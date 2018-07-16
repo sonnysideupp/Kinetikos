@@ -51,6 +51,41 @@ Finally, since we've just created the prisma endpoint let's deploy our prisma se
 
 Now that the depencies are installed and our prisma server has been deployed, try running your server with `yarn dev` and you should see your playground appear.
 
+Oh no! When running `yarn dev`, you've run into an error. It looks something like this:
+```
+TSError: ⨯ Unable to compile TypeScript:
+src/resolvers/Mutation/auth.ts(19,53): error TS2345: Argument of type '{ where: { email: a
+ny; }; }' is not assignable to parameter of type '{ where: UserWhereUniqueInput; }'.
+  Types of property 'where' are incompatible.
+    Type '{ email: any; }' is not assignable to type 'UserWhereUniqueInput'.
+      Object literal may only specify known properties, and 'email' does not exist in type
+ 'UserWhereUniqueInput'.
+```
+
+What's going on here? Let's take a look at the error message.
+
+Well, the boilerplate code we've given you has a file that's referenced in the error message: `src/resolvers/Mutation/auth.ts`. This file contains the resolvers for our `login` and `signup` mutations. Now if we take a look at the code for these resolvers, and specifically the lines referenced in the error message (line 19), we see:
+```
+const user = await ctx.db.query.user({ where: { email } })
+```
+So what's wrong with this line? Well, if we look at the `datamodel.yml` file in `/server/prisma` we created earlier with `prisma init`, we see that the file only contains two fields for the `User` type:
+```
+type User {
+  id: ID! @unique
+  name: String!  
+}
+```
+We're trying to use the `email` field when it doesn't exist in the datamodel yet, so our code is breaking. To fix this, we need to update our `datamodel.graphql` file. Update the `User` type so it looks like this:
+```
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+}
+```
+Since we've updated our `datamodel.graphql`, we need to run `prisma deploy` again in our `/server` directory. Now we can finally run `yarn dev` again and see our playground appear. 
+
 To know that your server has been deployed correctly, check out the `schema` tab in your playground in both `app` and `dev` and see if that makes sense with your `datamodel.graphql` file! E.G: you should only have a User type right now.
 
 
