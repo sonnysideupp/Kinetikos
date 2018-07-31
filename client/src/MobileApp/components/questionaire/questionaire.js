@@ -29,13 +29,10 @@ query questionTexts($language: String) {
 export default class Questionaire extends Component {
     render() {
 
-        const client = new ApolloClient({
-            link: new HttpLink({uri: `http://10.0.2.2:4000`}),
-          cache: new InMemoryCache(),
-        });
+        
 
         return (
-            <ApolloProvider client={client}>
+           
             <View>
                 <Query query={GET_QUES} 
                 variables= {{
@@ -54,7 +51,7 @@ export default class Questionaire extends Component {
                             {data.questionTexts.map((question, idx) => {
                                 const index = idx + 1
                                 return (
-                                <Question key={index} index={index} question={question} client={client}/>
+                                <Question key={index} index={index} question={question} />
                                 )
                             })}
                         </View>
@@ -62,7 +59,7 @@ export default class Questionaire extends Component {
                 }}
                 </Query>
                 </View>
-            </ApolloProvider>
+           
 
         )
     }
