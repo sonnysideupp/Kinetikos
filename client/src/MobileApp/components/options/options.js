@@ -10,6 +10,12 @@ export default class Options extends Component {
         {label: 'param2', value: 1 }
     ]
 
+    op = (arg) => {
+        let newArr = []
+        arg.map((item, index) => newArr.push({label: item, value: item}))
+        return newArr
+    }
+
     state = {
         options: [
             {label: 'param1', value: 0 },
@@ -31,32 +37,15 @@ export default class Options extends Component {
                 <RadioButton key={"1"} value={"1"}>
                              <Text>This is item 1</Text>
                 </RadioButton>
-                </RadioGroup>
-
-                
+                 </RadioGroup>
 
                 {this.props.options.map((option, index) => {
-                    // val = this.state.options
-                    // val.push({label: option, value: option})
-                    // this.setState({
-                    //     ...this.state,
-                    //     options: val
-                    // })
-                    // return (
-                    //     <RadioButton key={index} value={option}>
-                    //         <Text>This is item {option}</Text>
-                    //     </RadioButton>
-                    // )
-                    // <Text>{option}</Text>
+                    return (
+                        <Text>{option}</Text>
+                    )
                     
                 })}
-                {/* </RadioGroup> */}
 
-                {/* <RadioForm
-                    radio_props={this.state.options}
-                    initial={0}
-                    onPress={(value) => {this.setState({value:value})}}
-                  /> */}
             </View>
         )
     }
