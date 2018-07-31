@@ -11,6 +11,22 @@ export default {
   },
 
   questionTexts: (parent, args, ctx: Context, info) => {
-    return ctx.db.query.questionTexts({where: {language: args.language}}, info)
+    if(args) {
+      return ctx.db.query.questionTexts({where: {AND: {...args}}}, info)
+    } else {
+      return ctx.db.query.questionTexts({}, info)
+    }
   }, 
+
+  alternatives: (parent, args, ctx: Context, info) => {
+    if(args) {
+      return ctx.db.query.alternativeses({where: {listID: args.listID}}, info)
+    }
+
+    return ctx.db.query.alternativeses({}, info)
+  },
+
+  alternativeTexts: (parent, args, ctx: Context, info) => {
+    return ctx.db.query.alternativeTexts({where: {AND: [{...args.alternativeID},{...args.language}]}}, info)
+  },
 }

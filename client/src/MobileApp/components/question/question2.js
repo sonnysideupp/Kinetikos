@@ -9,16 +9,13 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import gql from 'graphql-tag'
 import Options from '../options/options'
 
-const GET_OPTIONS = gql`
-query questionOptions {
-    questionOptions(data: [{language: {name: "English"}}]) {
-        id
-        QuestionID
-        QuestionTypeID
-        options
-        language {
-            name
-          }
+const GET_ALT = gql`
+query alternatives($listID: ID) {
+    alternatives(listID: $listID) {
+       id
+       description
+       value
+       order
     }
 }
 `
@@ -31,15 +28,17 @@ export default class Question extends Component {
         {label: 'param2', value: 1 }
     ]
 
- 
 
 
     questionType(data) {
-        if(data.question.questionType.id === "cjk2f4oee8zjz0b29m50j3odw") {
+        if(data.question.questionTypeID === "cjk9udmj618c60b0683u1uzfh") {
             return (
                 
                 <View>
-                <Query query={GET_OPTIONS}>
+                <Query query={GET_ALT}
+                variables={{
+                    listID: data.question.listID
+                }}>
                 {({ loading, error, data, refetch }) => {
                     if (loading) {
                         return(<Text>Loading</Text>);
@@ -50,18 +49,20 @@ export default class Question extends Component {
                     
                     return (
                         <View>
-                           <Options options={data.questionOptions[0].options}/>
+                            <Text>i am wuerying</Text>
+                           {/* <Options alternatives={data.alternatives}/> */}
                         </View>
                     )
                 }}
                 </Query>
+                <Text>query for alternatives</Text>
                 </View>
               
               );
         } else {
             return (
                 <View style={styles.question}>
-                    <Text>HELLO</Text>
+                    <Text>place input</Text>
                 </View>
             )
         }
@@ -75,22 +76,12 @@ export default class Question extends Component {
 
     render () {
 
-        // this.state = {
-        //     data: [
-        //         {QuestionID: this.props.question.questionID},
-        //         {QuestionTypeID: this.props.question.questionTypeID},
-        //         {language: {name: this.props.question.language.name}}
-        //     ]
-        //     //args: "hello"
-        // }
-
-
         type = this.questionType(this.props)
 
         return (
             <View style={styles.container}>
 
-                <Text style={styles.question}>{this.props.index}) {this.props.question.text}</Text>
+                <Text style={styles.question}>{this.props.index}) {this.props.questionText.text}</Text>
                 {type}               
 
             </View>

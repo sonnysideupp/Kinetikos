@@ -32,6 +32,14 @@ export const auth = {
     }
   },
 
+  async addList(parent, args, ctx: Context, info) {
+    const question = await ctx.db.query.question({ where: args.questionID }, info)
+    if(args.listID) {
+      return ctx.db.mutation.updateQuestion({data: {listID: args.listID}, where: {id: args.questionID}}, info)
+    } 
+    return question
+  }
+
   // async createQuestionText(parent, args, ctx: Context, info) {
   //   const name = args.language
   //   const language = await ctx.db.query.language({where: {name: name }})

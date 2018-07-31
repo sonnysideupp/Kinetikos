@@ -3,12 +3,16 @@
 type Query {
   me: User!
   questionnaire: [Question]!
-  questionTexts(language: LanguageWhereInput!): [QuestionText]!
+  questionTexts(questionID: ID, language: LanguageWhereInput): [QuestionText]!
+  #change this to order by the order variable
+  alternatives(listID: ID): [Alternatives]!
+  alternativeTexts(alternativeID: ID!, language: LanguageWhereInput!): [AlternativeText]!
 }
 
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+  addList(questionID: ID!, listID: ID): Question!
   # createQuestionText(text: String!, language: String!, questionID: ID!, questionType: QuestionTypeCreateOneInput): QuestionText!
   # createQuestionOptions(options: [String!]!, QuestionTypeID: ID!, QuestionID: ID!, language: String, questionText: QuestionTextCreateOneWithoutQuestionOptionsInput!): [QuestionOptions!]!
   # createQuestion(description: String, type: QuestionType!): Question!

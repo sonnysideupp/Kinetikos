@@ -8,7 +8,7 @@ type User {
 type Question {
   id: ID! @unique
   description: String!
-  questionType: ID!
+  questionTypeID: ID!
   listID: ID
 }
 
@@ -40,7 +40,7 @@ type Alternatives {
 type AlternativeText {
   id: ID! @unique
   alternativeID: ID!
-  language: ID!
+  language: Language!
   text: String!
 }
 

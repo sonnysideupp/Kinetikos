@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/juliana-sales/Kinetikos/dev
-# timestamp: Tue Jul 31 2018 15:42:21 GMT+0100 (Western European Summer Time)
+# timestamp: Tue Jul 31 2018 17:55:02 GMT+0100 (Western European Summer Time)
 
 type AggregateAlternatives {
   count: Int!
@@ -324,7 +324,7 @@ input AlternativesWhereUniqueInput {
 type AlternativeText implements Node {
   id: ID!
   alternativeID: ID!
-  language: ID!
+  language(where: LanguageWhereInput): Language!
   text: String!
 }
 
@@ -340,8 +340,8 @@ type AlternativeTextConnection {
 
 input AlternativeTextCreateInput {
   alternativeID: ID!
-  language: ID!
   text: String!
+  language: LanguageCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -358,8 +358,6 @@ enum AlternativeTextOrderByInput {
   id_DESC
   alternativeID_ASC
   alternativeID_DESC
-  language_ASC
-  language_DESC
   text_ASC
   text_DESC
   updatedAt_ASC
@@ -371,7 +369,6 @@ enum AlternativeTextOrderByInput {
 type AlternativeTextPreviousValues {
   id: ID!
   alternativeID: ID!
-  language: ID!
   text: String!
 }
 
@@ -416,8 +413,8 @@ input AlternativeTextSubscriptionWhereInput {
 
 input AlternativeTextUpdateInput {
   alternativeID: ID
-  language: ID
   text: String
+  language: LanguageUpdateOneInput
 }
 
 input AlternativeTextWhereInput {
@@ -509,46 +506,6 @@ input AlternativeTextWhereInput {
 
   """All values not ending with the given string."""
   alternativeID_not_ends_with: ID
-  language: ID
-
-  """All values that are not equal to given value."""
-  language_not: ID
-
-  """All values that are contained in given list."""
-  language_in: [ID!]
-
-  """All values that are not contained in given list."""
-  language_not_in: [ID!]
-
-  """All values less than the given value."""
-  language_lt: ID
-
-  """All values less than or equal the given value."""
-  language_lte: ID
-
-  """All values greater than the given value."""
-  language_gt: ID
-
-  """All values greater than or equal the given value."""
-  language_gte: ID
-
-  """All values containing the given string."""
-  language_contains: ID
-
-  """All values not containing the given string."""
-  language_not_contains: ID
-
-  """All values starting with the given string."""
-  language_starts_with: ID
-
-  """All values not starting with the given string."""
-  language_not_starts_with: ID
-
-  """All values ending with the given string."""
-  language_ends_with: ID
-
-  """All values not ending with the given string."""
-  language_not_ends_with: ID
   text: String
 
   """All values that are not equal to given value."""
@@ -589,6 +546,7 @@ input AlternativeTextWhereInput {
 
   """All values not ending with the given string."""
   text_not_ends_with: String
+  language: LanguageWhereInput
 }
 
 input AlternativeTextWhereUniqueInput {
@@ -1372,7 +1330,7 @@ type Query {
 type Question implements Node {
   id: ID!
   description: String!
-  questionType: ID!
+  questionTypeID: ID!
   listID: ID
 }
 
@@ -1388,7 +1346,7 @@ type QuestionConnection {
 
 input QuestionCreateInput {
   description: String!
-  questionType: ID!
+  questionTypeID: ID!
   listID: ID
 }
 
@@ -1406,8 +1364,8 @@ enum QuestionOrderByInput {
   id_DESC
   description_ASC
   description_DESC
-  questionType_ASC
-  questionType_DESC
+  questionTypeID_ASC
+  questionTypeID_DESC
   listID_ASC
   listID_DESC
   updatedAt_ASC
@@ -1419,7 +1377,7 @@ enum QuestionOrderByInput {
 type QuestionPreviousValues {
   id: ID!
   description: String!
-  questionType: ID!
+  questionTypeID: ID!
   listID: ID
 }
 
@@ -1879,7 +1837,7 @@ input QuestionTypeWhereUniqueInput {
 
 input QuestionUpdateInput {
   description: String
-  questionType: ID
+  questionTypeID: ID
   listID: ID
 }
 
@@ -1972,46 +1930,46 @@ input QuestionWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  questionType: ID
+  questionTypeID: ID
 
   """All values that are not equal to given value."""
-  questionType_not: ID
+  questionTypeID_not: ID
 
   """All values that are contained in given list."""
-  questionType_in: [ID!]
+  questionTypeID_in: [ID!]
 
   """All values that are not contained in given list."""
-  questionType_not_in: [ID!]
+  questionTypeID_not_in: [ID!]
 
   """All values less than the given value."""
-  questionType_lt: ID
+  questionTypeID_lt: ID
 
   """All values less than or equal the given value."""
-  questionType_lte: ID
+  questionTypeID_lte: ID
 
   """All values greater than the given value."""
-  questionType_gt: ID
+  questionTypeID_gt: ID
 
   """All values greater than or equal the given value."""
-  questionType_gte: ID
+  questionTypeID_gte: ID
 
   """All values containing the given string."""
-  questionType_contains: ID
+  questionTypeID_contains: ID
 
   """All values not containing the given string."""
-  questionType_not_contains: ID
+  questionTypeID_not_contains: ID
 
   """All values starting with the given string."""
-  questionType_starts_with: ID
+  questionTypeID_starts_with: ID
 
   """All values not starting with the given string."""
-  questionType_not_starts_with: ID
+  questionTypeID_not_starts_with: ID
 
   """All values ending with the given string."""
-  questionType_ends_with: ID
+  questionTypeID_ends_with: ID
 
   """All values not ending with the given string."""
-  questionType_not_ends_with: ID
+  questionTypeID_not_ends_with: ID
   listID: ID
 
   """All values that are not equal to given value."""

@@ -460,7 +460,7 @@ input AlternativesWhereUniqueInput {
 type AlternativeText implements Node {
   id: ID!
   alternativeID: ID!
-  language: ID!
+  language(where: LanguageWhereInput): Language!
   text: String!
 }
 
@@ -476,8 +476,8 @@ type AlternativeTextConnection {
 
 input AlternativeTextCreateInput {
   alternativeID: ID!
-  language: ID!
   text: String!
+  language: LanguageCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -494,8 +494,6 @@ enum AlternativeTextOrderByInput {
   id_DESC
   alternativeID_ASC
   alternativeID_DESC
-  language_ASC
-  language_DESC
   text_ASC
   text_DESC
   updatedAt_ASC
@@ -507,7 +505,6 @@ enum AlternativeTextOrderByInput {
 type AlternativeTextPreviousValues {
   id: ID!
   alternativeID: ID!
-  language: ID!
   text: String!
 }
 
@@ -552,8 +549,8 @@ input AlternativeTextSubscriptionWhereInput {
 
 input AlternativeTextUpdateInput {
   alternativeID: ID
-  language: ID
   text: String
+  language: LanguageUpdateOneInput
 }
 
 input AlternativeTextWhereInput {
@@ -645,46 +642,6 @@ input AlternativeTextWhereInput {
 
   """All values not ending with the given string."""
   alternativeID_not_ends_with: ID
-  language: ID
-
-  """All values that are not equal to given value."""
-  language_not: ID
-
-  """All values that are contained in given list."""
-  language_in: [ID!]
-
-  """All values that are not contained in given list."""
-  language_not_in: [ID!]
-
-  """All values less than the given value."""
-  language_lt: ID
-
-  """All values less than or equal the given value."""
-  language_lte: ID
-
-  """All values greater than the given value."""
-  language_gt: ID
-
-  """All values greater than or equal the given value."""
-  language_gte: ID
-
-  """All values containing the given string."""
-  language_contains: ID
-
-  """All values not containing the given string."""
-  language_not_contains: ID
-
-  """All values starting with the given string."""
-  language_starts_with: ID
-
-  """All values not starting with the given string."""
-  language_not_starts_with: ID
-
-  """All values ending with the given string."""
-  language_ends_with: ID
-
-  """All values not ending with the given string."""
-  language_not_ends_with: ID
   text: String
 
   """All values that are not equal to given value."""
@@ -725,6 +682,7 @@ input AlternativeTextWhereInput {
 
   """All values not ending with the given string."""
   text_not_ends_with: String
+  language: LanguageWhereInput
 }
 
 input AlternativeTextWhereUniqueInput {
@@ -1508,7 +1466,7 @@ type Query {
 type Question implements Node {
   id: ID!
   description: String!
-  questionType: ID!
+  questionTypeID: ID!
   listID: ID
 }
 
@@ -1524,7 +1482,7 @@ type QuestionConnection {
 
 input QuestionCreateInput {
   description: String!
-  questionType: ID!
+  questionTypeID: ID!
   listID: ID
 }
 
@@ -1542,8 +1500,8 @@ enum QuestionOrderByInput {
   id_DESC
   description_ASC
   description_DESC
-  questionType_ASC
-  questionType_DESC
+  questionTypeID_ASC
+  questionTypeID_DESC
   listID_ASC
   listID_DESC
   updatedAt_ASC
@@ -1555,7 +1513,7 @@ enum QuestionOrderByInput {
 type QuestionPreviousValues {
   id: ID!
   description: String!
-  questionType: ID!
+  questionTypeID: ID!
   listID: ID
 }
 
@@ -2015,7 +1973,7 @@ input QuestionTypeWhereUniqueInput {
 
 input QuestionUpdateInput {
   description: String
-  questionType: ID
+  questionTypeID: ID
   listID: ID
 }
 
@@ -2108,46 +2066,46 @@ input QuestionWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  questionType: ID
+  questionTypeID: ID
 
   """All values that are not equal to given value."""
-  questionType_not: ID
+  questionTypeID_not: ID
 
   """All values that are contained in given list."""
-  questionType_in: [ID!]
+  questionTypeID_in: [ID!]
 
   """All values that are not contained in given list."""
-  questionType_not_in: [ID!]
+  questionTypeID_not_in: [ID!]
 
   """All values less than the given value."""
-  questionType_lt: ID
+  questionTypeID_lt: ID
 
   """All values less than or equal the given value."""
-  questionType_lte: ID
+  questionTypeID_lte: ID
 
   """All values greater than the given value."""
-  questionType_gt: ID
+  questionTypeID_gt: ID
 
   """All values greater than or equal the given value."""
-  questionType_gte: ID
+  questionTypeID_gte: ID
 
   """All values containing the given string."""
-  questionType_contains: ID
+  questionTypeID_contains: ID
 
   """All values not containing the given string."""
-  questionType_not_contains: ID
+  questionTypeID_not_contains: ID
 
   """All values starting with the given string."""
-  questionType_starts_with: ID
+  questionTypeID_starts_with: ID
 
   """All values not starting with the given string."""
-  questionType_not_starts_with: ID
+  questionTypeID_not_starts_with: ID
 
   """All values ending with the given string."""
-  questionType_ends_with: ID
+  questionTypeID_ends_with: ID
 
   """All values not ending with the given string."""
-  questionType_not_ends_with: ID
+  questionTypeID_not_ends_with: ID
   listID: ID
 
   """All values that are not equal to given value."""
@@ -2527,8 +2485,8 @@ export type QuestionOrderByInput =   'id_ASC' |
   'id_DESC' |
   'description_ASC' |
   'description_DESC' |
-  'questionType_ASC' |
-  'questionType_DESC' |
+  'questionTypeID_ASC' |
+  'questionTypeID_DESC' |
   'listID_ASC' |
   'listID_DESC' |
   'updatedAt_ASC' |
@@ -2544,8 +2502,6 @@ export type AlternativeTextOrderByInput =   'id_ASC' |
   'id_DESC' |
   'alternativeID_ASC' |
   'alternativeID_DESC' |
-  'language_ASC' |
-  'language_DESC' |
   'text_ASC' |
   'text_DESC' |
   'updatedAt_ASC' |
@@ -2823,8 +2779,8 @@ export interface AlternativeTextSubscriptionWhereInput {
 
 export interface AlternativeTextUpdateInput {
   alternativeID?: ID_Input
-  language?: ID_Input
   text?: String
+  language?: LanguageUpdateOneInput
 }
 
 export interface AlternativeTextWhereInput {
@@ -2859,20 +2815,6 @@ export interface AlternativeTextWhereInput {
   alternativeID_not_starts_with?: ID_Input
   alternativeID_ends_with?: ID_Input
   alternativeID_not_ends_with?: ID_Input
-  language?: ID_Input
-  language_not?: ID_Input
-  language_in?: ID_Input[] | ID_Input
-  language_not_in?: ID_Input[] | ID_Input
-  language_lt?: ID_Input
-  language_lte?: ID_Input
-  language_gt?: ID_Input
-  language_gte?: ID_Input
-  language_contains?: ID_Input
-  language_not_contains?: ID_Input
-  language_starts_with?: ID_Input
-  language_not_starts_with?: ID_Input
-  language_ends_with?: ID_Input
-  language_not_ends_with?: ID_Input
   text?: String
   text_not?: String
   text_in?: String[] | String
@@ -2887,6 +2829,7 @@ export interface AlternativeTextWhereInput {
   text_not_starts_with?: String
   text_ends_with?: String
   text_not_ends_with?: String
+  language?: LanguageWhereInput
 }
 
 export interface AlternativesUpdateInput {
@@ -3019,7 +2962,7 @@ export interface QuestionTypeWhereUniqueInput {
 
 export interface QuestionUpdateInput {
   description?: String
-  questionType?: ID_Input
+  questionTypeID?: ID_Input
   listID?: ID_Input
 }
 
@@ -3127,20 +3070,20 @@ export interface QuestionWhereInput {
   description_not_starts_with?: String
   description_ends_with?: String
   description_not_ends_with?: String
-  questionType?: ID_Input
-  questionType_not?: ID_Input
-  questionType_in?: ID_Input[] | ID_Input
-  questionType_not_in?: ID_Input[] | ID_Input
-  questionType_lt?: ID_Input
-  questionType_lte?: ID_Input
-  questionType_gt?: ID_Input
-  questionType_gte?: ID_Input
-  questionType_contains?: ID_Input
-  questionType_not_contains?: ID_Input
-  questionType_starts_with?: ID_Input
-  questionType_not_starts_with?: ID_Input
-  questionType_ends_with?: ID_Input
-  questionType_not_ends_with?: ID_Input
+  questionTypeID?: ID_Input
+  questionTypeID_not?: ID_Input
+  questionTypeID_in?: ID_Input[] | ID_Input
+  questionTypeID_not_in?: ID_Input[] | ID_Input
+  questionTypeID_lt?: ID_Input
+  questionTypeID_lte?: ID_Input
+  questionTypeID_gt?: ID_Input
+  questionTypeID_gte?: ID_Input
+  questionTypeID_contains?: ID_Input
+  questionTypeID_not_contains?: ID_Input
+  questionTypeID_starts_with?: ID_Input
+  questionTypeID_not_starts_with?: ID_Input
+  questionTypeID_ends_with?: ID_Input
+  questionTypeID_not_ends_with?: ID_Input
   listID?: ID_Input
   listID_not?: ID_Input
   listID_in?: ID_Input[] | ID_Input
@@ -3197,8 +3140,8 @@ export interface ListWhereInput {
 
 export interface AlternativeTextCreateInput {
   alternativeID: ID_Input
-  language: ID_Input
   text: String
+  language: LanguageCreateOneInput
 }
 
 export interface AnswerSubscriptionWhereInput {
@@ -3263,7 +3206,7 @@ export interface QuestionTypeWhereInput {
 
 export interface QuestionCreateInput {
   description: String
-  questionType: ID_Input
+  questionTypeID: ID_Input
   listID?: ID_Input
 }
 
@@ -3399,7 +3342,7 @@ export interface LanguageEdge {
 export interface AlternativeText extends Node {
   id: ID_Output
   alternativeID: ID_Output
-  language: ID_Output
+  language: Language
   text: String
 }
 
@@ -3488,7 +3431,7 @@ export interface QuestionTypeEdge {
 export interface QuestionPreviousValues {
   id: ID_Output
   description: String
-  questionType: ID_Output
+  questionTypeID: ID_Output
   listID?: ID_Output
 }
 
@@ -3624,7 +3567,7 @@ export interface AggregateUser {
 export interface Question extends Node {
   id: ID_Output
   description: String
-  questionType: ID_Output
+  questionTypeID: ID_Output
   listID?: ID_Output
 }
 
@@ -3680,7 +3623,6 @@ export interface User extends Node {
 export interface AlternativeTextPreviousValues {
   id: ID_Output
   alternativeID: ID_Output
-  language: ID_Output
   text: String
 }
 

@@ -9,15 +9,22 @@ import gql from 'graphql-tag'
 import Question from '../question/question2'
 
 const GET_QUES = gql`
-query questionTexts($language: String) {
-    questionTexts(language: {name: $language}) {
+query questionnaire {
+    questionnaire {
+        id
+        description
+        questionTypeID
+        listID
+    }
+}
+`
+
+const GET_TEXTS = gql`
+query questionTexts($language: String, $questionID: ID) {
+    questionTexts(language: {name: $language}, questionID: $questionID) {
         id
         text
         questionID
-        questionType {
-            id
-            description
-        }
         language {
             id
             name
@@ -46,12 +53,34 @@ export default class Questionaire extends Component {
                     
                     return (
                         <View>
-                            {data.questionTexts.map((question, idx) => {
+                            {data.questionnaire.map((question, idx) => {
                                 const index = idx + 1
                                 return (
-                                <Question key={index} index={index} question={question} />
-                                )
-                            })}
+                                <Query query={GET_TEXTS}
+                                variables= {{
+                                    //language: this.props.language,
+                                    questionID: question.id
+                                }}>
+                                {({ loading, error, data, refetch }) => {
+                                    if (loading) {
+                                        return(<Text>Loading</Text>);
+                                    }
+                                    if (error) {
+                                        return(<Text>`Error! ${error.message}`</Text>);
+                                    }
+
+                                    if(data.questionTexts) {
+                                        return (
+                                            <View>
+                                            <Question index={index} question={question} questionText={data.questionTexts[0]}/>
+                                            </View>
+                                        )
+                                    }
+                                
+                                }}
+                             </Query>
+                            )
+                        })}
                         </View>
                     )
                 }}
