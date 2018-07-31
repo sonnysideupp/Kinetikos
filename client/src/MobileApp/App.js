@@ -46,7 +46,7 @@ cache: new InMemoryCache(),
 
 export default () => (
   <ApolloProvider client={client}>
-    <Navigation />
+    <Navigation language={"English"}/>
     </ApolloProvider>
 );
 

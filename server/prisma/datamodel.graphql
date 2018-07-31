@@ -8,7 +8,12 @@ type User {
 type Question {
   id: ID! @unique
   description: String!
+<<<<<<< HEAD
   type: QuestionType!
+=======
+  questionType: ID!
+  listID: ID
+>>>>>>> 6783f19c0a08cdac042f5edbcdd56ebd407db32e
 }
 
 type QuestionType {
@@ -21,8 +26,11 @@ type QuestionText {
   text: String!
   language: Language!
   questionID: ID!
+<<<<<<< HEAD
   questionType: QuestionType!
   questionOptions: QuestionOptions 
+=======
+>>>>>>> 6783f19c0a08cdac042f5edbcdd56ebd407db32e
 }
 
 type Language {
@@ -30,12 +38,30 @@ type Language {
   name: String! @unique
 }
 
-# this is used to store the options for radio and multiple choice questions
-type QuestionOptions {
+type Alternatives {
   id: ID! @unique
-  QuestionTypeID: ID!
-  QuestionID: ID!
-  options: [String!]
-  language: Language!
+  description: String!
+  value: Float!
+  order: Int!
+  listID: ID!
+}
+
+type AlternativeText {
+  id: ID! @unique
+  alternativeID: ID!
+  language: ID!
+  text: String!
+}
+
+type List {
+  id: ID! @unique
+  description: String!
+}
+
+type Answer {
+  id: ID! @unique
+  questionID: ID!
+  value: Float
+  alternativeID: ID
 }
 

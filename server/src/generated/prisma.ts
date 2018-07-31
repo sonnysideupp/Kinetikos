@@ -6,80 +6,113 @@ import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 export interface Query {
     users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     questions: <T = Question[]>(args: { where?: QuestionWhereInput, orderBy?: QuestionOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    questionTexts: <T = QuestionText[]>(args: { where?: QuestionTextWhereInput, orderBy?: QuestionTextOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    languages: <T = Language[]>(args: { where?: LanguageWhereInput, orderBy?: LanguageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    questionOptionses: <T = QuestionOptions[]>(args: { where?: QuestionOptionsWhereInput, orderBy?: QuestionOptionsOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     questionTypes: <T = QuestionType[]>(args: { where?: QuestionTypeWhereInput, orderBy?: QuestionTypeOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    questionTexts: <T = QuestionText[]>(args: { where?: QuestionTextWhereInput, orderBy?: QuestionTextOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    alternativeses: <T = Alternatives[]>(args: { where?: AlternativesWhereInput, orderBy?: AlternativesOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    alternativeTexts: <T = AlternativeText[]>(args: { where?: AlternativeTextWhereInput, orderBy?: AlternativeTextOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    lists: <T = List[]>(args: { where?: ListWhereInput, orderBy?: ListOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    answers: <T = Answer[]>(args: { where?: AnswerWhereInput, orderBy?: AnswerOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    languages: <T = Language[]>(args: { where?: LanguageWhereInput, orderBy?: LanguageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     question: <T = Question | null>(args: { where: QuestionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    questionText: <T = QuestionText | null>(args: { where: QuestionTextWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    language: <T = Language | null>(args: { where: LanguageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    questionOptions: <T = QuestionOptions | null>(args: { where: QuestionOptionsWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     questionType: <T = QuestionType | null>(args: { where: QuestionTypeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    questionText: <T = QuestionText | null>(args: { where: QuestionTextWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    alternatives: <T = Alternatives | null>(args: { where: AlternativesWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    alternativeText: <T = AlternativeText | null>(args: { where: AlternativeTextWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    list: <T = List | null>(args: { where: ListWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    answer: <T = Answer | null>(args: { where: AnswerWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    language: <T = Language | null>(args: { where: LanguageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     questionsConnection: <T = QuestionConnection>(args: { where?: QuestionWhereInput, orderBy?: QuestionOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    questionTextsConnection: <T = QuestionTextConnection>(args: { where?: QuestionTextWhereInput, orderBy?: QuestionTextOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    languagesConnection: <T = LanguageConnection>(args: { where?: LanguageWhereInput, orderBy?: LanguageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    questionOptionsesConnection: <T = QuestionOptionsConnection>(args: { where?: QuestionOptionsWhereInput, orderBy?: QuestionOptionsOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     questionTypesConnection: <T = QuestionTypeConnection>(args: { where?: QuestionTypeWhereInput, orderBy?: QuestionTypeOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    questionTextsConnection: <T = QuestionTextConnection>(args: { where?: QuestionTextWhereInput, orderBy?: QuestionTextOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    alternativesesConnection: <T = AlternativesConnection>(args: { where?: AlternativesWhereInput, orderBy?: AlternativesOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    alternativeTextsConnection: <T = AlternativeTextConnection>(args: { where?: AlternativeTextWhereInput, orderBy?: AlternativeTextOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    listsConnection: <T = ListConnection>(args: { where?: ListWhereInput, orderBy?: ListOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    answersConnection: <T = AnswerConnection>(args: { where?: AnswerWhereInput, orderBy?: AnswerOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    languagesConnection: <T = LanguageConnection>(args: { where?: LanguageWhereInput, orderBy?: LanguageOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Mutation {
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createQuestion: <T = Question>(args: { data: QuestionCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createQuestionText: <T = QuestionText>(args: { data: QuestionTextCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createLanguage: <T = Language>(args: { data: LanguageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createQuestionOptions: <T = QuestionOptions>(args: { data: QuestionOptionsCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createQuestionType: <T = QuestionType>(args: { data: QuestionTypeCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createQuestionText: <T = QuestionText>(args: { data: QuestionTextCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createAlternatives: <T = Alternatives>(args: { data: AlternativesCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createAlternativeText: <T = AlternativeText>(args: { data: AlternativeTextCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createList: <T = List>(args: { data: ListCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createAnswer: <T = Answer>(args: { data: AnswerCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createLanguage: <T = Language>(args: { data: LanguageCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateQuestion: <T = Question | null>(args: { data: QuestionUpdateInput, where: QuestionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateQuestionText: <T = QuestionText | null>(args: { data: QuestionTextUpdateInput, where: QuestionTextWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateLanguage: <T = Language | null>(args: { data: LanguageUpdateInput, where: LanguageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateQuestionOptions: <T = QuestionOptions | null>(args: { data: QuestionOptionsUpdateInput, where: QuestionOptionsWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateQuestionType: <T = QuestionType | null>(args: { data: QuestionTypeUpdateInput, where: QuestionTypeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateQuestionText: <T = QuestionText | null>(args: { data: QuestionTextUpdateInput, where: QuestionTextWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateAlternatives: <T = Alternatives | null>(args: { data: AlternativesUpdateInput, where: AlternativesWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateAlternativeText: <T = AlternativeText | null>(args: { data: AlternativeTextUpdateInput, where: AlternativeTextWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateList: <T = List | null>(args: { data: ListUpdateInput, where: ListWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateAnswer: <T = Answer | null>(args: { data: AnswerUpdateInput, where: AnswerWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateLanguage: <T = Language | null>(args: { data: LanguageUpdateInput, where: LanguageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteQuestion: <T = Question | null>(args: { where: QuestionWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteQuestionText: <T = QuestionText | null>(args: { where: QuestionTextWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteLanguage: <T = Language | null>(args: { where: LanguageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteQuestionOptions: <T = QuestionOptions | null>(args: { where: QuestionOptionsWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteQuestionType: <T = QuestionType | null>(args: { where: QuestionTypeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteQuestionText: <T = QuestionText | null>(args: { where: QuestionTextWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteAlternatives: <T = Alternatives | null>(args: { where: AlternativesWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteAlternativeText: <T = AlternativeText | null>(args: { where: AlternativeTextWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteList: <T = List | null>(args: { where: ListWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteAnswer: <T = Answer | null>(args: { where: AnswerWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteLanguage: <T = Language | null>(args: { where: LanguageWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertQuestion: <T = Question>(args: { where: QuestionWhereUniqueInput, create: QuestionCreateInput, update: QuestionUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertQuestionText: <T = QuestionText>(args: { where: QuestionTextWhereUniqueInput, create: QuestionTextCreateInput, update: QuestionTextUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertLanguage: <T = Language>(args: { where: LanguageWhereUniqueInput, create: LanguageCreateInput, update: LanguageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertQuestionOptions: <T = QuestionOptions>(args: { where: QuestionOptionsWhereUniqueInput, create: QuestionOptionsCreateInput, update: QuestionOptionsUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertQuestionType: <T = QuestionType>(args: { where: QuestionTypeWhereUniqueInput, create: QuestionTypeCreateInput, update: QuestionTypeUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertQuestionText: <T = QuestionText>(args: { where: QuestionTextWhereUniqueInput, create: QuestionTextCreateInput, update: QuestionTextUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertAlternatives: <T = Alternatives>(args: { where: AlternativesWhereUniqueInput, create: AlternativesCreateInput, update: AlternativesUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertAlternativeText: <T = AlternativeText>(args: { where: AlternativeTextWhereUniqueInput, create: AlternativeTextCreateInput, update: AlternativeTextUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertList: <T = List>(args: { where: ListWhereUniqueInput, create: ListCreateInput, update: ListUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertAnswer: <T = Answer>(args: { where: AnswerWhereUniqueInput, create: AnswerCreateInput, update: AnswerUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertLanguage: <T = Language>(args: { where: LanguageWhereUniqueInput, create: LanguageCreateInput, update: LanguageUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyQuestions: <T = BatchPayload>(args: { data: QuestionUpdateInput, where?: QuestionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyQuestionTexts: <T = BatchPayload>(args: { data: QuestionTextUpdateInput, where?: QuestionTextWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyLanguages: <T = BatchPayload>(args: { data: LanguageUpdateInput, where?: LanguageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyQuestionOptionses: <T = BatchPayload>(args: { data: QuestionOptionsUpdateInput, where?: QuestionOptionsWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyQuestionTypes: <T = BatchPayload>(args: { data: QuestionTypeUpdateInput, where?: QuestionTypeWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyQuestionTexts: <T = BatchPayload>(args: { data: QuestionTextUpdateInput, where?: QuestionTextWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyAlternativeses: <T = BatchPayload>(args: { data: AlternativesUpdateInput, where?: AlternativesWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyAlternativeTexts: <T = BatchPayload>(args: { data: AlternativeTextUpdateInput, where?: AlternativeTextWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyLists: <T = BatchPayload>(args: { data: ListUpdateInput, where?: ListWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyAnswers: <T = BatchPayload>(args: { data: AnswerUpdateInput, where?: AnswerWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyLanguages: <T = BatchPayload>(args: { data: LanguageUpdateInput, where?: LanguageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyQuestions: <T = BatchPayload>(args: { where?: QuestionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyQuestionTypes: <T = BatchPayload>(args: { where?: QuestionTypeWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyQuestionTexts: <T = BatchPayload>(args: { where?: QuestionTextWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyLanguages: <T = BatchPayload>(args: { where?: LanguageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyQuestionOptionses: <T = BatchPayload>(args: { where?: QuestionOptionsWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyQuestionTypes: <T = BatchPayload>(args: { where?: QuestionTypeWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    deleteManyAlternativeses: <T = BatchPayload>(args: { where?: AlternativesWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyAlternativeTexts: <T = BatchPayload>(args: { where?: AlternativeTextWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyLists: <T = BatchPayload>(args: { where?: ListWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyAnswers: <T = BatchPayload>(args: { where?: AnswerWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyLanguages: <T = BatchPayload>(args: { where?: LanguageWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
     user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     question: <T = QuestionSubscriptionPayload | null>(args: { where?: QuestionSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    questionType: <T = QuestionTypeSubscriptionPayload | null>(args: { where?: QuestionTypeSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     questionText: <T = QuestionTextSubscriptionPayload | null>(args: { where?: QuestionTextSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    language: <T = LanguageSubscriptionPayload | null>(args: { where?: LanguageSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    questionOptions: <T = QuestionOptionsSubscriptionPayload | null>(args: { where?: QuestionOptionsSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    questionType: <T = QuestionTypeSubscriptionPayload | null>(args: { where?: QuestionTypeSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
+    alternatives: <T = AlternativesSubscriptionPayload | null>(args: { where?: AlternativesSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    alternativeText: <T = AlternativeTextSubscriptionPayload | null>(args: { where?: AlternativeTextSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    list: <T = ListSubscriptionPayload | null>(args: { where?: ListSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    answer: <T = AnswerSubscriptionPayload | null>(args: { where?: AnswerSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    language: <T = LanguageSubscriptionPayload | null>(args: { where?: LanguageSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
   }
 
 export interface Exists {
   User: (where?: UserWhereInput) => Promise<boolean>
   Question: (where?: QuestionWhereInput) => Promise<boolean>
-  QuestionText: (where?: QuestionTextWhereInput) => Promise<boolean>
-  Language: (where?: LanguageWhereInput) => Promise<boolean>
-  QuestionOptions: (where?: QuestionOptionsWhereInput) => Promise<boolean>
   QuestionType: (where?: QuestionTypeWhereInput) => Promise<boolean>
+  QuestionText: (where?: QuestionTextWhereInput) => Promise<boolean>
+  Alternatives: (where?: AlternativesWhereInput) => Promise<boolean>
+  AlternativeText: (where?: AlternativeTextWhereInput) => Promise<boolean>
+  List: (where?: ListWhereInput) => Promise<boolean>
+  Answer: (where?: AnswerWhereInput) => Promise<boolean>
+  Language: (where?: LanguageWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
@@ -104,15 +137,27 @@ export interface BindingConstructor<T> {
  * Type Defs
 */
 
-const typeDefs = `type AggregateLanguage {
+const typeDefs = `type AggregateAlternatives {
+  count: Int!
+}
+
+type AggregateAlternativeText {
+  count: Int!
+}
+
+type AggregateAnswer {
+  count: Int!
+}
+
+type AggregateLanguage {
+  count: Int!
+}
+
+type AggregateList {
   count: Int!
 }
 
 type AggregateQuestion {
-  count: Int!
-}
-
-type AggregateQuestionOptions {
   count: Int!
 }
 
@@ -126,6 +171,820 @@ type AggregateQuestionType {
 
 type AggregateUser {
   count: Int!
+}
+
+type Alternatives implements Node {
+  id: ID!
+  description: String!
+  value: Float!
+  order: Int!
+  listID: ID!
+}
+
+"""A connection to a list of items."""
+type AlternativesConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AlternativesEdge]!
+  aggregate: AggregateAlternatives!
+}
+
+input AlternativesCreateInput {
+  description: String!
+  value: Float!
+  order: Int!
+  listID: ID!
+}
+
+"""An edge in a connection."""
+type AlternativesEdge {
+  """The item at the end of the edge."""
+  node: Alternatives!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AlternativesOrderByInput {
+  id_ASC
+  id_DESC
+  description_ASC
+  description_DESC
+  value_ASC
+  value_DESC
+  order_ASC
+  order_DESC
+  listID_ASC
+  listID_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AlternativesPreviousValues {
+  id: ID!
+  description: String!
+  value: Float!
+  order: Int!
+  listID: ID!
+}
+
+type AlternativesSubscriptionPayload {
+  mutation: MutationType!
+  node: Alternatives
+  updatedFields: [String!]
+  previousValues: AlternativesPreviousValues
+}
+
+input AlternativesSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AlternativesSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AlternativesSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AlternativesSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AlternativesWhereInput
+}
+
+input AlternativesUpdateInput {
+  description: String
+  value: Float
+  order: Int
+  listID: ID
+}
+
+input AlternativesWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AlternativesWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AlternativesWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AlternativesWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  value: Float
+
+  """All values that are not equal to given value."""
+  value_not: Float
+
+  """All values that are contained in given list."""
+  value_in: [Float!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Float!]
+
+  """All values less than the given value."""
+  value_lt: Float
+
+  """All values less than or equal the given value."""
+  value_lte: Float
+
+  """All values greater than the given value."""
+  value_gt: Float
+
+  """All values greater than or equal the given value."""
+  value_gte: Float
+  order: Int
+
+  """All values that are not equal to given value."""
+  order_not: Int
+
+  """All values that are contained in given list."""
+  order_in: [Int!]
+
+  """All values that are not contained in given list."""
+  order_not_in: [Int!]
+
+  """All values less than the given value."""
+  order_lt: Int
+
+  """All values less than or equal the given value."""
+  order_lte: Int
+
+  """All values greater than the given value."""
+  order_gt: Int
+
+  """All values greater than or equal the given value."""
+  order_gte: Int
+  listID: ID
+
+  """All values that are not equal to given value."""
+  listID_not: ID
+
+  """All values that are contained in given list."""
+  listID_in: [ID!]
+
+  """All values that are not contained in given list."""
+  listID_not_in: [ID!]
+
+  """All values less than the given value."""
+  listID_lt: ID
+
+  """All values less than or equal the given value."""
+  listID_lte: ID
+
+  """All values greater than the given value."""
+  listID_gt: ID
+
+  """All values greater than or equal the given value."""
+  listID_gte: ID
+
+  """All values containing the given string."""
+  listID_contains: ID
+
+  """All values not containing the given string."""
+  listID_not_contains: ID
+
+  """All values starting with the given string."""
+  listID_starts_with: ID
+
+  """All values not starting with the given string."""
+  listID_not_starts_with: ID
+
+  """All values ending with the given string."""
+  listID_ends_with: ID
+
+  """All values not ending with the given string."""
+  listID_not_ends_with: ID
+}
+
+input AlternativesWhereUniqueInput {
+  id: ID
+}
+
+type AlternativeText implements Node {
+  id: ID!
+  alternativeID: ID!
+  language: ID!
+  text: String!
+}
+
+"""A connection to a list of items."""
+type AlternativeTextConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AlternativeTextEdge]!
+  aggregate: AggregateAlternativeText!
+}
+
+input AlternativeTextCreateInput {
+  alternativeID: ID!
+  language: ID!
+  text: String!
+}
+
+"""An edge in a connection."""
+type AlternativeTextEdge {
+  """The item at the end of the edge."""
+  node: AlternativeText!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AlternativeTextOrderByInput {
+  id_ASC
+  id_DESC
+  alternativeID_ASC
+  alternativeID_DESC
+  language_ASC
+  language_DESC
+  text_ASC
+  text_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AlternativeTextPreviousValues {
+  id: ID!
+  alternativeID: ID!
+  language: ID!
+  text: String!
+}
+
+type AlternativeTextSubscriptionPayload {
+  mutation: MutationType!
+  node: AlternativeText
+  updatedFields: [String!]
+  previousValues: AlternativeTextPreviousValues
+}
+
+input AlternativeTextSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AlternativeTextSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AlternativeTextSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AlternativeTextSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AlternativeTextWhereInput
+}
+
+input AlternativeTextUpdateInput {
+  alternativeID: ID
+  language: ID
+  text: String
+}
+
+input AlternativeTextWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AlternativeTextWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AlternativeTextWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AlternativeTextWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  alternativeID: ID
+
+  """All values that are not equal to given value."""
+  alternativeID_not: ID
+
+  """All values that are contained in given list."""
+  alternativeID_in: [ID!]
+
+  """All values that are not contained in given list."""
+  alternativeID_not_in: [ID!]
+
+  """All values less than the given value."""
+  alternativeID_lt: ID
+
+  """All values less than or equal the given value."""
+  alternativeID_lte: ID
+
+  """All values greater than the given value."""
+  alternativeID_gt: ID
+
+  """All values greater than or equal the given value."""
+  alternativeID_gte: ID
+
+  """All values containing the given string."""
+  alternativeID_contains: ID
+
+  """All values not containing the given string."""
+  alternativeID_not_contains: ID
+
+  """All values starting with the given string."""
+  alternativeID_starts_with: ID
+
+  """All values not starting with the given string."""
+  alternativeID_not_starts_with: ID
+
+  """All values ending with the given string."""
+  alternativeID_ends_with: ID
+
+  """All values not ending with the given string."""
+  alternativeID_not_ends_with: ID
+  language: ID
+
+  """All values that are not equal to given value."""
+  language_not: ID
+
+  """All values that are contained in given list."""
+  language_in: [ID!]
+
+  """All values that are not contained in given list."""
+  language_not_in: [ID!]
+
+  """All values less than the given value."""
+  language_lt: ID
+
+  """All values less than or equal the given value."""
+  language_lte: ID
+
+  """All values greater than the given value."""
+  language_gt: ID
+
+  """All values greater than or equal the given value."""
+  language_gte: ID
+
+  """All values containing the given string."""
+  language_contains: ID
+
+  """All values not containing the given string."""
+  language_not_contains: ID
+
+  """All values starting with the given string."""
+  language_starts_with: ID
+
+  """All values not starting with the given string."""
+  language_not_starts_with: ID
+
+  """All values ending with the given string."""
+  language_ends_with: ID
+
+  """All values not ending with the given string."""
+  language_not_ends_with: ID
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+}
+
+input AlternativeTextWhereUniqueInput {
+  id: ID
+}
+
+type Answer implements Node {
+  id: ID!
+  questionID: ID!
+  value: Float
+  alternativeID: ID
+}
+
+"""A connection to a list of items."""
+type AnswerConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AnswerEdge]!
+  aggregate: AggregateAnswer!
+}
+
+input AnswerCreateInput {
+  questionID: ID!
+  value: Float
+  alternativeID: ID
+}
+
+"""An edge in a connection."""
+type AnswerEdge {
+  """The item at the end of the edge."""
+  node: Answer!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AnswerOrderByInput {
+  id_ASC
+  id_DESC
+  questionID_ASC
+  questionID_DESC
+  value_ASC
+  value_DESC
+  alternativeID_ASC
+  alternativeID_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AnswerPreviousValues {
+  id: ID!
+  questionID: ID!
+  value: Float
+  alternativeID: ID
+}
+
+type AnswerSubscriptionPayload {
+  mutation: MutationType!
+  node: Answer
+  updatedFields: [String!]
+  previousValues: AnswerPreviousValues
+}
+
+input AnswerSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AnswerSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AnswerSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AnswerSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AnswerWhereInput
+}
+
+input AnswerUpdateInput {
+  questionID: ID
+  value: Float
+  alternativeID: ID
+}
+
+input AnswerWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AnswerWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AnswerWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AnswerWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  questionID: ID
+
+  """All values that are not equal to given value."""
+  questionID_not: ID
+
+  """All values that are contained in given list."""
+  questionID_in: [ID!]
+
+  """All values that are not contained in given list."""
+  questionID_not_in: [ID!]
+
+  """All values less than the given value."""
+  questionID_lt: ID
+
+  """All values less than or equal the given value."""
+  questionID_lte: ID
+
+  """All values greater than the given value."""
+  questionID_gt: ID
+
+  """All values greater than or equal the given value."""
+  questionID_gte: ID
+
+  """All values containing the given string."""
+  questionID_contains: ID
+
+  """All values not containing the given string."""
+  questionID_not_contains: ID
+
+  """All values starting with the given string."""
+  questionID_starts_with: ID
+
+  """All values not starting with the given string."""
+  questionID_not_starts_with: ID
+
+  """All values ending with the given string."""
+  questionID_ends_with: ID
+
+  """All values not ending with the given string."""
+  questionID_not_ends_with: ID
+  value: Float
+
+  """All values that are not equal to given value."""
+  value_not: Float
+
+  """All values that are contained in given list."""
+  value_in: [Float!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Float!]
+
+  """All values less than the given value."""
+  value_lt: Float
+
+  """All values less than or equal the given value."""
+  value_lte: Float
+
+  """All values greater than the given value."""
+  value_gt: Float
+
+  """All values greater than or equal the given value."""
+  value_gte: Float
+  alternativeID: ID
+
+  """All values that are not equal to given value."""
+  alternativeID_not: ID
+
+  """All values that are contained in given list."""
+  alternativeID_in: [ID!]
+
+  """All values that are not contained in given list."""
+  alternativeID_not_in: [ID!]
+
+  """All values less than the given value."""
+  alternativeID_lt: ID
+
+  """All values less than or equal the given value."""
+  alternativeID_lte: ID
+
+  """All values greater than the given value."""
+  alternativeID_gt: ID
+
+  """All values greater than or equal the given value."""
+  alternativeID_gte: ID
+
+  """All values containing the given string."""
+  alternativeID_contains: ID
+
+  """All values not containing the given string."""
+  alternativeID_not_contains: ID
+
+  """All values starting with the given string."""
+  alternativeID_starts_with: ID
+
+  """All values not starting with the given string."""
+  alternativeID_not_starts_with: ID
+
+  """All values ending with the given string."""
+  alternativeID_ends_with: ID
+
+  """All values not ending with the given string."""
+  alternativeID_not_ends_with: ID
+}
+
+input AnswerWhereUniqueInput {
+  id: ID
 }
 
 type BatchPayload {
@@ -331,12 +1190,6 @@ input LanguageWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  _MagicalBackRelation_LanguageToQuestionOptions_every: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionOptions_some: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionOptions_none: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_every: QuestionTextWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_some: QuestionTextWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_none: QuestionTextWhereInput
 }
 
 input LanguageWhereUniqueInput {
@@ -344,214 +1197,66 @@ input LanguageWhereUniqueInput {
   name: String
 }
 
-"""
-The \`Long\` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-"""
-scalar Long
-
-type Mutation {
-  createUser(data: UserCreateInput!): User!
-  createQuestion(data: QuestionCreateInput!): Question!
-  createQuestionText(data: QuestionTextCreateInput!): QuestionText!
-  createLanguage(data: LanguageCreateInput!): Language!
-  createQuestionOptions(data: QuestionOptionsCreateInput!): QuestionOptions!
-  createQuestionType(data: QuestionTypeCreateInput!): QuestionType!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateQuestion(data: QuestionUpdateInput!, where: QuestionWhereUniqueInput!): Question
-  updateQuestionText(data: QuestionTextUpdateInput!, where: QuestionTextWhereUniqueInput!): QuestionText
-  updateLanguage(data: LanguageUpdateInput!, where: LanguageWhereUniqueInput!): Language
-  updateQuestionOptions(data: QuestionOptionsUpdateInput!, where: QuestionOptionsWhereUniqueInput!): QuestionOptions
-  updateQuestionType(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereUniqueInput!): QuestionType
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteQuestion(where: QuestionWhereUniqueInput!): Question
-  deleteQuestionText(where: QuestionTextWhereUniqueInput!): QuestionText
-  deleteLanguage(where: LanguageWhereUniqueInput!): Language
-  deleteQuestionOptions(where: QuestionOptionsWhereUniqueInput!): QuestionOptions
-  deleteQuestionType(where: QuestionTypeWhereUniqueInput!): QuestionType
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertQuestion(where: QuestionWhereUniqueInput!, create: QuestionCreateInput!, update: QuestionUpdateInput!): Question!
-  upsertQuestionText(where: QuestionTextWhereUniqueInput!, create: QuestionTextCreateInput!, update: QuestionTextUpdateInput!): QuestionText!
-  upsertLanguage(where: LanguageWhereUniqueInput!, create: LanguageCreateInput!, update: LanguageUpdateInput!): Language!
-  upsertQuestionOptions(where: QuestionOptionsWhereUniqueInput!, create: QuestionOptionsCreateInput!, update: QuestionOptionsUpdateInput!): QuestionOptions!
-  upsertQuestionType(where: QuestionTypeWhereUniqueInput!, create: QuestionTypeCreateInput!, update: QuestionTypeUpdateInput!): QuestionType!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyQuestions(data: QuestionUpdateInput!, where: QuestionWhereInput): BatchPayload!
-  updateManyQuestionTexts(data: QuestionTextUpdateInput!, where: QuestionTextWhereInput): BatchPayload!
-  updateManyLanguages(data: LanguageUpdateInput!, where: LanguageWhereInput): BatchPayload!
-  updateManyQuestionOptionses(data: QuestionOptionsUpdateInput!, where: QuestionOptionsWhereInput): BatchPayload!
-  updateManyQuestionTypes(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyQuestions(where: QuestionWhereInput): BatchPayload!
-  deleteManyQuestionTexts(where: QuestionTextWhereInput): BatchPayload!
-  deleteManyLanguages(where: LanguageWhereInput): BatchPayload!
-  deleteManyQuestionOptionses(where: QuestionOptionsWhereInput): BatchPayload!
-  deleteManyQuestionTypes(where: QuestionTypeWhereInput): BatchPayload!
-}
-
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-"""An object with an ID"""
-interface Node {
-  """The id of the object."""
+type List implements Node {
   id: ID!
-}
-
-"""Information about pagination in a connection."""
-type PageInfo {
-  """When paginating forwards, are there more items?"""
-  hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
-  """When paginating backwards, the cursor to continue."""
-  startCursor: String
-
-  """When paginating forwards, the cursor to continue."""
-  endCursor: String
-}
-
-type Query {
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question]!
-  questionTexts(where: QuestionTextWhereInput, orderBy: QuestionTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionText]!
-  languages(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Language]!
-  questionOptionses(where: QuestionOptionsWhereInput, orderBy: QuestionOptionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionOptions]!
-  questionTypes(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionType]!
-  user(where: UserWhereUniqueInput!): User
-  question(where: QuestionWhereUniqueInput!): Question
-  questionText(where: QuestionTextWhereUniqueInput!): QuestionText
-  language(where: LanguageWhereUniqueInput!): Language
-  questionOptions(where: QuestionOptionsWhereUniqueInput!): QuestionOptions
-  questionType(where: QuestionTypeWhereUniqueInput!): QuestionType
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  questionsConnection(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionConnection!
-  questionTextsConnection(where: QuestionTextWhereInput, orderBy: QuestionTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTextConnection!
-  languagesConnection(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LanguageConnection!
-  questionOptionsesConnection(where: QuestionOptionsWhereInput, orderBy: QuestionOptionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionOptionsConnection!
-  questionTypesConnection(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTypeConnection!
-
-  """Fetches an object given its ID"""
-  node(
-    """The ID of an object"""
-    id: ID!
-  ): Node
-}
-
-type Question implements Node {
-  id: ID!
-  description: String
-  type(where: QuestionTypeWhereInput): QuestionType!
+  description: String!
 }
 
 """A connection to a list of items."""
-type QuestionConnection {
+type ListConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [QuestionEdge]!
-  aggregate: AggregateQuestion!
+  edges: [ListEdge]!
+  aggregate: AggregateList!
 }
 
-input QuestionCreateInput {
-  description: String
-  type: QuestionTypeCreateOneInput!
+input ListCreateInput {
+  description: String!
 }
 
 """An edge in a connection."""
-type QuestionEdge {
+type ListEdge {
   """The item at the end of the edge."""
-  node: Question!
+  node: List!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-type QuestionOptions implements Node {
-  id: ID!
-  QuestionTypeID: ID!
-  QuestionID: ID!
-  options: [String!]!
-  language(where: LanguageWhereInput): Language!
-}
-
-"""A connection to a list of items."""
-type QuestionOptionsConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [QuestionOptionsEdge]!
-  aggregate: AggregateQuestionOptions!
-}
-
-input QuestionOptionsCreateInput {
-  QuestionTypeID: ID!
-  QuestionID: ID!
-  options: QuestionOptionsCreateoptionsInput
-  language: LanguageCreateOneInput!
-}
-
-input QuestionOptionsCreateOneInput {
-  create: QuestionOptionsCreateInput
-  connect: QuestionOptionsWhereUniqueInput
-}
-
-input QuestionOptionsCreateoptionsInput {
-  set: [String!]
-}
-
-"""An edge in a connection."""
-type QuestionOptionsEdge {
-  """The item at the end of the edge."""
-  node: QuestionOptions!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum QuestionOptionsOrderByInput {
+enum ListOrderByInput {
   id_ASC
   id_DESC
-  QuestionTypeID_ASC
-  QuestionTypeID_DESC
-  QuestionID_ASC
-  QuestionID_DESC
+  description_ASC
+  description_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type QuestionOptionsPreviousValues {
+type ListPreviousValues {
   id: ID!
-  QuestionTypeID: ID!
-  QuestionID: ID!
-  options: [String!]!
+  description: String!
 }
 
-type QuestionOptionsSubscriptionPayload {
+type ListSubscriptionPayload {
   mutation: MutationType!
-  node: QuestionOptions
+  node: List
   updatedFields: [String!]
-  previousValues: QuestionOptionsPreviousValues
+  previousValues: ListPreviousValues
 }
 
-input QuestionOptionsSubscriptionWhereInput {
+input ListSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [QuestionOptionsSubscriptionWhereInput!]
+  AND: [ListSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [QuestionOptionsSubscriptionWhereInput!]
+  OR: [ListSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [QuestionOptionsSubscriptionWhereInput!]
+  NOT: [ListSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -572,50 +1277,22 @@ input QuestionOptionsSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: QuestionOptionsWhereInput
+  node: ListWhereInput
 }
 
-input QuestionOptionsUpdateDataInput {
-  QuestionTypeID: ID
-  QuestionID: ID
-  options: QuestionOptionsUpdateoptionsInput
-  language: LanguageUpdateOneInput
+input ListUpdateInput {
+  description: String
 }
 
-input QuestionOptionsUpdateInput {
-  QuestionTypeID: ID
-  QuestionID: ID
-  options: QuestionOptionsUpdateoptionsInput
-  language: LanguageUpdateOneInput
-}
-
-input QuestionOptionsUpdateOneInput {
-  create: QuestionOptionsCreateInput
-  connect: QuestionOptionsWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: QuestionOptionsUpdateDataInput
-  upsert: QuestionOptionsUpsertNestedInput
-}
-
-input QuestionOptionsUpdateoptionsInput {
-  set: [String!]
-}
-
-input QuestionOptionsUpsertNestedInput {
-  update: QuestionOptionsUpdateDataInput!
-  create: QuestionOptionsCreateInput!
-}
-
-input QuestionOptionsWhereInput {
+input ListWhereInput {
   """Logical AND on all given filters."""
-  AND: [QuestionOptionsWhereInput!]
+  AND: [ListWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [QuestionOptionsWhereInput!]
+  OR: [ListWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [QuestionOptionsWhereInput!]
+  NOT: [ListWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -656,94 +1333,208 @@ input QuestionOptionsWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  QuestionTypeID: ID
+  description: String
 
   """All values that are not equal to given value."""
-  QuestionTypeID_not: ID
+  description_not: String
 
   """All values that are contained in given list."""
-  QuestionTypeID_in: [ID!]
+  description_in: [String!]
 
   """All values that are not contained in given list."""
-  QuestionTypeID_not_in: [ID!]
+  description_not_in: [String!]
 
   """All values less than the given value."""
-  QuestionTypeID_lt: ID
+  description_lt: String
 
   """All values less than or equal the given value."""
-  QuestionTypeID_lte: ID
+  description_lte: String
 
   """All values greater than the given value."""
-  QuestionTypeID_gt: ID
+  description_gt: String
 
   """All values greater than or equal the given value."""
-  QuestionTypeID_gte: ID
+  description_gte: String
 
   """All values containing the given string."""
-  QuestionTypeID_contains: ID
+  description_contains: String
 
   """All values not containing the given string."""
-  QuestionTypeID_not_contains: ID
+  description_not_contains: String
 
   """All values starting with the given string."""
-  QuestionTypeID_starts_with: ID
+  description_starts_with: String
 
   """All values not starting with the given string."""
-  QuestionTypeID_not_starts_with: ID
+  description_not_starts_with: String
 
   """All values ending with the given string."""
-  QuestionTypeID_ends_with: ID
+  description_ends_with: String
 
   """All values not ending with the given string."""
-  QuestionTypeID_not_ends_with: ID
-  QuestionID: ID
-
-  """All values that are not equal to given value."""
-  QuestionID_not: ID
-
-  """All values that are contained in given list."""
-  QuestionID_in: [ID!]
-
-  """All values that are not contained in given list."""
-  QuestionID_not_in: [ID!]
-
-  """All values less than the given value."""
-  QuestionID_lt: ID
-
-  """All values less than or equal the given value."""
-  QuestionID_lte: ID
-
-  """All values greater than the given value."""
-  QuestionID_gt: ID
-
-  """All values greater than or equal the given value."""
-  QuestionID_gte: ID
-
-  """All values containing the given string."""
-  QuestionID_contains: ID
-
-  """All values not containing the given string."""
-  QuestionID_not_contains: ID
-
-  """All values starting with the given string."""
-  QuestionID_starts_with: ID
-
-  """All values not starting with the given string."""
-  QuestionID_not_starts_with: ID
-
-  """All values ending with the given string."""
-  QuestionID_ends_with: ID
-
-  """All values not ending with the given string."""
-  QuestionID_not_ends_with: ID
-  language: LanguageWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_every: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_some: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_none: QuestionTextWhereInput
+  description_not_ends_with: String
 }
 
-input QuestionOptionsWhereUniqueInput {
+input ListWhereUniqueInput {
   id: ID
+}
+
+"""
+The \`Long\` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createQuestion(data: QuestionCreateInput!): Question!
+  createQuestionType(data: QuestionTypeCreateInput!): QuestionType!
+  createQuestionText(data: QuestionTextCreateInput!): QuestionText!
+  createAlternatives(data: AlternativesCreateInput!): Alternatives!
+  createAlternativeText(data: AlternativeTextCreateInput!): AlternativeText!
+  createList(data: ListCreateInput!): List!
+  createAnswer(data: AnswerCreateInput!): Answer!
+  createLanguage(data: LanguageCreateInput!): Language!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateQuestion(data: QuestionUpdateInput!, where: QuestionWhereUniqueInput!): Question
+  updateQuestionType(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereUniqueInput!): QuestionType
+  updateQuestionText(data: QuestionTextUpdateInput!, where: QuestionTextWhereUniqueInput!): QuestionText
+  updateAlternatives(data: AlternativesUpdateInput!, where: AlternativesWhereUniqueInput!): Alternatives
+  updateAlternativeText(data: AlternativeTextUpdateInput!, where: AlternativeTextWhereUniqueInput!): AlternativeText
+  updateList(data: ListUpdateInput!, where: ListWhereUniqueInput!): List
+  updateAnswer(data: AnswerUpdateInput!, where: AnswerWhereUniqueInput!): Answer
+  updateLanguage(data: LanguageUpdateInput!, where: LanguageWhereUniqueInput!): Language
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteQuestion(where: QuestionWhereUniqueInput!): Question
+  deleteQuestionType(where: QuestionTypeWhereUniqueInput!): QuestionType
+  deleteQuestionText(where: QuestionTextWhereUniqueInput!): QuestionText
+  deleteAlternatives(where: AlternativesWhereUniqueInput!): Alternatives
+  deleteAlternativeText(where: AlternativeTextWhereUniqueInput!): AlternativeText
+  deleteList(where: ListWhereUniqueInput!): List
+  deleteAnswer(where: AnswerWhereUniqueInput!): Answer
+  deleteLanguage(where: LanguageWhereUniqueInput!): Language
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertQuestion(where: QuestionWhereUniqueInput!, create: QuestionCreateInput!, update: QuestionUpdateInput!): Question!
+  upsertQuestionType(where: QuestionTypeWhereUniqueInput!, create: QuestionTypeCreateInput!, update: QuestionTypeUpdateInput!): QuestionType!
+  upsertQuestionText(where: QuestionTextWhereUniqueInput!, create: QuestionTextCreateInput!, update: QuestionTextUpdateInput!): QuestionText!
+  upsertAlternatives(where: AlternativesWhereUniqueInput!, create: AlternativesCreateInput!, update: AlternativesUpdateInput!): Alternatives!
+  upsertAlternativeText(where: AlternativeTextWhereUniqueInput!, create: AlternativeTextCreateInput!, update: AlternativeTextUpdateInput!): AlternativeText!
+  upsertList(where: ListWhereUniqueInput!, create: ListCreateInput!, update: ListUpdateInput!): List!
+  upsertAnswer(where: AnswerWhereUniqueInput!, create: AnswerCreateInput!, update: AnswerUpdateInput!): Answer!
+  upsertLanguage(where: LanguageWhereUniqueInput!, create: LanguageCreateInput!, update: LanguageUpdateInput!): Language!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyQuestions(data: QuestionUpdateInput!, where: QuestionWhereInput): BatchPayload!
+  updateManyQuestionTypes(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereInput): BatchPayload!
+  updateManyQuestionTexts(data: QuestionTextUpdateInput!, where: QuestionTextWhereInput): BatchPayload!
+  updateManyAlternativeses(data: AlternativesUpdateInput!, where: AlternativesWhereInput): BatchPayload!
+  updateManyAlternativeTexts(data: AlternativeTextUpdateInput!, where: AlternativeTextWhereInput): BatchPayload!
+  updateManyLists(data: ListUpdateInput!, where: ListWhereInput): BatchPayload!
+  updateManyAnswers(data: AnswerUpdateInput!, where: AnswerWhereInput): BatchPayload!
+  updateManyLanguages(data: LanguageUpdateInput!, where: LanguageWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyQuestions(where: QuestionWhereInput): BatchPayload!
+  deleteManyQuestionTypes(where: QuestionTypeWhereInput): BatchPayload!
+  deleteManyQuestionTexts(where: QuestionTextWhereInput): BatchPayload!
+  deleteManyAlternativeses(where: AlternativesWhereInput): BatchPayload!
+  deleteManyAlternativeTexts(where: AlternativeTextWhereInput): BatchPayload!
+  deleteManyLists(where: ListWhereInput): BatchPayload!
+  deleteManyAnswers(where: AnswerWhereInput): BatchPayload!
+  deleteManyLanguages(where: LanguageWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question]!
+  questionTypes(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionType]!
+  questionTexts(where: QuestionTextWhereInput, orderBy: QuestionTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionText]!
+  alternativeses(where: AlternativesWhereInput, orderBy: AlternativesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Alternatives]!
+  alternativeTexts(where: AlternativeTextWhereInput, orderBy: AlternativeTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AlternativeText]!
+  lists(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [List]!
+  answers(where: AnswerWhereInput, orderBy: AnswerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Answer]!
+  languages(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Language]!
+  user(where: UserWhereUniqueInput!): User
+  question(where: QuestionWhereUniqueInput!): Question
+  questionType(where: QuestionTypeWhereUniqueInput!): QuestionType
+  questionText(where: QuestionTextWhereUniqueInput!): QuestionText
+  alternatives(where: AlternativesWhereUniqueInput!): Alternatives
+  alternativeText(where: AlternativeTextWhereUniqueInput!): AlternativeText
+  list(where: ListWhereUniqueInput!): List
+  answer(where: AnswerWhereUniqueInput!): Answer
+  language(where: LanguageWhereUniqueInput!): Language
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  questionsConnection(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionConnection!
+  questionTypesConnection(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTypeConnection!
+  questionTextsConnection(where: QuestionTextWhereInput, orderBy: QuestionTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTextConnection!
+  alternativesesConnection(where: AlternativesWhereInput, orderBy: AlternativesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlternativesConnection!
+  alternativeTextsConnection(where: AlternativeTextWhereInput, orderBy: AlternativeTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlternativeTextConnection!
+  listsConnection(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ListConnection!
+  answersConnection(where: AnswerWhereInput, orderBy: AnswerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AnswerConnection!
+  languagesConnection(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LanguageConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Question implements Node {
+  id: ID!
+  description: String!
+  questionType: ID!
+  listID: ID
+}
+
+"""A connection to a list of items."""
+type QuestionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [QuestionEdge]!
+  aggregate: AggregateQuestion!
+}
+
+input QuestionCreateInput {
+  description: String!
+  questionType: ID!
+  listID: ID
+}
+
+"""An edge in a connection."""
+type QuestionEdge {
+  """The item at the end of the edge."""
+  node: Question!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 enum QuestionOrderByInput {
@@ -751,6 +1542,10 @@ enum QuestionOrderByInput {
   id_DESC
   description_ASC
   description_DESC
+  questionType_ASC
+  questionType_DESC
+  listID_ASC
+  listID_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -759,7 +1554,9 @@ enum QuestionOrderByInput {
 
 type QuestionPreviousValues {
   id: ID!
-  description: String
+  description: String!
+  questionType: ID!
+  listID: ID
 }
 
 type QuestionSubscriptionPayload {
@@ -806,8 +1603,6 @@ type QuestionText implements Node {
   text: String!
   language(where: LanguageWhereInput): Language!
   questionID: ID!
-  questionType(where: QuestionTypeWhereInput): QuestionType!
-  questionOptions(where: QuestionOptionsWhereInput): QuestionOptions
 }
 
 """A connection to a list of items."""
@@ -824,8 +1619,6 @@ input QuestionTextCreateInput {
   text: String!
   questionID: ID!
   language: LanguageCreateOneInput!
-  questionType: QuestionTypeCreateOneInput!
-  questionOptions: QuestionOptionsCreateOneInput
 }
 
 """An edge in a connection."""
@@ -899,8 +1692,6 @@ input QuestionTextUpdateInput {
   text: String
   questionID: ID
   language: LanguageUpdateOneInput
-  questionType: QuestionTypeUpdateOneInput
-  questionOptions: QuestionOptionsUpdateOneInput
 }
 
 input QuestionTextWhereInput {
@@ -1033,8 +1824,6 @@ input QuestionTextWhereInput {
   """All values not ending with the given string."""
   questionID_not_ends_with: ID
   language: LanguageWhereInput
-  questionType: QuestionTypeWhereInput
-  questionOptions: QuestionOptionsWhereInput
 }
 
 input QuestionTextWhereUniqueInput {
@@ -1058,11 +1847,6 @@ type QuestionTypeConnection {
 
 input QuestionTypeCreateInput {
   description: String!
-}
-
-input QuestionTypeCreateOneInput {
-  create: QuestionTypeCreateInput
-  connect: QuestionTypeWhereUniqueInput
 }
 
 """An edge in a connection."""
@@ -1129,25 +1913,8 @@ input QuestionTypeSubscriptionWhereInput {
   node: QuestionTypeWhereInput
 }
 
-input QuestionTypeUpdateDataInput {
-  description: String
-}
-
 input QuestionTypeUpdateInput {
   description: String
-}
-
-input QuestionTypeUpdateOneInput {
-  create: QuestionTypeCreateInput
-  connect: QuestionTypeWhereUniqueInput
-  delete: Boolean
-  update: QuestionTypeUpdateDataInput
-  upsert: QuestionTypeUpsertNestedInput
-}
-
-input QuestionTypeUpsertNestedInput {
-  update: QuestionTypeUpdateDataInput!
-  create: QuestionTypeCreateInput!
 }
 
 input QuestionTypeWhereInput {
@@ -1239,21 +2006,17 @@ input QuestionTypeWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  _MagicalBackRelation_QuestionToQuestionType_every: QuestionWhereInput
-  _MagicalBackRelation_QuestionToQuestionType_some: QuestionWhereInput
-  _MagicalBackRelation_QuestionToQuestionType_none: QuestionWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_every: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_some: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_none: QuestionTextWhereInput
 }
 
 input QuestionTypeWhereUniqueInput {
   id: ID
+  description: String
 }
 
 input QuestionUpdateInput {
   description: String
-  type: QuestionTypeUpdateOneInput
+  questionType: ID
+  listID: ID
 }
 
 input QuestionWhereInput {
@@ -1345,7 +2108,86 @@ input QuestionWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  type: QuestionTypeWhereInput
+  questionType: ID
+
+  """All values that are not equal to given value."""
+  questionType_not: ID
+
+  """All values that are contained in given list."""
+  questionType_in: [ID!]
+
+  """All values that are not contained in given list."""
+  questionType_not_in: [ID!]
+
+  """All values less than the given value."""
+  questionType_lt: ID
+
+  """All values less than or equal the given value."""
+  questionType_lte: ID
+
+  """All values greater than the given value."""
+  questionType_gt: ID
+
+  """All values greater than or equal the given value."""
+  questionType_gte: ID
+
+  """All values containing the given string."""
+  questionType_contains: ID
+
+  """All values not containing the given string."""
+  questionType_not_contains: ID
+
+  """All values starting with the given string."""
+  questionType_starts_with: ID
+
+  """All values not starting with the given string."""
+  questionType_not_starts_with: ID
+
+  """All values ending with the given string."""
+  questionType_ends_with: ID
+
+  """All values not ending with the given string."""
+  questionType_not_ends_with: ID
+  listID: ID
+
+  """All values that are not equal to given value."""
+  listID_not: ID
+
+  """All values that are contained in given list."""
+  listID_in: [ID!]
+
+  """All values that are not contained in given list."""
+  listID_not_in: [ID!]
+
+  """All values less than the given value."""
+  listID_lt: ID
+
+  """All values less than or equal the given value."""
+  listID_lte: ID
+
+  """All values greater than the given value."""
+  listID_gt: ID
+
+  """All values greater than or equal the given value."""
+  listID_gte: ID
+
+  """All values containing the given string."""
+  listID_contains: ID
+
+  """All values not containing the given string."""
+  listID_not_contains: ID
+
+  """All values starting with the given string."""
+  listID_starts_with: ID
+
+  """All values not starting with the given string."""
+  listID_not_starts_with: ID
+
+  """All values ending with the given string."""
+  listID_ends_with: ID
+
+  """All values not ending with the given string."""
+  listID_not_ends_with: ID
 }
 
 input QuestionWhereUniqueInput {
@@ -1355,10 +2197,13 @@ input QuestionWhereUniqueInput {
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   question(where: QuestionSubscriptionWhereInput): QuestionSubscriptionPayload
-  questionText(where: QuestionTextSubscriptionWhereInput): QuestionTextSubscriptionPayload
-  language(where: LanguageSubscriptionWhereInput): LanguageSubscriptionPayload
-  questionOptions(where: QuestionOptionsSubscriptionWhereInput): QuestionOptionsSubscriptionPayload
   questionType(where: QuestionTypeSubscriptionWhereInput): QuestionTypeSubscriptionPayload
+  questionText(where: QuestionTextSubscriptionWhereInput): QuestionTextSubscriptionPayload
+  alternatives(where: AlternativesSubscriptionWhereInput): AlternativesSubscriptionPayload
+  alternativeText(where: AlternativeTextSubscriptionWhereInput): AlternativeTextSubscriptionPayload
+  list(where: ListSubscriptionWhereInput): ListSubscriptionPayload
+  answer(where: AnswerSubscriptionWhereInput): AnswerSubscriptionPayload
+  language(where: LanguageSubscriptionWhereInput): LanguageSubscriptionPayload
 }
 
 type User implements Node {
@@ -1643,7 +2488,7 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
-export type QuestionOrderByInput =   'id_ASC' |
+export type QuestionTypeOrderByInput =   'id_ASC' |
   'id_DESC' |
   'description_ASC' |
   'description_DESC' |
@@ -1663,34 +2508,68 @@ export type QuestionTextOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
+export type AlternativesOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'description_ASC' |
+  'description_DESC' |
+  'value_ASC' |
+  'value_DESC' |
+  'order_ASC' |
+  'order_DESC' |
+  'listID_ASC' |
+  'listID_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
+export type QuestionOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'description_ASC' |
+  'description_DESC' |
+  'questionType_ASC' |
+  'questionType_DESC' |
+  'listID_ASC' |
+  'listID_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
 export type MutationType =   'CREATED' |
   'UPDATED' |
   'DELETED'
 
-export type LanguageOrderByInput =   'id_ASC' |
+export type AlternativeTextOrderByInput =   'id_ASC' |
   'id_DESC' |
-  'name_ASC' |
-  'name_DESC' |
+  'alternativeID_ASC' |
+  'alternativeID_DESC' |
+  'language_ASC' |
+  'language_DESC' |
+  'text_ASC' |
+  'text_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type QuestionOptionsOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'QuestionTypeID_ASC' |
-  'QuestionTypeID_DESC' |
-  'QuestionID_ASC' |
-  'QuestionID_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
-export type QuestionTypeOrderByInput =   'id_ASC' |
+export type ListOrderByInput =   'id_ASC' |
   'id_DESC' |
   'description_ASC' |
   'description_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
+export type AnswerOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'questionID_ASC' |
+  'questionID_DESC' |
+  'value_ASC' |
+  'value_DESC' |
+  'alternativeID_ASC' |
+  'alternativeID_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -1709,20 +2588,23 @@ export type UserOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export interface QuestionTypeWhereUniqueInput {
+export type LanguageOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
+export interface UserCreateInput {
+  name: String
+  email: String
+  password: String
+}
+
+export interface AlternativesWhereUniqueInput {
   id?: ID_Input
-}
-
-export interface QuestionTextCreateInput {
-  text: String
-  questionID: ID_Input
-  language: LanguageCreateOneInput
-  questionType: QuestionTypeCreateOneInput
-  questionOptions?: QuestionOptionsCreateOneInput
-}
-
-export interface QuestionOptionsUpdateoptionsInput {
-  set?: String[] | String
 }
 
 export interface UserWhereInput {
@@ -1787,11 +2669,23 @@ export interface UserWhereInput {
   password_not_ends_with?: String
 }
 
-export interface QuestionOptionsUpdateDataInput {
-  QuestionTypeID?: ID_Input
-  QuestionID?: ID_Input
-  options?: QuestionOptionsUpdateoptionsInput
-  language?: LanguageUpdateOneInput
+export interface AlternativeTextWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface AlternativesSubscriptionWhereInput {
+  AND?: AlternativesSubscriptionWhereInput[] | AlternativesSubscriptionWhereInput
+  OR?: AlternativesSubscriptionWhereInput[] | AlternativesSubscriptionWhereInput
+  NOT?: AlternativesSubscriptionWhereInput[] | AlternativesSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: AlternativesWhereInput
+}
+
+export interface ListWhereUniqueInput {
+  id?: ID_Input
 }
 
 export interface LanguageWhereInput {
@@ -1826,21 +2720,307 @@ export interface LanguageWhereInput {
   name_not_starts_with?: String
   name_ends_with?: String
   name_not_ends_with?: String
-  _MagicalBackRelation_LanguageToQuestionOptions_every?: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionOptions_some?: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionOptions_none?: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_every?: QuestionTextWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_some?: QuestionTextWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_none?: QuestionTextWhereInput
 }
 
-export interface QuestionOptionsUpdateOneInput {
-  create?: QuestionOptionsCreateInput
-  connect?: QuestionOptionsWhereUniqueInput
-  disconnect?: Boolean
+export interface AnswerWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface QuestionTextSubscriptionWhereInput {
+  AND?: QuestionTextSubscriptionWhereInput[] | QuestionTextSubscriptionWhereInput
+  OR?: QuestionTextSubscriptionWhereInput[] | QuestionTextSubscriptionWhereInput
+  NOT?: QuestionTextSubscriptionWhereInput[] | QuestionTextSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: QuestionTextWhereInput
+}
+
+export interface LanguageWhereUniqueInput {
+  id?: ID_Input
+  name?: String
+}
+
+export interface AlternativesWhereInput {
+  AND?: AlternativesWhereInput[] | AlternativesWhereInput
+  OR?: AlternativesWhereInput[] | AlternativesWhereInput
+  NOT?: AlternativesWhereInput[] | AlternativesWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
+  value?: Float
+  value_not?: Float
+  value_in?: Float[] | Float
+  value_not_in?: Float[] | Float
+  value_lt?: Float
+  value_lte?: Float
+  value_gt?: Float
+  value_gte?: Float
+  order?: Int
+  order_not?: Int
+  order_in?: Int[] | Int
+  order_not_in?: Int[] | Int
+  order_lt?: Int
+  order_lte?: Int
+  order_gt?: Int
+  order_gte?: Int
+  listID?: ID_Input
+  listID_not?: ID_Input
+  listID_in?: ID_Input[] | ID_Input
+  listID_not_in?: ID_Input[] | ID_Input
+  listID_lt?: ID_Input
+  listID_lte?: ID_Input
+  listID_gt?: ID_Input
+  listID_gte?: ID_Input
+  listID_contains?: ID_Input
+  listID_not_contains?: ID_Input
+  listID_starts_with?: ID_Input
+  listID_not_starts_with?: ID_Input
+  listID_ends_with?: ID_Input
+  listID_not_ends_with?: ID_Input
+}
+
+export interface ListUpdateInput {
+  description?: String
+}
+
+export interface AlternativeTextSubscriptionWhereInput {
+  AND?: AlternativeTextSubscriptionWhereInput[] | AlternativeTextSubscriptionWhereInput
+  OR?: AlternativeTextSubscriptionWhereInput[] | AlternativeTextSubscriptionWhereInput
+  NOT?: AlternativeTextSubscriptionWhereInput[] | AlternativeTextSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: AlternativeTextWhereInput
+}
+
+export interface AlternativeTextUpdateInput {
+  alternativeID?: ID_Input
+  language?: ID_Input
+  text?: String
+}
+
+export interface AlternativeTextWhereInput {
+  AND?: AlternativeTextWhereInput[] | AlternativeTextWhereInput
+  OR?: AlternativeTextWhereInput[] | AlternativeTextWhereInput
+  NOT?: AlternativeTextWhereInput[] | AlternativeTextWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  alternativeID?: ID_Input
+  alternativeID_not?: ID_Input
+  alternativeID_in?: ID_Input[] | ID_Input
+  alternativeID_not_in?: ID_Input[] | ID_Input
+  alternativeID_lt?: ID_Input
+  alternativeID_lte?: ID_Input
+  alternativeID_gt?: ID_Input
+  alternativeID_gte?: ID_Input
+  alternativeID_contains?: ID_Input
+  alternativeID_not_contains?: ID_Input
+  alternativeID_starts_with?: ID_Input
+  alternativeID_not_starts_with?: ID_Input
+  alternativeID_ends_with?: ID_Input
+  alternativeID_not_ends_with?: ID_Input
+  language?: ID_Input
+  language_not?: ID_Input
+  language_in?: ID_Input[] | ID_Input
+  language_not_in?: ID_Input[] | ID_Input
+  language_lt?: ID_Input
+  language_lte?: ID_Input
+  language_gt?: ID_Input
+  language_gte?: ID_Input
+  language_contains?: ID_Input
+  language_not_contains?: ID_Input
+  language_starts_with?: ID_Input
+  language_not_starts_with?: ID_Input
+  language_ends_with?: ID_Input
+  language_not_ends_with?: ID_Input
+  text?: String
+  text_not?: String
+  text_in?: String[] | String
+  text_not_in?: String[] | String
+  text_lt?: String
+  text_lte?: String
+  text_gt?: String
+  text_gte?: String
+  text_contains?: String
+  text_not_contains?: String
+  text_starts_with?: String
+  text_not_starts_with?: String
+  text_ends_with?: String
+  text_not_ends_with?: String
+}
+
+export interface AlternativesUpdateInput {
+  description?: String
+  value?: Float
+  order?: Int
+  listID?: ID_Input
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface LanguageUpsertNestedInput {
+  update: LanguageUpdateDataInput
+  create: LanguageCreateInput
+}
+
+export interface ListSubscriptionWhereInput {
+  AND?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput
+  OR?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput
+  NOT?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ListWhereInput
+}
+
+export interface LanguageUpdateDataInput {
+  name?: String
+}
+
+export interface AnswerWhereInput {
+  AND?: AnswerWhereInput[] | AnswerWhereInput
+  OR?: AnswerWhereInput[] | AnswerWhereInput
+  NOT?: AnswerWhereInput[] | AnswerWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  questionID?: ID_Input
+  questionID_not?: ID_Input
+  questionID_in?: ID_Input[] | ID_Input
+  questionID_not_in?: ID_Input[] | ID_Input
+  questionID_lt?: ID_Input
+  questionID_lte?: ID_Input
+  questionID_gt?: ID_Input
+  questionID_gte?: ID_Input
+  questionID_contains?: ID_Input
+  questionID_not_contains?: ID_Input
+  questionID_starts_with?: ID_Input
+  questionID_not_starts_with?: ID_Input
+  questionID_ends_with?: ID_Input
+  questionID_not_ends_with?: ID_Input
+  value?: Float
+  value_not?: Float
+  value_in?: Float[] | Float
+  value_not_in?: Float[] | Float
+  value_lt?: Float
+  value_lte?: Float
+  value_gt?: Float
+  value_gte?: Float
+  alternativeID?: ID_Input
+  alternativeID_not?: ID_Input
+  alternativeID_in?: ID_Input[] | ID_Input
+  alternativeID_not_in?: ID_Input[] | ID_Input
+  alternativeID_lt?: ID_Input
+  alternativeID_lte?: ID_Input
+  alternativeID_gt?: ID_Input
+  alternativeID_gte?: ID_Input
+  alternativeID_contains?: ID_Input
+  alternativeID_not_contains?: ID_Input
+  alternativeID_starts_with?: ID_Input
+  alternativeID_not_starts_with?: ID_Input
+  alternativeID_ends_with?: ID_Input
+  alternativeID_not_ends_with?: ID_Input
+}
+
+export interface LanguageUpdateOneInput {
+  create?: LanguageCreateInput
+  connect?: LanguageWhereUniqueInput
   delete?: Boolean
-  update?: QuestionOptionsUpdateDataInput
-  upsert?: QuestionOptionsUpsertNestedInput
+  update?: LanguageUpdateDataInput
+  upsert?: LanguageUpsertNestedInput
+}
+
+export interface AnswerUpdateInput {
+  questionID?: ID_Input
+  value?: Float
+  alternativeID?: ID_Input
+}
+
+export interface QuestionTextUpdateInput {
+  text?: String
+  questionID?: ID_Input
+  language?: LanguageUpdateOneInput
+}
+
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  email?: String
+}
+
+export interface QuestionTypeUpdateInput {
+  description?: String
+}
+
+export interface QuestionTypeWhereUniqueInput {
+  id?: ID_Input
+  description?: String
+}
+
+export interface QuestionUpdateInput {
+  description?: String
+  questionType?: ID_Input
+  listID?: ID_Input
 }
 
 export interface QuestionTextWhereInput {
@@ -1890,28 +3070,29 @@ export interface QuestionTextWhereInput {
   questionID_ends_with?: ID_Input
   questionID_not_ends_with?: ID_Input
   language?: LanguageWhereInput
-  questionType?: QuestionTypeWhereInput
-  questionOptions?: QuestionOptionsWhereInput
 }
 
-export interface LanguageUpsertNestedInput {
-  update: LanguageUpdateDataInput
-  create: LanguageCreateInput
+export interface UserUpdateInput {
+  name?: String
+  email?: String
+  password?: String
 }
 
-export interface QuestionSubscriptionWhereInput {
-  AND?: QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput
-  OR?: QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput
-  NOT?: QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput
+export interface QuestionTypeSubscriptionWhereInput {
+  AND?: QuestionTypeSubscriptionWhereInput[] | QuestionTypeSubscriptionWhereInput
+  OR?: QuestionTypeSubscriptionWhereInput[] | QuestionTypeSubscriptionWhereInput
+  NOT?: QuestionTypeSubscriptionWhereInput[] | QuestionTypeSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: QuestionWhereInput
+  node?: QuestionTypeWhereInput
 }
 
-export interface LanguageUpdateDataInput {
-  name?: String
+export interface AnswerCreateInput {
+  questionID: ID_Input
+  value?: Float
+  alternativeID?: ID_Input
 }
 
 export interface QuestionWhereInput {
@@ -1946,158 +3127,104 @@ export interface QuestionWhereInput {
   description_not_starts_with?: String
   description_ends_with?: String
   description_not_ends_with?: String
-  type?: QuestionTypeWhereInput
+  questionType?: ID_Input
+  questionType_not?: ID_Input
+  questionType_in?: ID_Input[] | ID_Input
+  questionType_not_in?: ID_Input[] | ID_Input
+  questionType_lt?: ID_Input
+  questionType_lte?: ID_Input
+  questionType_gt?: ID_Input
+  questionType_gte?: ID_Input
+  questionType_contains?: ID_Input
+  questionType_not_contains?: ID_Input
+  questionType_starts_with?: ID_Input
+  questionType_not_starts_with?: ID_Input
+  questionType_ends_with?: ID_Input
+  questionType_not_ends_with?: ID_Input
+  listID?: ID_Input
+  listID_not?: ID_Input
+  listID_in?: ID_Input[] | ID_Input
+  listID_not_in?: ID_Input[] | ID_Input
+  listID_lt?: ID_Input
+  listID_lte?: ID_Input
+  listID_gt?: ID_Input
+  listID_gte?: ID_Input
+  listID_contains?: ID_Input
+  listID_not_contains?: ID_Input
+  listID_starts_with?: ID_Input
+  listID_not_starts_with?: ID_Input
+  listID_ends_with?: ID_Input
+  listID_not_ends_with?: ID_Input
 }
 
-export interface LanguageUpdateOneInput {
-  create?: LanguageCreateInput
-  connect?: LanguageWhereUniqueInput
-  delete?: Boolean
-  update?: LanguageUpdateDataInput
-  upsert?: LanguageUpsertNestedInput
+export interface ListCreateInput {
+  description: String
 }
 
-export interface QuestionTypeUpdateInput {
-  description?: String
-}
-
-export interface QuestionTextUpdateInput {
-  text?: String
-  questionID?: ID_Input
-  language?: LanguageUpdateOneInput
-  questionType?: QuestionTypeUpdateOneInput
-  questionOptions?: QuestionOptionsUpdateOneInput
-}
-
-export interface LanguageSubscriptionWhereInput {
-  AND?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
-  OR?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
-  NOT?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: LanguageWhereInput
-}
-
-export interface QuestionTypeUpsertNestedInput {
-  update: QuestionTypeUpdateDataInput
-  create: QuestionTypeCreateInput
-}
-
-export interface UserWhereUniqueInput {
+export interface ListWhereInput {
+  AND?: ListWhereInput[] | ListWhereInput
+  OR?: ListWhereInput[] | ListWhereInput
+  NOT?: ListWhereInput[] | ListWhereInput
   id?: ID_Input
-  email?: String
-}
-
-export interface QuestionTypeUpdateDataInput {
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
   description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
 }
 
-export interface QuestionTextWhereUniqueInput {
+export interface AlternativeTextCreateInput {
+  alternativeID: ID_Input
+  language: ID_Input
+  text: String
+}
+
+export interface AnswerSubscriptionWhereInput {
+  AND?: AnswerSubscriptionWhereInput[] | AnswerSubscriptionWhereInput
+  OR?: AnswerSubscriptionWhereInput[] | AnswerSubscriptionWhereInput
+  NOT?: AnswerSubscriptionWhereInput[] | AnswerSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: AnswerWhereInput
+}
+
+export interface AlternativesCreateInput {
+  description: String
+  value: Float
+  order: Int
+  listID: ID_Input
+}
+
+export interface QuestionWhereUniqueInput {
   id?: ID_Input
-}
-
-export interface QuestionTypeUpdateOneInput {
-  create?: QuestionTypeCreateInput
-  connect?: QuestionTypeWhereUniqueInput
-  delete?: Boolean
-  update?: QuestionTypeUpdateDataInput
-  upsert?: QuestionTypeUpsertNestedInput
-}
-
-export interface QuestionOptionsWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface QuestionUpdateInput {
-  description?: String
-  type?: QuestionTypeUpdateOneInput
-}
-
-export interface QuestionOptionsUpdateInput {
-  QuestionTypeID?: ID_Input
-  QuestionID?: ID_Input
-  options?: QuestionOptionsUpdateoptionsInput
-  language?: LanguageUpdateOneInput
-}
-
-export interface UserUpdateInput {
-  name?: String
-  email?: String
-  password?: String
-}
-
-export interface QuestionOptionsUpsertNestedInput {
-  update: QuestionOptionsUpdateDataInput
-  create: QuestionOptionsCreateInput
-}
-
-export interface QuestionOptionsCreateoptionsInput {
-  set?: String[] | String
-}
-
-export interface QuestionTextSubscriptionWhereInput {
-  AND?: QuestionTextSubscriptionWhereInput[] | QuestionTextSubscriptionWhereInput
-  OR?: QuestionTextSubscriptionWhereInput[] | QuestionTextSubscriptionWhereInput
-  NOT?: QuestionTextSubscriptionWhereInput[] | QuestionTextSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: QuestionTextWhereInput
-}
-
-export interface QuestionOptionsCreateInput {
-  QuestionTypeID: ID_Input
-  QuestionID: ID_Input
-  options?: QuestionOptionsCreateoptionsInput
-  language: LanguageCreateOneInput
-}
-
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
-}
-
-export interface QuestionOptionsCreateOneInput {
-  create?: QuestionOptionsCreateInput
-  connect?: QuestionOptionsWhereUniqueInput
-}
-
-export interface QuestionOptionsSubscriptionWhereInput {
-  AND?: QuestionOptionsSubscriptionWhereInput[] | QuestionOptionsSubscriptionWhereInput
-  OR?: QuestionOptionsSubscriptionWhereInput[] | QuestionOptionsSubscriptionWhereInput
-  NOT?: QuestionOptionsSubscriptionWhereInput[] | QuestionOptionsSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: QuestionOptionsWhereInput
 }
 
 export interface LanguageCreateInput {
   name: String
-}
-
-export interface LanguageWhereUniqueInput {
-  id?: ID_Input
-  name?: String
-}
-
-export interface LanguageCreateOneInput {
-  create?: LanguageCreateInput
-  connect?: LanguageWhereUniqueInput
-}
-
-export interface LanguageUpdateInput {
-  name?: String
 }
 
 export interface QuestionTypeWhereInput {
@@ -2132,99 +3259,57 @@ export interface QuestionTypeWhereInput {
   description_not_starts_with?: String
   description_ends_with?: String
   description_not_ends_with?: String
-  _MagicalBackRelation_QuestionToQuestionType_every?: QuestionWhereInput
-  _MagicalBackRelation_QuestionToQuestionType_some?: QuestionWhereInput
-  _MagicalBackRelation_QuestionToQuestionType_none?: QuestionWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_every?: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_some?: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_none?: QuestionTextWhereInput
+}
+
+export interface QuestionCreateInput {
+  description: String
+  questionType: ID_Input
+  listID?: ID_Input
 }
 
 export interface QuestionTypeCreateInput {
   description: String
 }
 
-export interface QuestionTypeCreateOneInput {
-  create?: QuestionTypeCreateInput
-  connect?: QuestionTypeWhereUniqueInput
+export interface QuestionTextCreateInput {
+  text: String
+  questionID: ID_Input
+  language: LanguageCreateOneInput
 }
 
-export interface QuestionCreateInput {
-  description?: String
-  type: QuestionTypeCreateOneInput
+export interface LanguageCreateOneInput {
+  create?: LanguageCreateInput
+  connect?: LanguageWhereUniqueInput
 }
 
-export interface UserCreateInput {
-  name: String
-  email: String
-  password: String
+export interface LanguageUpdateInput {
+  name?: String
 }
 
-export interface QuestionOptionsWhereInput {
-  AND?: QuestionOptionsWhereInput[] | QuestionOptionsWhereInput
-  OR?: QuestionOptionsWhereInput[] | QuestionOptionsWhereInput
-  NOT?: QuestionOptionsWhereInput[] | QuestionOptionsWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  QuestionTypeID?: ID_Input
-  QuestionTypeID_not?: ID_Input
-  QuestionTypeID_in?: ID_Input[] | ID_Input
-  QuestionTypeID_not_in?: ID_Input[] | ID_Input
-  QuestionTypeID_lt?: ID_Input
-  QuestionTypeID_lte?: ID_Input
-  QuestionTypeID_gt?: ID_Input
-  QuestionTypeID_gte?: ID_Input
-  QuestionTypeID_contains?: ID_Input
-  QuestionTypeID_not_contains?: ID_Input
-  QuestionTypeID_starts_with?: ID_Input
-  QuestionTypeID_not_starts_with?: ID_Input
-  QuestionTypeID_ends_with?: ID_Input
-  QuestionTypeID_not_ends_with?: ID_Input
-  QuestionID?: ID_Input
-  QuestionID_not?: ID_Input
-  QuestionID_in?: ID_Input[] | ID_Input
-  QuestionID_not_in?: ID_Input[] | ID_Input
-  QuestionID_lt?: ID_Input
-  QuestionID_lte?: ID_Input
-  QuestionID_gt?: ID_Input
-  QuestionID_gte?: ID_Input
-  QuestionID_contains?: ID_Input
-  QuestionID_not_contains?: ID_Input
-  QuestionID_starts_with?: ID_Input
-  QuestionID_not_starts_with?: ID_Input
-  QuestionID_ends_with?: ID_Input
-  QuestionID_not_ends_with?: ID_Input
-  language?: LanguageWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_every?: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_some?: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_none?: QuestionTextWhereInput
-}
-
-export interface QuestionTypeSubscriptionWhereInput {
-  AND?: QuestionTypeSubscriptionWhereInput[] | QuestionTypeSubscriptionWhereInput
-  OR?: QuestionTypeSubscriptionWhereInput[] | QuestionTypeSubscriptionWhereInput
-  NOT?: QuestionTypeSubscriptionWhereInput[] | QuestionTypeSubscriptionWhereInput
+export interface QuestionSubscriptionWhereInput {
+  AND?: QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput
+  OR?: QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput
+  NOT?: QuestionSubscriptionWhereInput[] | QuestionSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: QuestionTypeWhereInput
+  node?: QuestionWhereInput
 }
 
-export interface QuestionWhereUniqueInput {
+export interface QuestionTextWhereUniqueInput {
   id?: ID_Input
+}
+
+export interface LanguageSubscriptionWhereInput {
+  AND?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
+  OR?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
+  NOT?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: LanguageWhereInput
 }
 
 /*
@@ -2235,70 +3320,71 @@ export interface Node {
   id: ID_Output
 }
 
-export interface AggregateQuestionType {
-  count: Int
+/*
+ * A connection to a list of items.
+
+ */
+export interface ListConnection {
+  pageInfo: PageInfo
+  edges: ListEdge[]
+  aggregate: AggregateList
+}
+
+export interface List extends Node {
+  id: ID_Output
+  description: String
+}
+
+export interface LanguagePreviousValues {
+  id: ID_Output
+  name: String
 }
 
 export interface BatchPayload {
   count: Long
 }
 
-export interface QuestionTypePreviousValues {
-  id: ID_Output
-  description: String
-}
-
-export interface QuestionOptions extends Node {
-  id: ID_Output
-  QuestionTypeID: ID_Output
-  QuestionID: ID_Output
-  options: String[]
-  language: Language
-}
-
-export interface QuestionOptionsSubscriptionPayload {
-  mutation: MutationType
-  node?: QuestionOptions
-  updatedFields?: String[]
-  previousValues?: QuestionOptionsPreviousValues
+export interface AggregateList {
+  count: Int
 }
 
 /*
  * An edge in a connection.
 
  */
-export interface QuestionTypeEdge {
-  node: QuestionType
+export interface ListEdge {
+  node: List
   cursor: String
 }
 
+export interface AnswerSubscriptionPayload {
+  mutation: MutationType
+  node?: Answer
+  updatedFields?: String[]
+  previousValues?: AnswerPreviousValues
+}
+
 /*
  * A connection to a list of items.
 
  */
-export interface QuestionTypeConnection {
+export interface AnswerConnection {
   pageInfo: PageInfo
-  edges: QuestionTypeEdge[]
-  aggregate: AggregateQuestionType
+  edges: AnswerEdge[]
+  aggregate: AggregateAnswer
 }
 
-export interface AggregateQuestionOptions {
+/*
+ * An edge in a connection.
+
+ */
+export interface AnswerEdge {
+  node: Answer
+  cursor: String
+}
+
+export interface AggregateAnswer {
   count: Int
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface QuestionOptionsConnection {
-  pageInfo: PageInfo
-  edges: QuestionOptionsEdge[]
-  aggregate: AggregateQuestionOptions
-}
-
-export interface Language extends Node {
-  id: ID_Output
-  name: String
 }
 
 /*
@@ -2310,17 +3396,33 @@ export interface LanguageEdge {
   cursor: String
 }
 
-export interface QuestionText extends Node {
+export interface AlternativeText extends Node {
   id: ID_Output
+  alternativeID: ID_Output
+  language: ID_Output
   text: String
-  language: Language
-  questionID: ID_Output
-  questionType: QuestionType
-  questionOptions?: QuestionOptions
 }
 
-export interface AggregateQuestionText {
+export interface AggregateAlternativeText {
   count: Int
+}
+
+export interface Alternatives extends Node {
+  id: ID_Output
+  description: String
+  value: Float
+  order: Int
+  listID: ID_Output
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface AlternativeTextConnection {
+  pageInfo: PageInfo
+  edges: AlternativeTextEdge[]
+  aggregate: AggregateAlternativeText
 }
 
 export interface UserSubscriptionPayload {
@@ -2328,6 +3430,33 @@ export interface UserSubscriptionPayload {
   node?: User
   updatedFields?: String[]
   previousValues?: UserPreviousValues
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface AlternativesEdge {
+  node: Alternatives
+  cursor: String
+}
+
+export interface UserPreviousValues {
+  id: ID_Output
+  name: String
+  email: String
+  password: String
+}
+
+export interface AggregateQuestionText {
+  count: Int
+}
+
+export interface AnswerPreviousValues {
+  id: ID_Output
+  questionID: ID_Output
+  value?: Float
+  alternativeID?: ID_Output
 }
 
 /*
@@ -2340,31 +3469,6 @@ export interface QuestionTextConnection {
   aggregate: AggregateQuestionText
 }
 
-export interface UserPreviousValues {
-  id: ID_Output
-  name: String
-  email: String
-  password: String
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface QuestionEdge {
-  node: Question
-  cursor: String
-}
-
-export interface QuestionType extends Node {
-  id: ID_Output
-  description: String
-}
-
-export interface AggregateUser {
-  count: Int
-}
-
 export interface QuestionSubscriptionPayload {
   mutation: MutationType
   node?: Question
@@ -2372,58 +3476,29 @@ export interface QuestionSubscriptionPayload {
   previousValues?: QuestionPreviousValues
 }
 
-export interface QuestionTypeSubscriptionPayload {
-  mutation: MutationType
-  node?: QuestionType
-  updatedFields?: String[]
-  previousValues?: QuestionTypePreviousValues
-}
-
-export interface QuestionPreviousValues {
-  id: ID_Output
-  description?: String
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface UserConnection {
-  pageInfo: PageInfo
-  edges: UserEdge[]
-  aggregate: AggregateUser
-}
-
-export interface Question extends Node {
-  id: ID_Output
-  description?: String
-  type: QuestionType
-}
-
-export interface AggregateLanguage {
-  count: Int
-}
-
-export interface QuestionTextSubscriptionPayload {
-  mutation: MutationType
-  node?: QuestionText
-  updatedFields?: String[]
-  previousValues?: QuestionTextPreviousValues
-}
-
 /*
  * An edge in a connection.
 
  */
-export interface QuestionTextEdge {
-  node: QuestionText
+export interface QuestionTypeEdge {
+  node: QuestionType
   cursor: String
 }
 
-export interface QuestionTextPreviousValues {
+export interface QuestionPreviousValues {
   id: ID_Output
-  text: String
-  questionID: ID_Output
+  description: String
+  questionType: ID_Output
+  listID?: ID_Output
+}
+
+export interface AggregateQuestion {
+  count: Int
+}
+
+export interface Language extends Node {
+  id: ID_Output
+  name: String
 }
 
 /*
@@ -2434,6 +3509,27 @@ export interface QuestionConnection {
   pageInfo: PageInfo
   edges: QuestionEdge[]
   aggregate: AggregateQuestion
+}
+
+export interface QuestionTypeSubscriptionPayload {
+  mutation: MutationType
+  node?: QuestionType
+  updatedFields?: String[]
+  previousValues?: QuestionTypePreviousValues
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface UserEdge {
+  node: User
+  cursor: String
+}
+
+export interface QuestionTypePreviousValues {
+  id: ID_Output
+  description: String
 }
 
 /*
@@ -2447,23 +3543,131 @@ export interface PageInfo {
   endCursor?: String
 }
 
-export interface QuestionOptionsPreviousValues {
+export interface QuestionText extends Node {
   id: ID_Output
-  QuestionTypeID: ID_Output
-  QuestionID: ID_Output
-  options: String[]
+  text: String
+  language: Language
+  questionID: ID_Output
 }
 
-export interface LanguagePreviousValues {
+export interface Answer extends Node {
   id: ID_Output
-  name: String
+  questionID: ID_Output
+  value?: Float
+  alternativeID?: ID_Output
 }
 
-export interface LanguageSubscriptionPayload {
+export interface QuestionTextSubscriptionPayload {
   mutation: MutationType
-  node?: Language
+  node?: QuestionText
   updatedFields?: String[]
-  previousValues?: LanguagePreviousValues
+  previousValues?: QuestionTextPreviousValues
+}
+
+export interface AggregateLanguage {
+  count: Int
+}
+
+export interface QuestionTextPreviousValues {
+  id: ID_Output
+  text: String
+  questionID: ID_Output
+}
+
+export interface AggregateAlternatives {
+  count: Int
+}
+
+export interface QuestionType extends Node {
+  id: ID_Output
+  description: String
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface QuestionTextEdge {
+  node: QuestionText
+  cursor: String
+}
+
+export interface AlternativesSubscriptionPayload {
+  mutation: MutationType
+  node?: Alternatives
+  updatedFields?: String[]
+  previousValues?: AlternativesPreviousValues
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface QuestionTypeConnection {
+  pageInfo: PageInfo
+  edges: QuestionTypeEdge[]
+  aggregate: AggregateQuestionType
+}
+
+export interface AlternativesPreviousValues {
+  id: ID_Output
+  description: String
+  value: Float
+  order: Int
+  listID: ID_Output
+}
+
+export interface AggregateUser {
+  count: Int
+}
+
+export interface Question extends Node {
+  id: ID_Output
+  description: String
+  questionType: ID_Output
+  listID?: ID_Output
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface UserConnection {
+  pageInfo: PageInfo
+  edges: UserEdge[]
+  aggregate: AggregateUser
+}
+
+export interface AlternativeTextSubscriptionPayload {
+  mutation: MutationType
+  node?: AlternativeText
+  updatedFields?: String[]
+  previousValues?: AlternativeTextPreviousValues
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface AlternativeTextEdge {
+  node: AlternativeText
+  cursor: String
+}
+
+export interface AggregateQuestionType {
+  count: Int
+}
+
+export interface ListPreviousValues {
+  id: ID_Output
+  description: String
+}
+
+export interface ListSubscriptionPayload {
+  mutation: MutationType
+  node?: List
+  updatedFields?: String[]
+  previousValues?: ListPreviousValues
 }
 
 export interface User extends Node {
@@ -2473,26 +3677,30 @@ export interface User extends Node {
   password: String
 }
 
-/*
- * An edge in a connection.
-
- */
-export interface QuestionOptionsEdge {
-  node: QuestionOptions
-  cursor: String
+export interface AlternativeTextPreviousValues {
+  id: ID_Output
+  alternativeID: ID_Output
+  language: ID_Output
+  text: String
 }
 
 /*
  * An edge in a connection.
 
  */
-export interface UserEdge {
-  node: User
+export interface QuestionEdge {
+  node: Question
   cursor: String
 }
 
-export interface AggregateQuestion {
-  count: Int
+/*
+ * A connection to a list of items.
+
+ */
+export interface AlternativesConnection {
+  pageInfo: PageInfo
+  edges: AlternativesEdge[]
+  aggregate: AggregateAlternatives
 }
 
 /*
@@ -2503,6 +3711,13 @@ export interface LanguageConnection {
   pageInfo: PageInfo
   edges: LanguageEdge[]
   aggregate: AggregateLanguage
+}
+
+export interface LanguageSubscriptionPayload {
+  mutation: MutationType
+  node?: Language
+  updatedFields?: String[]
+  previousValues?: LanguagePreviousValues
 }
 
 /*
@@ -2526,6 +3741,11 @@ export type Boolean = boolean
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
 export type String = string
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). 
+*/
+export type Float = number
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 

@@ -1,15 +1,27 @@
 # source: https://eu1.prisma.sh/juliana-sales/Kinetikos/dev
-# timestamp: Fri Jul 27 2018 12:52:46 GMT+0100 (Western European Summer Time)
+# timestamp: Tue Jul 31 2018 15:42:21 GMT+0100 (Western European Summer Time)
+
+type AggregateAlternatives {
+  count: Int!
+}
+
+type AggregateAlternativeText {
+  count: Int!
+}
+
+type AggregateAnswer {
+  count: Int!
+}
 
 type AggregateLanguage {
   count: Int!
 }
 
-type AggregateQuestion {
+type AggregateList {
   count: Int!
 }
 
-type AggregateQuestionOptions {
+type AggregateQuestion {
   count: Int!
 }
 
@@ -23,6 +35,820 @@ type AggregateQuestionType {
 
 type AggregateUser {
   count: Int!
+}
+
+type Alternatives implements Node {
+  id: ID!
+  description: String!
+  value: Float!
+  order: Int!
+  listID: ID!
+}
+
+"""A connection to a list of items."""
+type AlternativesConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AlternativesEdge]!
+  aggregate: AggregateAlternatives!
+}
+
+input AlternativesCreateInput {
+  description: String!
+  value: Float!
+  order: Int!
+  listID: ID!
+}
+
+"""An edge in a connection."""
+type AlternativesEdge {
+  """The item at the end of the edge."""
+  node: Alternatives!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AlternativesOrderByInput {
+  id_ASC
+  id_DESC
+  description_ASC
+  description_DESC
+  value_ASC
+  value_DESC
+  order_ASC
+  order_DESC
+  listID_ASC
+  listID_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AlternativesPreviousValues {
+  id: ID!
+  description: String!
+  value: Float!
+  order: Int!
+  listID: ID!
+}
+
+type AlternativesSubscriptionPayload {
+  mutation: MutationType!
+  node: Alternatives
+  updatedFields: [String!]
+  previousValues: AlternativesPreviousValues
+}
+
+input AlternativesSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AlternativesSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AlternativesSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AlternativesSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AlternativesWhereInput
+}
+
+input AlternativesUpdateInput {
+  description: String
+  value: Float
+  order: Int
+  listID: ID
+}
+
+input AlternativesWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AlternativesWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AlternativesWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AlternativesWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  value: Float
+
+  """All values that are not equal to given value."""
+  value_not: Float
+
+  """All values that are contained in given list."""
+  value_in: [Float!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Float!]
+
+  """All values less than the given value."""
+  value_lt: Float
+
+  """All values less than or equal the given value."""
+  value_lte: Float
+
+  """All values greater than the given value."""
+  value_gt: Float
+
+  """All values greater than or equal the given value."""
+  value_gte: Float
+  order: Int
+
+  """All values that are not equal to given value."""
+  order_not: Int
+
+  """All values that are contained in given list."""
+  order_in: [Int!]
+
+  """All values that are not contained in given list."""
+  order_not_in: [Int!]
+
+  """All values less than the given value."""
+  order_lt: Int
+
+  """All values less than or equal the given value."""
+  order_lte: Int
+
+  """All values greater than the given value."""
+  order_gt: Int
+
+  """All values greater than or equal the given value."""
+  order_gte: Int
+  listID: ID
+
+  """All values that are not equal to given value."""
+  listID_not: ID
+
+  """All values that are contained in given list."""
+  listID_in: [ID!]
+
+  """All values that are not contained in given list."""
+  listID_not_in: [ID!]
+
+  """All values less than the given value."""
+  listID_lt: ID
+
+  """All values less than or equal the given value."""
+  listID_lte: ID
+
+  """All values greater than the given value."""
+  listID_gt: ID
+
+  """All values greater than or equal the given value."""
+  listID_gte: ID
+
+  """All values containing the given string."""
+  listID_contains: ID
+
+  """All values not containing the given string."""
+  listID_not_contains: ID
+
+  """All values starting with the given string."""
+  listID_starts_with: ID
+
+  """All values not starting with the given string."""
+  listID_not_starts_with: ID
+
+  """All values ending with the given string."""
+  listID_ends_with: ID
+
+  """All values not ending with the given string."""
+  listID_not_ends_with: ID
+}
+
+input AlternativesWhereUniqueInput {
+  id: ID
+}
+
+type AlternativeText implements Node {
+  id: ID!
+  alternativeID: ID!
+  language: ID!
+  text: String!
+}
+
+"""A connection to a list of items."""
+type AlternativeTextConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AlternativeTextEdge]!
+  aggregate: AggregateAlternativeText!
+}
+
+input AlternativeTextCreateInput {
+  alternativeID: ID!
+  language: ID!
+  text: String!
+}
+
+"""An edge in a connection."""
+type AlternativeTextEdge {
+  """The item at the end of the edge."""
+  node: AlternativeText!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AlternativeTextOrderByInput {
+  id_ASC
+  id_DESC
+  alternativeID_ASC
+  alternativeID_DESC
+  language_ASC
+  language_DESC
+  text_ASC
+  text_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AlternativeTextPreviousValues {
+  id: ID!
+  alternativeID: ID!
+  language: ID!
+  text: String!
+}
+
+type AlternativeTextSubscriptionPayload {
+  mutation: MutationType!
+  node: AlternativeText
+  updatedFields: [String!]
+  previousValues: AlternativeTextPreviousValues
+}
+
+input AlternativeTextSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AlternativeTextSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AlternativeTextSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AlternativeTextSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AlternativeTextWhereInput
+}
+
+input AlternativeTextUpdateInput {
+  alternativeID: ID
+  language: ID
+  text: String
+}
+
+input AlternativeTextWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AlternativeTextWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AlternativeTextWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AlternativeTextWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  alternativeID: ID
+
+  """All values that are not equal to given value."""
+  alternativeID_not: ID
+
+  """All values that are contained in given list."""
+  alternativeID_in: [ID!]
+
+  """All values that are not contained in given list."""
+  alternativeID_not_in: [ID!]
+
+  """All values less than the given value."""
+  alternativeID_lt: ID
+
+  """All values less than or equal the given value."""
+  alternativeID_lte: ID
+
+  """All values greater than the given value."""
+  alternativeID_gt: ID
+
+  """All values greater than or equal the given value."""
+  alternativeID_gte: ID
+
+  """All values containing the given string."""
+  alternativeID_contains: ID
+
+  """All values not containing the given string."""
+  alternativeID_not_contains: ID
+
+  """All values starting with the given string."""
+  alternativeID_starts_with: ID
+
+  """All values not starting with the given string."""
+  alternativeID_not_starts_with: ID
+
+  """All values ending with the given string."""
+  alternativeID_ends_with: ID
+
+  """All values not ending with the given string."""
+  alternativeID_not_ends_with: ID
+  language: ID
+
+  """All values that are not equal to given value."""
+  language_not: ID
+
+  """All values that are contained in given list."""
+  language_in: [ID!]
+
+  """All values that are not contained in given list."""
+  language_not_in: [ID!]
+
+  """All values less than the given value."""
+  language_lt: ID
+
+  """All values less than or equal the given value."""
+  language_lte: ID
+
+  """All values greater than the given value."""
+  language_gt: ID
+
+  """All values greater than or equal the given value."""
+  language_gte: ID
+
+  """All values containing the given string."""
+  language_contains: ID
+
+  """All values not containing the given string."""
+  language_not_contains: ID
+
+  """All values starting with the given string."""
+  language_starts_with: ID
+
+  """All values not starting with the given string."""
+  language_not_starts_with: ID
+
+  """All values ending with the given string."""
+  language_ends_with: ID
+
+  """All values not ending with the given string."""
+  language_not_ends_with: ID
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+}
+
+input AlternativeTextWhereUniqueInput {
+  id: ID
+}
+
+type Answer implements Node {
+  id: ID!
+  questionID: ID!
+  value: Float
+  alternativeID: ID
+}
+
+"""A connection to a list of items."""
+type AnswerConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AnswerEdge]!
+  aggregate: AggregateAnswer!
+}
+
+input AnswerCreateInput {
+  questionID: ID!
+  value: Float
+  alternativeID: ID
+}
+
+"""An edge in a connection."""
+type AnswerEdge {
+  """The item at the end of the edge."""
+  node: Answer!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AnswerOrderByInput {
+  id_ASC
+  id_DESC
+  questionID_ASC
+  questionID_DESC
+  value_ASC
+  value_DESC
+  alternativeID_ASC
+  alternativeID_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AnswerPreviousValues {
+  id: ID!
+  questionID: ID!
+  value: Float
+  alternativeID: ID
+}
+
+type AnswerSubscriptionPayload {
+  mutation: MutationType!
+  node: Answer
+  updatedFields: [String!]
+  previousValues: AnswerPreviousValues
+}
+
+input AnswerSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AnswerSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AnswerSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AnswerSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AnswerWhereInput
+}
+
+input AnswerUpdateInput {
+  questionID: ID
+  value: Float
+  alternativeID: ID
+}
+
+input AnswerWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AnswerWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AnswerWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AnswerWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  questionID: ID
+
+  """All values that are not equal to given value."""
+  questionID_not: ID
+
+  """All values that are contained in given list."""
+  questionID_in: [ID!]
+
+  """All values that are not contained in given list."""
+  questionID_not_in: [ID!]
+
+  """All values less than the given value."""
+  questionID_lt: ID
+
+  """All values less than or equal the given value."""
+  questionID_lte: ID
+
+  """All values greater than the given value."""
+  questionID_gt: ID
+
+  """All values greater than or equal the given value."""
+  questionID_gte: ID
+
+  """All values containing the given string."""
+  questionID_contains: ID
+
+  """All values not containing the given string."""
+  questionID_not_contains: ID
+
+  """All values starting with the given string."""
+  questionID_starts_with: ID
+
+  """All values not starting with the given string."""
+  questionID_not_starts_with: ID
+
+  """All values ending with the given string."""
+  questionID_ends_with: ID
+
+  """All values not ending with the given string."""
+  questionID_not_ends_with: ID
+  value: Float
+
+  """All values that are not equal to given value."""
+  value_not: Float
+
+  """All values that are contained in given list."""
+  value_in: [Float!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Float!]
+
+  """All values less than the given value."""
+  value_lt: Float
+
+  """All values less than or equal the given value."""
+  value_lte: Float
+
+  """All values greater than the given value."""
+  value_gt: Float
+
+  """All values greater than or equal the given value."""
+  value_gte: Float
+  alternativeID: ID
+
+  """All values that are not equal to given value."""
+  alternativeID_not: ID
+
+  """All values that are contained in given list."""
+  alternativeID_in: [ID!]
+
+  """All values that are not contained in given list."""
+  alternativeID_not_in: [ID!]
+
+  """All values less than the given value."""
+  alternativeID_lt: ID
+
+  """All values less than or equal the given value."""
+  alternativeID_lte: ID
+
+  """All values greater than the given value."""
+  alternativeID_gt: ID
+
+  """All values greater than or equal the given value."""
+  alternativeID_gte: ID
+
+  """All values containing the given string."""
+  alternativeID_contains: ID
+
+  """All values not containing the given string."""
+  alternativeID_not_contains: ID
+
+  """All values starting with the given string."""
+  alternativeID_starts_with: ID
+
+  """All values not starting with the given string."""
+  alternativeID_not_starts_with: ID
+
+  """All values ending with the given string."""
+  alternativeID_ends_with: ID
+
+  """All values not ending with the given string."""
+  alternativeID_not_ends_with: ID
+}
+
+input AnswerWhereUniqueInput {
+  id: ID
 }
 
 type BatchPayload {
@@ -228,12 +1054,6 @@ input LanguageWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  _MagicalBackRelation_LanguageToQuestionOptions_every: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionOptions_some: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionOptions_none: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_every: QuestionTextWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_some: QuestionTextWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_none: QuestionTextWhereInput
 }
 
 input LanguageWhereUniqueInput {
@@ -241,214 +1061,66 @@ input LanguageWhereUniqueInput {
   name: String
 }
 
-"""
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-"""
-scalar Long
-
-type Mutation {
-  createUser(data: UserCreateInput!): User!
-  createQuestion(data: QuestionCreateInput!): Question!
-  createQuestionText(data: QuestionTextCreateInput!): QuestionText!
-  createLanguage(data: LanguageCreateInput!): Language!
-  createQuestionOptions(data: QuestionOptionsCreateInput!): QuestionOptions!
-  createQuestionType(data: QuestionTypeCreateInput!): QuestionType!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateQuestion(data: QuestionUpdateInput!, where: QuestionWhereUniqueInput!): Question
-  updateQuestionText(data: QuestionTextUpdateInput!, where: QuestionTextWhereUniqueInput!): QuestionText
-  updateLanguage(data: LanguageUpdateInput!, where: LanguageWhereUniqueInput!): Language
-  updateQuestionOptions(data: QuestionOptionsUpdateInput!, where: QuestionOptionsWhereUniqueInput!): QuestionOptions
-  updateQuestionType(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereUniqueInput!): QuestionType
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteQuestion(where: QuestionWhereUniqueInput!): Question
-  deleteQuestionText(where: QuestionTextWhereUniqueInput!): QuestionText
-  deleteLanguage(where: LanguageWhereUniqueInput!): Language
-  deleteQuestionOptions(where: QuestionOptionsWhereUniqueInput!): QuestionOptions
-  deleteQuestionType(where: QuestionTypeWhereUniqueInput!): QuestionType
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertQuestion(where: QuestionWhereUniqueInput!, create: QuestionCreateInput!, update: QuestionUpdateInput!): Question!
-  upsertQuestionText(where: QuestionTextWhereUniqueInput!, create: QuestionTextCreateInput!, update: QuestionTextUpdateInput!): QuestionText!
-  upsertLanguage(where: LanguageWhereUniqueInput!, create: LanguageCreateInput!, update: LanguageUpdateInput!): Language!
-  upsertQuestionOptions(where: QuestionOptionsWhereUniqueInput!, create: QuestionOptionsCreateInput!, update: QuestionOptionsUpdateInput!): QuestionOptions!
-  upsertQuestionType(where: QuestionTypeWhereUniqueInput!, create: QuestionTypeCreateInput!, update: QuestionTypeUpdateInput!): QuestionType!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyQuestions(data: QuestionUpdateInput!, where: QuestionWhereInput): BatchPayload!
-  updateManyQuestionTexts(data: QuestionTextUpdateInput!, where: QuestionTextWhereInput): BatchPayload!
-  updateManyLanguages(data: LanguageUpdateInput!, where: LanguageWhereInput): BatchPayload!
-  updateManyQuestionOptionses(data: QuestionOptionsUpdateInput!, where: QuestionOptionsWhereInput): BatchPayload!
-  updateManyQuestionTypes(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyQuestions(where: QuestionWhereInput): BatchPayload!
-  deleteManyQuestionTexts(where: QuestionTextWhereInput): BatchPayload!
-  deleteManyLanguages(where: LanguageWhereInput): BatchPayload!
-  deleteManyQuestionOptionses(where: QuestionOptionsWhereInput): BatchPayload!
-  deleteManyQuestionTypes(where: QuestionTypeWhereInput): BatchPayload!
-}
-
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-"""An object with an ID"""
-interface Node {
-  """The id of the object."""
+type List implements Node {
   id: ID!
-}
-
-"""Information about pagination in a connection."""
-type PageInfo {
-  """When paginating forwards, are there more items?"""
-  hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
-  """When paginating backwards, the cursor to continue."""
-  startCursor: String
-
-  """When paginating forwards, the cursor to continue."""
-  endCursor: String
-}
-
-type Query {
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question]!
-  questionTexts(where: QuestionTextWhereInput, orderBy: QuestionTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionText]!
-  languages(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Language]!
-  questionOptionses(where: QuestionOptionsWhereInput, orderBy: QuestionOptionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionOptions]!
-  questionTypes(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionType]!
-  user(where: UserWhereUniqueInput!): User
-  question(where: QuestionWhereUniqueInput!): Question
-  questionText(where: QuestionTextWhereUniqueInput!): QuestionText
-  language(where: LanguageWhereUniqueInput!): Language
-  questionOptions(where: QuestionOptionsWhereUniqueInput!): QuestionOptions
-  questionType(where: QuestionTypeWhereUniqueInput!): QuestionType
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  questionsConnection(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionConnection!
-  questionTextsConnection(where: QuestionTextWhereInput, orderBy: QuestionTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTextConnection!
-  languagesConnection(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LanguageConnection!
-  questionOptionsesConnection(where: QuestionOptionsWhereInput, orderBy: QuestionOptionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionOptionsConnection!
-  questionTypesConnection(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTypeConnection!
-
-  """Fetches an object given its ID"""
-  node(
-    """The ID of an object"""
-    id: ID!
-  ): Node
-}
-
-type Question implements Node {
-  id: ID!
-  description: String
-  type(where: QuestionTypeWhereInput): QuestionType!
+  description: String!
 }
 
 """A connection to a list of items."""
-type QuestionConnection {
+type ListConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [QuestionEdge]!
-  aggregate: AggregateQuestion!
+  edges: [ListEdge]!
+  aggregate: AggregateList!
 }
 
-input QuestionCreateInput {
-  description: String
-  type: QuestionTypeCreateOneInput!
+input ListCreateInput {
+  description: String!
 }
 
 """An edge in a connection."""
-type QuestionEdge {
+type ListEdge {
   """The item at the end of the edge."""
-  node: Question!
+  node: List!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-type QuestionOptions implements Node {
-  id: ID!
-  QuestionTypeID: ID!
-  QuestionID: ID!
-  options: [String!]!
-  language(where: LanguageWhereInput): Language!
-}
-
-"""A connection to a list of items."""
-type QuestionOptionsConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [QuestionOptionsEdge]!
-  aggregate: AggregateQuestionOptions!
-}
-
-input QuestionOptionsCreateInput {
-  QuestionTypeID: ID!
-  QuestionID: ID!
-  options: QuestionOptionsCreateoptionsInput
-  language: LanguageCreateOneInput!
-}
-
-input QuestionOptionsCreateOneInput {
-  create: QuestionOptionsCreateInput
-  connect: QuestionOptionsWhereUniqueInput
-}
-
-input QuestionOptionsCreateoptionsInput {
-  set: [String!]
-}
-
-"""An edge in a connection."""
-type QuestionOptionsEdge {
-  """The item at the end of the edge."""
-  node: QuestionOptions!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum QuestionOptionsOrderByInput {
+enum ListOrderByInput {
   id_ASC
   id_DESC
-  QuestionTypeID_ASC
-  QuestionTypeID_DESC
-  QuestionID_ASC
-  QuestionID_DESC
+  description_ASC
+  description_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type QuestionOptionsPreviousValues {
+type ListPreviousValues {
   id: ID!
-  QuestionTypeID: ID!
-  QuestionID: ID!
-  options: [String!]!
+  description: String!
 }
 
-type QuestionOptionsSubscriptionPayload {
+type ListSubscriptionPayload {
   mutation: MutationType!
-  node: QuestionOptions
+  node: List
   updatedFields: [String!]
-  previousValues: QuestionOptionsPreviousValues
+  previousValues: ListPreviousValues
 }
 
-input QuestionOptionsSubscriptionWhereInput {
+input ListSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [QuestionOptionsSubscriptionWhereInput!]
+  AND: [ListSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [QuestionOptionsSubscriptionWhereInput!]
+  OR: [ListSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [QuestionOptionsSubscriptionWhereInput!]
+  NOT: [ListSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -469,50 +1141,22 @@ input QuestionOptionsSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: QuestionOptionsWhereInput
+  node: ListWhereInput
 }
 
-input QuestionOptionsUpdateDataInput {
-  QuestionTypeID: ID
-  QuestionID: ID
-  options: QuestionOptionsUpdateoptionsInput
-  language: LanguageUpdateOneInput
+input ListUpdateInput {
+  description: String
 }
 
-input QuestionOptionsUpdateInput {
-  QuestionTypeID: ID
-  QuestionID: ID
-  options: QuestionOptionsUpdateoptionsInput
-  language: LanguageUpdateOneInput
-}
-
-input QuestionOptionsUpdateOneInput {
-  create: QuestionOptionsCreateInput
-  connect: QuestionOptionsWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: QuestionOptionsUpdateDataInput
-  upsert: QuestionOptionsUpsertNestedInput
-}
-
-input QuestionOptionsUpdateoptionsInput {
-  set: [String!]
-}
-
-input QuestionOptionsUpsertNestedInput {
-  update: QuestionOptionsUpdateDataInput!
-  create: QuestionOptionsCreateInput!
-}
-
-input QuestionOptionsWhereInput {
+input ListWhereInput {
   """Logical AND on all given filters."""
-  AND: [QuestionOptionsWhereInput!]
+  AND: [ListWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [QuestionOptionsWhereInput!]
+  OR: [ListWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [QuestionOptionsWhereInput!]
+  NOT: [ListWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -553,94 +1197,208 @@ input QuestionOptionsWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  QuestionTypeID: ID
+  description: String
 
   """All values that are not equal to given value."""
-  QuestionTypeID_not: ID
+  description_not: String
 
   """All values that are contained in given list."""
-  QuestionTypeID_in: [ID!]
+  description_in: [String!]
 
   """All values that are not contained in given list."""
-  QuestionTypeID_not_in: [ID!]
+  description_not_in: [String!]
 
   """All values less than the given value."""
-  QuestionTypeID_lt: ID
+  description_lt: String
 
   """All values less than or equal the given value."""
-  QuestionTypeID_lte: ID
+  description_lte: String
 
   """All values greater than the given value."""
-  QuestionTypeID_gt: ID
+  description_gt: String
 
   """All values greater than or equal the given value."""
-  QuestionTypeID_gte: ID
+  description_gte: String
 
   """All values containing the given string."""
-  QuestionTypeID_contains: ID
+  description_contains: String
 
   """All values not containing the given string."""
-  QuestionTypeID_not_contains: ID
+  description_not_contains: String
 
   """All values starting with the given string."""
-  QuestionTypeID_starts_with: ID
+  description_starts_with: String
 
   """All values not starting with the given string."""
-  QuestionTypeID_not_starts_with: ID
+  description_not_starts_with: String
 
   """All values ending with the given string."""
-  QuestionTypeID_ends_with: ID
+  description_ends_with: String
 
   """All values not ending with the given string."""
-  QuestionTypeID_not_ends_with: ID
-  QuestionID: ID
-
-  """All values that are not equal to given value."""
-  QuestionID_not: ID
-
-  """All values that are contained in given list."""
-  QuestionID_in: [ID!]
-
-  """All values that are not contained in given list."""
-  QuestionID_not_in: [ID!]
-
-  """All values less than the given value."""
-  QuestionID_lt: ID
-
-  """All values less than or equal the given value."""
-  QuestionID_lte: ID
-
-  """All values greater than the given value."""
-  QuestionID_gt: ID
-
-  """All values greater than or equal the given value."""
-  QuestionID_gte: ID
-
-  """All values containing the given string."""
-  QuestionID_contains: ID
-
-  """All values not containing the given string."""
-  QuestionID_not_contains: ID
-
-  """All values starting with the given string."""
-  QuestionID_starts_with: ID
-
-  """All values not starting with the given string."""
-  QuestionID_not_starts_with: ID
-
-  """All values ending with the given string."""
-  QuestionID_ends_with: ID
-
-  """All values not ending with the given string."""
-  QuestionID_not_ends_with: ID
-  language: LanguageWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_every: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_some: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_none: QuestionTextWhereInput
+  description_not_ends_with: String
 }
 
-input QuestionOptionsWhereUniqueInput {
+input ListWhereUniqueInput {
   id: ID
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createUser(data: UserCreateInput!): User!
+  createQuestion(data: QuestionCreateInput!): Question!
+  createQuestionType(data: QuestionTypeCreateInput!): QuestionType!
+  createQuestionText(data: QuestionTextCreateInput!): QuestionText!
+  createAlternatives(data: AlternativesCreateInput!): Alternatives!
+  createAlternativeText(data: AlternativeTextCreateInput!): AlternativeText!
+  createList(data: ListCreateInput!): List!
+  createAnswer(data: AnswerCreateInput!): Answer!
+  createLanguage(data: LanguageCreateInput!): Language!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateQuestion(data: QuestionUpdateInput!, where: QuestionWhereUniqueInput!): Question
+  updateQuestionType(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereUniqueInput!): QuestionType
+  updateQuestionText(data: QuestionTextUpdateInput!, where: QuestionTextWhereUniqueInput!): QuestionText
+  updateAlternatives(data: AlternativesUpdateInput!, where: AlternativesWhereUniqueInput!): Alternatives
+  updateAlternativeText(data: AlternativeTextUpdateInput!, where: AlternativeTextWhereUniqueInput!): AlternativeText
+  updateList(data: ListUpdateInput!, where: ListWhereUniqueInput!): List
+  updateAnswer(data: AnswerUpdateInput!, where: AnswerWhereUniqueInput!): Answer
+  updateLanguage(data: LanguageUpdateInput!, where: LanguageWhereUniqueInput!): Language
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteQuestion(where: QuestionWhereUniqueInput!): Question
+  deleteQuestionType(where: QuestionTypeWhereUniqueInput!): QuestionType
+  deleteQuestionText(where: QuestionTextWhereUniqueInput!): QuestionText
+  deleteAlternatives(where: AlternativesWhereUniqueInput!): Alternatives
+  deleteAlternativeText(where: AlternativeTextWhereUniqueInput!): AlternativeText
+  deleteList(where: ListWhereUniqueInput!): List
+  deleteAnswer(where: AnswerWhereUniqueInput!): Answer
+  deleteLanguage(where: LanguageWhereUniqueInput!): Language
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertQuestion(where: QuestionWhereUniqueInput!, create: QuestionCreateInput!, update: QuestionUpdateInput!): Question!
+  upsertQuestionType(where: QuestionTypeWhereUniqueInput!, create: QuestionTypeCreateInput!, update: QuestionTypeUpdateInput!): QuestionType!
+  upsertQuestionText(where: QuestionTextWhereUniqueInput!, create: QuestionTextCreateInput!, update: QuestionTextUpdateInput!): QuestionText!
+  upsertAlternatives(where: AlternativesWhereUniqueInput!, create: AlternativesCreateInput!, update: AlternativesUpdateInput!): Alternatives!
+  upsertAlternativeText(where: AlternativeTextWhereUniqueInput!, create: AlternativeTextCreateInput!, update: AlternativeTextUpdateInput!): AlternativeText!
+  upsertList(where: ListWhereUniqueInput!, create: ListCreateInput!, update: ListUpdateInput!): List!
+  upsertAnswer(where: AnswerWhereUniqueInput!, create: AnswerCreateInput!, update: AnswerUpdateInput!): Answer!
+  upsertLanguage(where: LanguageWhereUniqueInput!, create: LanguageCreateInput!, update: LanguageUpdateInput!): Language!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyQuestions(data: QuestionUpdateInput!, where: QuestionWhereInput): BatchPayload!
+  updateManyQuestionTypes(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereInput): BatchPayload!
+  updateManyQuestionTexts(data: QuestionTextUpdateInput!, where: QuestionTextWhereInput): BatchPayload!
+  updateManyAlternativeses(data: AlternativesUpdateInput!, where: AlternativesWhereInput): BatchPayload!
+  updateManyAlternativeTexts(data: AlternativeTextUpdateInput!, where: AlternativeTextWhereInput): BatchPayload!
+  updateManyLists(data: ListUpdateInput!, where: ListWhereInput): BatchPayload!
+  updateManyAnswers(data: AnswerUpdateInput!, where: AnswerWhereInput): BatchPayload!
+  updateManyLanguages(data: LanguageUpdateInput!, where: LanguageWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyQuestions(where: QuestionWhereInput): BatchPayload!
+  deleteManyQuestionTypes(where: QuestionTypeWhereInput): BatchPayload!
+  deleteManyQuestionTexts(where: QuestionTextWhereInput): BatchPayload!
+  deleteManyAlternativeses(where: AlternativesWhereInput): BatchPayload!
+  deleteManyAlternativeTexts(where: AlternativeTextWhereInput): BatchPayload!
+  deleteManyLists(where: ListWhereInput): BatchPayload!
+  deleteManyAnswers(where: AnswerWhereInput): BatchPayload!
+  deleteManyLanguages(where: LanguageWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question]!
+  questionTypes(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionType]!
+  questionTexts(where: QuestionTextWhereInput, orderBy: QuestionTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionText]!
+  alternativeses(where: AlternativesWhereInput, orderBy: AlternativesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Alternatives]!
+  alternativeTexts(where: AlternativeTextWhereInput, orderBy: AlternativeTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AlternativeText]!
+  lists(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [List]!
+  answers(where: AnswerWhereInput, orderBy: AnswerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Answer]!
+  languages(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Language]!
+  user(where: UserWhereUniqueInput!): User
+  question(where: QuestionWhereUniqueInput!): Question
+  questionType(where: QuestionTypeWhereUniqueInput!): QuestionType
+  questionText(where: QuestionTextWhereUniqueInput!): QuestionText
+  alternatives(where: AlternativesWhereUniqueInput!): Alternatives
+  alternativeText(where: AlternativeTextWhereUniqueInput!): AlternativeText
+  list(where: ListWhereUniqueInput!): List
+  answer(where: AnswerWhereUniqueInput!): Answer
+  language(where: LanguageWhereUniqueInput!): Language
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  questionsConnection(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionConnection!
+  questionTypesConnection(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTypeConnection!
+  questionTextsConnection(where: QuestionTextWhereInput, orderBy: QuestionTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTextConnection!
+  alternativesesConnection(where: AlternativesWhereInput, orderBy: AlternativesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlternativesConnection!
+  alternativeTextsConnection(where: AlternativeTextWhereInput, orderBy: AlternativeTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlternativeTextConnection!
+  listsConnection(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ListConnection!
+  answersConnection(where: AnswerWhereInput, orderBy: AnswerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AnswerConnection!
+  languagesConnection(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LanguageConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Question implements Node {
+  id: ID!
+  description: String!
+  questionType: ID!
+  listID: ID
+}
+
+"""A connection to a list of items."""
+type QuestionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [QuestionEdge]!
+  aggregate: AggregateQuestion!
+}
+
+input QuestionCreateInput {
+  description: String!
+  questionType: ID!
+  listID: ID
+}
+
+"""An edge in a connection."""
+type QuestionEdge {
+  """The item at the end of the edge."""
+  node: Question!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 enum QuestionOrderByInput {
@@ -648,6 +1406,10 @@ enum QuestionOrderByInput {
   id_DESC
   description_ASC
   description_DESC
+  questionType_ASC
+  questionType_DESC
+  listID_ASC
+  listID_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -656,7 +1418,9 @@ enum QuestionOrderByInput {
 
 type QuestionPreviousValues {
   id: ID!
-  description: String
+  description: String!
+  questionType: ID!
+  listID: ID
 }
 
 type QuestionSubscriptionPayload {
@@ -703,8 +1467,6 @@ type QuestionText implements Node {
   text: String!
   language(where: LanguageWhereInput): Language!
   questionID: ID!
-  questionType(where: QuestionTypeWhereInput): QuestionType!
-  questionOptions(where: QuestionOptionsWhereInput): QuestionOptions
 }
 
 """A connection to a list of items."""
@@ -721,8 +1483,6 @@ input QuestionTextCreateInput {
   text: String!
   questionID: ID!
   language: LanguageCreateOneInput!
-  questionType: QuestionTypeCreateOneInput!
-  questionOptions: QuestionOptionsCreateOneInput
 }
 
 """An edge in a connection."""
@@ -796,8 +1556,6 @@ input QuestionTextUpdateInput {
   text: String
   questionID: ID
   language: LanguageUpdateOneInput
-  questionType: QuestionTypeUpdateOneInput
-  questionOptions: QuestionOptionsUpdateOneInput
 }
 
 input QuestionTextWhereInput {
@@ -930,8 +1688,6 @@ input QuestionTextWhereInput {
   """All values not ending with the given string."""
   questionID_not_ends_with: ID
   language: LanguageWhereInput
-  questionType: QuestionTypeWhereInput
-  questionOptions: QuestionOptionsWhereInput
 }
 
 input QuestionTextWhereUniqueInput {
@@ -955,11 +1711,6 @@ type QuestionTypeConnection {
 
 input QuestionTypeCreateInput {
   description: String!
-}
-
-input QuestionTypeCreateOneInput {
-  create: QuestionTypeCreateInput
-  connect: QuestionTypeWhereUniqueInput
 }
 
 """An edge in a connection."""
@@ -1026,25 +1777,8 @@ input QuestionTypeSubscriptionWhereInput {
   node: QuestionTypeWhereInput
 }
 
-input QuestionTypeUpdateDataInput {
-  description: String
-}
-
 input QuestionTypeUpdateInput {
   description: String
-}
-
-input QuestionTypeUpdateOneInput {
-  create: QuestionTypeCreateInput
-  connect: QuestionTypeWhereUniqueInput
-  delete: Boolean
-  update: QuestionTypeUpdateDataInput
-  upsert: QuestionTypeUpsertNestedInput
-}
-
-input QuestionTypeUpsertNestedInput {
-  update: QuestionTypeUpdateDataInput!
-  create: QuestionTypeCreateInput!
 }
 
 input QuestionTypeWhereInput {
@@ -1136,21 +1870,17 @@ input QuestionTypeWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  _MagicalBackRelation_QuestionToQuestionType_every: QuestionWhereInput
-  _MagicalBackRelation_QuestionToQuestionType_some: QuestionWhereInput
-  _MagicalBackRelation_QuestionToQuestionType_none: QuestionWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_every: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_some: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_none: QuestionTextWhereInput
 }
 
 input QuestionTypeWhereUniqueInput {
   id: ID
+  description: String
 }
 
 input QuestionUpdateInput {
   description: String
-  type: QuestionTypeUpdateOneInput
+  questionType: ID
+  listID: ID
 }
 
 input QuestionWhereInput {
@@ -1242,7 +1972,86 @@ input QuestionWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  type: QuestionTypeWhereInput
+  questionType: ID
+
+  """All values that are not equal to given value."""
+  questionType_not: ID
+
+  """All values that are contained in given list."""
+  questionType_in: [ID!]
+
+  """All values that are not contained in given list."""
+  questionType_not_in: [ID!]
+
+  """All values less than the given value."""
+  questionType_lt: ID
+
+  """All values less than or equal the given value."""
+  questionType_lte: ID
+
+  """All values greater than the given value."""
+  questionType_gt: ID
+
+  """All values greater than or equal the given value."""
+  questionType_gte: ID
+
+  """All values containing the given string."""
+  questionType_contains: ID
+
+  """All values not containing the given string."""
+  questionType_not_contains: ID
+
+  """All values starting with the given string."""
+  questionType_starts_with: ID
+
+  """All values not starting with the given string."""
+  questionType_not_starts_with: ID
+
+  """All values ending with the given string."""
+  questionType_ends_with: ID
+
+  """All values not ending with the given string."""
+  questionType_not_ends_with: ID
+  listID: ID
+
+  """All values that are not equal to given value."""
+  listID_not: ID
+
+  """All values that are contained in given list."""
+  listID_in: [ID!]
+
+  """All values that are not contained in given list."""
+  listID_not_in: [ID!]
+
+  """All values less than the given value."""
+  listID_lt: ID
+
+  """All values less than or equal the given value."""
+  listID_lte: ID
+
+  """All values greater than the given value."""
+  listID_gt: ID
+
+  """All values greater than or equal the given value."""
+  listID_gte: ID
+
+  """All values containing the given string."""
+  listID_contains: ID
+
+  """All values not containing the given string."""
+  listID_not_contains: ID
+
+  """All values starting with the given string."""
+  listID_starts_with: ID
+
+  """All values not starting with the given string."""
+  listID_not_starts_with: ID
+
+  """All values ending with the given string."""
+  listID_ends_with: ID
+
+  """All values not ending with the given string."""
+  listID_not_ends_with: ID
 }
 
 input QuestionWhereUniqueInput {
@@ -1252,10 +2061,13 @@ input QuestionWhereUniqueInput {
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   question(where: QuestionSubscriptionWhereInput): QuestionSubscriptionPayload
-  questionText(where: QuestionTextSubscriptionWhereInput): QuestionTextSubscriptionPayload
-  language(where: LanguageSubscriptionWhereInput): LanguageSubscriptionPayload
-  questionOptions(where: QuestionOptionsSubscriptionWhereInput): QuestionOptionsSubscriptionPayload
   questionType(where: QuestionTypeSubscriptionWhereInput): QuestionTypeSubscriptionPayload
+  questionText(where: QuestionTextSubscriptionWhereInput): QuestionTextSubscriptionPayload
+  alternatives(where: AlternativesSubscriptionWhereInput): AlternativesSubscriptionPayload
+  alternativeText(where: AlternativeTextSubscriptionWhereInput): AlternativeTextSubscriptionPayload
+  list(where: ListSubscriptionWhereInput): ListSubscriptionPayload
+  answer(where: AnswerSubscriptionWhereInput): AnswerSubscriptionPayload
+  language(where: LanguageSubscriptionWhereInput): LanguageSubscriptionPayload
 }
 
 type User implements Node {

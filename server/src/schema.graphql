@@ -4,14 +4,13 @@ type Query {
   me: User!
   questionnaire: [Question]!
   questionTexts(language: LanguageWhereInput!): [QuestionText]!
-  questionOptions(data: [QuestionOptionsWhereInput]!): [QuestionOptions]!
 }
 
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
-  createQuestionText(text: String!, language: String!, questionID: ID!, questionType: QuestionTypeCreateOneInput): QuestionText!
-  createQuestionOptions(options: [String!]!, QuestionTypeID: ID!, QuestionID: ID!, language: String): [QuestionOptions!]!
+  # createQuestionText(text: String!, language: String!, questionID: ID!, questionType: QuestionTypeCreateOneInput): QuestionText!
+  # createQuestionOptions(options: [String!]!, QuestionTypeID: ID!, QuestionID: ID!, language: String, questionText: QuestionTextCreateOneWithoutQuestionOptionsInput!): [QuestionOptions!]!
   # createQuestion(description: String, type: QuestionType!): Question!
   # createQuestionType(description: String!): QuestionType!
   # questionText(questionID: ID!, text: String!, language: Language!): QuestionText!
