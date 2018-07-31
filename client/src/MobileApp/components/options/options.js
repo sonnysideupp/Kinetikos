@@ -5,10 +5,10 @@ import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
 
 export default class Options extends Component {
 
-    // radio_props = [
-    //     {label: 'param1', value: 0 },
-    //     {label: 'param2', value: 1 }
-    // ]
+    radio_props = [
+        {label: 'param1', value: 0 },
+        {label: 'param2', value: 1 }
+    ]
 
     op = (arg) => {
         let newArr = []
@@ -33,50 +33,19 @@ export default class Options extends Component {
         return (
             <View>
                 <Text>{this.props.options}</Text>
-                {/* <RadioGroup style={styles.radio} onSelect={(index, value) => this.onSelect(index, value)}> */}
-                {/* <RadioButton key={"1"} value={"1"}>
+                <RadioGroup style={styles.radio} onSelect={(index, value) => this.onSelect(index, value)}>
+                <RadioButton key={"1"} value={"1"}>
                              <Text>This is item 1</Text>
-                </RadioButton> */}
-                {/* </RadioGroup> */}
-
-                <RadioForm
-                    radio_props={radio_props}
-                    initial={0}
-                    itemShowKey="label"
-                    itemRealKey="value"
-                    dataSource={formatArray(this.props.options)}
-                    onPress={onPress}
-                />
+                </RadioButton>
+                 </RadioGroup>
 
                 {this.props.options.map((option, index) => {
-                    // val = this.state.options
-                    // val.push({label: option, value: option})
-                    // this.setState({
-                    //     ...this.state,
-                    //     options: val
-                    // })
                     return (
-                        // <View>
-                        // <RadioButton key={index} value={option}>
-                        //     <Text>This is item {option}</Text>
-                        // </RadioButton>
-                        // </View>
-                         <RadioForm
-                    radio_props={radio_props}
-                    initial={0}
-                    onPress={(value) => {this.setState({value:value})}}
-                  /> 
+                        <Text>{option}</Text>
                     )
-                    // <Text>{option}</Text>
                     
                 })}
-                {/* </RadioGroup> */}
 
-                {/* <RadioForm
-                    radio_props={this.state.options}
-                    initial={0}
-                    onPress={(value) => {this.setState({value:value})}}
-                  /> */}
             </View>
         )
     }
