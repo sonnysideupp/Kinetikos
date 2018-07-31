@@ -17,10 +17,11 @@
     "react": "16.4.1",
     "react-apollo": "^2.1.9",
     "react-dom": "^16.4.1",
-    "react-native": "0.56.0",
+    "react-native": "^0.56.0",
     "react-native-flexi-radio-button": "^0.2.2",
     "react-native-radio-buttons": "^1.0.0",
     "react-native-simple-radio-button": "^2.7.2",
+    "react-navigation": "^2.9.3",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "2.16.0",
     "sanitize.css": "^6.0.0"
