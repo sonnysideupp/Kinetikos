@@ -13,8 +13,4 @@ export default {
   questionTexts: (parent, args, ctx: Context, info) => {
     return ctx.db.query.questionTexts({where: {language: args.language}}, info)
   }, 
-
-  questionOptions: async (parent, args, ctx: Context, info) => {
-    return ctx.db.query.questionOptionses({where: {AND: [...args.data] }}, info)
-  },
 }
