@@ -13,7 +13,7 @@ type Question {
 
 type QuestionType {
   id: ID! @unique
-  description: String!
+  description: String! @unique
 }
 
 type QuestionText {
@@ -37,5 +37,6 @@ type QuestionOptions {
   QuestionID: ID!
   options: [String!]
   language: Language!
+  questionText: QuestionText! @unique
 }
 

@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/juliana-sales/Kinetikos/dev
-# timestamp: Fri Jul 27 2018 12:52:46 GMT+0100 (Western European Summer Time)
+# timestamp: Tue Jul 31 2018 12:53:22 GMT+0100 (Western European Summer Time)
 
 type AggregateLanguage {
   count: Int!
@@ -228,12 +228,6 @@ input LanguageWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  _MagicalBackRelation_LanguageToQuestionOptions_every: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionOptions_some: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionOptions_none: QuestionOptionsWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_every: QuestionTextWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_some: QuestionTextWhereInput
-  _MagicalBackRelation_LanguageToQuestionText_none: QuestionTextWhereInput
 }
 
 input LanguageWhereUniqueInput {
@@ -251,38 +245,38 @@ type Mutation {
   createUser(data: UserCreateInput!): User!
   createQuestion(data: QuestionCreateInput!): Question!
   createQuestionText(data: QuestionTextCreateInput!): QuestionText!
-  createLanguage(data: LanguageCreateInput!): Language!
   createQuestionOptions(data: QuestionOptionsCreateInput!): QuestionOptions!
+  createLanguage(data: LanguageCreateInput!): Language!
   createQuestionType(data: QuestionTypeCreateInput!): QuestionType!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateQuestion(data: QuestionUpdateInput!, where: QuestionWhereUniqueInput!): Question
   updateQuestionText(data: QuestionTextUpdateInput!, where: QuestionTextWhereUniqueInput!): QuestionText
-  updateLanguage(data: LanguageUpdateInput!, where: LanguageWhereUniqueInput!): Language
   updateQuestionOptions(data: QuestionOptionsUpdateInput!, where: QuestionOptionsWhereUniqueInput!): QuestionOptions
+  updateLanguage(data: LanguageUpdateInput!, where: LanguageWhereUniqueInput!): Language
   updateQuestionType(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereUniqueInput!): QuestionType
   deleteUser(where: UserWhereUniqueInput!): User
   deleteQuestion(where: QuestionWhereUniqueInput!): Question
   deleteQuestionText(where: QuestionTextWhereUniqueInput!): QuestionText
-  deleteLanguage(where: LanguageWhereUniqueInput!): Language
   deleteQuestionOptions(where: QuestionOptionsWhereUniqueInput!): QuestionOptions
+  deleteLanguage(where: LanguageWhereUniqueInput!): Language
   deleteQuestionType(where: QuestionTypeWhereUniqueInput!): QuestionType
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertQuestion(where: QuestionWhereUniqueInput!, create: QuestionCreateInput!, update: QuestionUpdateInput!): Question!
   upsertQuestionText(where: QuestionTextWhereUniqueInput!, create: QuestionTextCreateInput!, update: QuestionTextUpdateInput!): QuestionText!
-  upsertLanguage(where: LanguageWhereUniqueInput!, create: LanguageCreateInput!, update: LanguageUpdateInput!): Language!
   upsertQuestionOptions(where: QuestionOptionsWhereUniqueInput!, create: QuestionOptionsCreateInput!, update: QuestionOptionsUpdateInput!): QuestionOptions!
+  upsertLanguage(where: LanguageWhereUniqueInput!, create: LanguageCreateInput!, update: LanguageUpdateInput!): Language!
   upsertQuestionType(where: QuestionTypeWhereUniqueInput!, create: QuestionTypeCreateInput!, update: QuestionTypeUpdateInput!): QuestionType!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyQuestions(data: QuestionUpdateInput!, where: QuestionWhereInput): BatchPayload!
   updateManyQuestionTexts(data: QuestionTextUpdateInput!, where: QuestionTextWhereInput): BatchPayload!
-  updateManyLanguages(data: LanguageUpdateInput!, where: LanguageWhereInput): BatchPayload!
   updateManyQuestionOptionses(data: QuestionOptionsUpdateInput!, where: QuestionOptionsWhereInput): BatchPayload!
+  updateManyLanguages(data: LanguageUpdateInput!, where: LanguageWhereInput): BatchPayload!
   updateManyQuestionTypes(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyQuestions(where: QuestionWhereInput): BatchPayload!
   deleteManyQuestionTexts(where: QuestionTextWhereInput): BatchPayload!
-  deleteManyLanguages(where: LanguageWhereInput): BatchPayload!
   deleteManyQuestionOptionses(where: QuestionOptionsWhereInput): BatchPayload!
+  deleteManyLanguages(where: LanguageWhereInput): BatchPayload!
   deleteManyQuestionTypes(where: QuestionTypeWhereInput): BatchPayload!
 }
 
@@ -317,20 +311,20 @@ type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question]!
   questionTexts(where: QuestionTextWhereInput, orderBy: QuestionTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionText]!
-  languages(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Language]!
   questionOptionses(where: QuestionOptionsWhereInput, orderBy: QuestionOptionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionOptions]!
+  languages(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Language]!
   questionTypes(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionType]!
   user(where: UserWhereUniqueInput!): User
   question(where: QuestionWhereUniqueInput!): Question
   questionText(where: QuestionTextWhereUniqueInput!): QuestionText
-  language(where: LanguageWhereUniqueInput!): Language
   questionOptions(where: QuestionOptionsWhereUniqueInput!): QuestionOptions
+  language(where: LanguageWhereUniqueInput!): Language
   questionType(where: QuestionTypeWhereUniqueInput!): QuestionType
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   questionsConnection(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionConnection!
   questionTextsConnection(where: QuestionTextWhereInput, orderBy: QuestionTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTextConnection!
-  languagesConnection(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LanguageConnection!
   questionOptionsesConnection(where: QuestionOptionsWhereInput, orderBy: QuestionOptionsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionOptionsConnection!
+  languagesConnection(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LanguageConnection!
   questionTypesConnection(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTypeConnection!
 
   """Fetches an object given its ID"""
@@ -376,6 +370,7 @@ type QuestionOptions implements Node {
   QuestionID: ID!
   options: [String!]!
   language(where: LanguageWhereInput): Language!
+  questionText(where: QuestionTextWhereInput): QuestionText!
 }
 
 """A connection to a list of items."""
@@ -393,15 +388,23 @@ input QuestionOptionsCreateInput {
   QuestionID: ID!
   options: QuestionOptionsCreateoptionsInput
   language: LanguageCreateOneInput!
+  questionText: QuestionTextCreateOneWithoutQuestionOptionsInput!
 }
 
-input QuestionOptionsCreateOneInput {
-  create: QuestionOptionsCreateInput
+input QuestionOptionsCreateOneWithoutQuestionTextInput {
+  create: QuestionOptionsCreateWithoutQuestionTextInput
   connect: QuestionOptionsWhereUniqueInput
 }
 
 input QuestionOptionsCreateoptionsInput {
   set: [String!]
+}
+
+input QuestionOptionsCreateWithoutQuestionTextInput {
+  QuestionTypeID: ID!
+  QuestionID: ID!
+  options: QuestionOptionsCreateoptionsInput
+  language: LanguageCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -472,36 +475,37 @@ input QuestionOptionsSubscriptionWhereInput {
   node: QuestionOptionsWhereInput
 }
 
-input QuestionOptionsUpdateDataInput {
-  QuestionTypeID: ID
-  QuestionID: ID
-  options: QuestionOptionsUpdateoptionsInput
-  language: LanguageUpdateOneInput
-}
-
 input QuestionOptionsUpdateInput {
   QuestionTypeID: ID
   QuestionID: ID
   options: QuestionOptionsUpdateoptionsInput
   language: LanguageUpdateOneInput
+  questionText: QuestionTextUpdateOneWithoutQuestionOptionsInput
 }
 
-input QuestionOptionsUpdateOneInput {
-  create: QuestionOptionsCreateInput
+input QuestionOptionsUpdateOneWithoutQuestionTextInput {
+  create: QuestionOptionsCreateWithoutQuestionTextInput
   connect: QuestionOptionsWhereUniqueInput
   disconnect: Boolean
   delete: Boolean
-  update: QuestionOptionsUpdateDataInput
-  upsert: QuestionOptionsUpsertNestedInput
+  update: QuestionOptionsUpdateWithoutQuestionTextDataInput
+  upsert: QuestionOptionsUpsertWithoutQuestionTextInput
 }
 
 input QuestionOptionsUpdateoptionsInput {
   set: [String!]
 }
 
-input QuestionOptionsUpsertNestedInput {
-  update: QuestionOptionsUpdateDataInput!
-  create: QuestionOptionsCreateInput!
+input QuestionOptionsUpdateWithoutQuestionTextDataInput {
+  QuestionTypeID: ID
+  QuestionID: ID
+  options: QuestionOptionsUpdateoptionsInput
+  language: LanguageUpdateOneInput
+}
+
+input QuestionOptionsUpsertWithoutQuestionTextInput {
+  update: QuestionOptionsUpdateWithoutQuestionTextDataInput!
+  create: QuestionOptionsCreateWithoutQuestionTextInput!
 }
 
 input QuestionOptionsWhereInput {
@@ -634,9 +638,7 @@ input QuestionOptionsWhereInput {
   """All values not ending with the given string."""
   QuestionID_not_ends_with: ID
   language: LanguageWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_every: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_some: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionOptionsToQuestionText_none: QuestionTextWhereInput
+  questionText: QuestionTextWhereInput
 }
 
 input QuestionOptionsWhereUniqueInput {
@@ -722,7 +724,19 @@ input QuestionTextCreateInput {
   questionID: ID!
   language: LanguageCreateOneInput!
   questionType: QuestionTypeCreateOneInput!
-  questionOptions: QuestionOptionsCreateOneInput
+  questionOptions: QuestionOptionsCreateOneWithoutQuestionTextInput
+}
+
+input QuestionTextCreateOneWithoutQuestionOptionsInput {
+  create: QuestionTextCreateWithoutQuestionOptionsInput
+  connect: QuestionTextWhereUniqueInput
+}
+
+input QuestionTextCreateWithoutQuestionOptionsInput {
+  text: String!
+  questionID: ID!
+  language: LanguageCreateOneInput!
+  questionType: QuestionTypeCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -797,7 +811,27 @@ input QuestionTextUpdateInput {
   questionID: ID
   language: LanguageUpdateOneInput
   questionType: QuestionTypeUpdateOneInput
-  questionOptions: QuestionOptionsUpdateOneInput
+  questionOptions: QuestionOptionsUpdateOneWithoutQuestionTextInput
+}
+
+input QuestionTextUpdateOneWithoutQuestionOptionsInput {
+  create: QuestionTextCreateWithoutQuestionOptionsInput
+  connect: QuestionTextWhereUniqueInput
+  delete: Boolean
+  update: QuestionTextUpdateWithoutQuestionOptionsDataInput
+  upsert: QuestionTextUpsertWithoutQuestionOptionsInput
+}
+
+input QuestionTextUpdateWithoutQuestionOptionsDataInput {
+  text: String
+  questionID: ID
+  language: LanguageUpdateOneInput
+  questionType: QuestionTypeUpdateOneInput
+}
+
+input QuestionTextUpsertWithoutQuestionOptionsInput {
+  update: QuestionTextUpdateWithoutQuestionOptionsDataInput!
+  create: QuestionTextCreateWithoutQuestionOptionsInput!
 }
 
 input QuestionTextWhereInput {
@@ -1136,16 +1170,11 @@ input QuestionTypeWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  _MagicalBackRelation_QuestionToQuestionType_every: QuestionWhereInput
-  _MagicalBackRelation_QuestionToQuestionType_some: QuestionWhereInput
-  _MagicalBackRelation_QuestionToQuestionType_none: QuestionWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_every: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_some: QuestionTextWhereInput
-  _MagicalBackRelation_QuestionTextToQuestionType_none: QuestionTextWhereInput
 }
 
 input QuestionTypeWhereUniqueInput {
   id: ID
+  description: String
 }
 
 input QuestionUpdateInput {
@@ -1253,8 +1282,8 @@ type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   question(where: QuestionSubscriptionWhereInput): QuestionSubscriptionPayload
   questionText(where: QuestionTextSubscriptionWhereInput): QuestionTextSubscriptionPayload
-  language(where: LanguageSubscriptionWhereInput): LanguageSubscriptionPayload
   questionOptions(where: QuestionOptionsSubscriptionWhereInput): QuestionOptionsSubscriptionPayload
+  language(where: LanguageSubscriptionWhereInput): LanguageSubscriptionPayload
   questionType(where: QuestionTypeSubscriptionWhereInput): QuestionTypeSubscriptionPayload
 }
 

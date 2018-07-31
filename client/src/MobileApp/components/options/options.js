@@ -5,23 +5,14 @@ import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
 
 export default class Options extends Component {
 
-    radio_props = [
-        {label: 'param1', value: 0 },
-        {label: 'param2', value: 1 }
-    ]
-
-    op = (arg) => {
+    formatOptions = (arg) => {
         let newArr = []
         arg.map((item, index) => newArr.push({label: item, value: item}))
         return newArr
     }
 
-    state = {
-        options: [
-            {label: 'param1', value: 0 },
-            {label: 'param2', value: 1 }
-        ]
-    }
+    onPress = (active) => this.setState({selected: value})
+
 
     onSelect(index, value){
         this.setState({
@@ -30,18 +21,20 @@ export default class Options extends Component {
       }
 
     render() {
+
+        const radioOptions = this.formatOptions(this.props.options)
+
         return (
-            <View>
-                <Text>{this.props.options}</Text>
-                <RadioGroup style={styles.radio} onSelect={(index, value) => this.onSelect(index, value)}>
-                <RadioButton key={"1"} value={"1"}>
-                             <Text>This is item 1</Text>
-                </RadioButton>
-                 </RadioGroup>
+            <View>              
 
                 {this.props.options.map((option, index) => {
                     return (
-                        <Text>{option}</Text>
+                        <RadioForm
+                            radio_props={radioOptions}
+                            itemShowKey="label"
+                            itemRealKey="value"
+                            onPress={this.onPress}
+                            />
                     )
                     
                 })}

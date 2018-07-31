@@ -67,7 +67,7 @@ export const auth = {
 
     if(args.language) {
       const name = args.language
-      return [ctx.db.mutation.createQuestionOptions({data: {QuestionTypeID: args.QuestionTypeID, QuestionID: args.QuestionID, options: {set: args.options}, language: {connect: {name}  }}}, info)]
+      return [ctx.db.mutation.createQuestionOptions({data: {QuestionTypeID: args.QuestionTypeID, QuestionID: args.QuestionID, options: {set: args.options}, language: {connect: {name}  }, questionText: args.questionText}}, info)]
     } else {
       const options = []
       console.log("BEFORE THE QUERYYYYY")
@@ -78,7 +78,7 @@ export const auth = {
           const name = language.name
           console.log("NAAAAAAAAAAMMMEEEEEEEEE")
           console.log(name)
-          options.push(await ctx.db.mutation.createQuestionOptions({data: {QuestionTypeID: args.QuestionTypeID, QuestionID: args.QuestionID, options: {set: args.options}, language: {connect: {name}}}}, info))
+          options.push(await ctx.db.mutation.createQuestionOptions({data: {QuestionTypeID: args.QuestionTypeID, QuestionID: args.QuestionID, options: {set: args.options}, language: {connect: {name}}, questionText: args.questionText}}, info))
         })
       return options
     }

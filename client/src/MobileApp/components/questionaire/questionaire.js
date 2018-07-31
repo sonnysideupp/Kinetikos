@@ -27,9 +27,7 @@ query questionTexts($language: String) {
 `
 
 export default class Questionaire extends Component {
-    render() {
-
-        
+    render() {  
 
         return (
            
