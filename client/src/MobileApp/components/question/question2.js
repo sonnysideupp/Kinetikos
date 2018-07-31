@@ -31,16 +31,13 @@ export default class Question extends Component {
         {label: 'param2', value: 1 }
     ]
 
-    client = new ApolloClient({
-        link: new HttpLink({uri: `http://10.0.2.2:4000`}),
-        cache: new InMemoryCache(),
-    });
+ 
 
 
     questionType(data) {
         if(data.question.questionType.id === "cjk2f4oee8zjz0b29m50j3odw") {
             return (
-                <ApolloProvider client={data.client}>
+                
                 <View>
                 <Query query={GET_OPTIONS}>
                 {({ loading, error, data, refetch }) => {
@@ -59,7 +56,7 @@ export default class Question extends Component {
                 }}
                 </Query>
                 </View>
-                </ApolloProvider>
+              
               );
         } else {
             return (
@@ -87,12 +84,6 @@ export default class Question extends Component {
         //     //args: "hello"
         // }
 
-        const hello = this.props
-
-        const client = new ApolloClient({
-            link: new HttpLink({uri: `http://10.0.2.2:4000`}),
-            cache: new InMemoryCache(),
-        });
 
         type = this.questionType(this.props)
 
