@@ -7,13 +7,13 @@ type User {
 
 type Question {
   id: ID! @unique
-  description: String
+  description: String!
   type: QuestionType!
 }
 
 type QuestionType {
   id: ID! @unique
-  description: String!
+  description: String! @unique
 }
 
 type QuestionText {
@@ -22,7 +22,7 @@ type QuestionText {
   language: Language!
   questionID: ID!
   questionType: QuestionType!
-  questionOptions: QuestionOptions @unique
+  questionOptions: QuestionOptions 
 }
 
 type Language {
