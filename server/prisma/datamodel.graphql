@@ -1,0 +1,41 @@
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+}
+
+type Question {
+  id: ID! @unique
+  description: String
+  type: QuestionType!
+}
+
+type QuestionType {
+  id: ID! @unique
+  description: String!
+}
+
+type QuestionText {
+  id: ID! @unique
+  text: String!
+  language: Language!
+  questionID: ID!
+  questionType: QuestionType!
+  questionOptions: QuestionOptions @unique
+}
+
+type Language {
+  id: ID! @unique
+  name: String! @unique
+}
+
+# this is used to store the options for radio and multiple choice questions
+type QuestionOptions {
+  id: ID! @unique
+  QuestionTypeID: ID!
+  QuestionID: ID!
+  options: [String!]
+  language: Language!
+}
+
