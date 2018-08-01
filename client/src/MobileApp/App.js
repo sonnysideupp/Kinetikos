@@ -31,6 +31,7 @@ const Navigation = createStackNavigator(
   {
     First: {screen: Home},
     Second: {screen: Questionnaire},
+    Third:{screen: Questions}
 
   },
   {
