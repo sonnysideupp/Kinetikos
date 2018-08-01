@@ -39,7 +39,7 @@ export default class Questionaire extends Component {
         return (
            
             <View>
-                <Query query={GET_QUES} 
+                <Query query={GET_QUES} key="quesQuery"
                 variables= {{
                     language: this.props.language
                 }}>
@@ -56,7 +56,7 @@ export default class Questionaire extends Component {
                             {data.questionnaire.map((question, idx) => {
                                 const index = idx + 1
                                 return (
-                                <Query query={GET_TEXTS}
+                                <Query query={GET_TEXTS} key="textsQuery"
                                 variables= {{
                                     //language: this.props.language,
                                     questionID: question.id
@@ -72,6 +72,7 @@ export default class Questionaire extends Component {
                                     if(data.questionTexts) {
                                         return (
                                             <View>
+                                                <Text>language is    {this.props.language}</Text>
                                             <Question index={index} question={question} questionText={data.questionTexts[0]}/>
                                             </View>
                                         )
