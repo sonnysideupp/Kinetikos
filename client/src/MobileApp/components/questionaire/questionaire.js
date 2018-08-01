@@ -72,6 +72,7 @@ export default class Questionaire extends Component {
                                     if(data.questionTexts) {
                                         return (
                                             <View>
+                                                <Text>language is    {this.props.language}</Text>
                                             <Question index={index} question={question} questionText={data.questionTexts[0]}/>
                                             </View>
                                         )

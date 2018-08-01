@@ -27,6 +27,6 @@ export default {
   },
 
   alternativeTexts: (parent, args, ctx: Context, info) => {
-    return ctx.db.query.alternativeTexts({where: {AND: [{...args.alternativeID},{...args.language}]}}, info)
+    return ctx.db.query.alternativeTexts({where: {AND: [{alternativeID: args.alternativeID},{language: args.language}]}}, info)
   },
 }

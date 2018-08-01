@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import RadioForm from 'react-native-simple-radio-button'
+import RadioForm from 'react-native-radio-form'
 import {RadioGroup, RadioButton} from 'react-native-flexi-radio-button'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const GET_ALT_TEXT = gql`
-query alternativeTexts($alternativeID: ID!, $language: String!) {
-    alternativeTexts(language: {name: $language}, alternativeID: $alternativeID) {
+query alternativeTexts($alternativeID: ID!, $language: LanguageWhereInput!) {
+    alternativeTexts(language: $language, alternativeID: $alternativeID) {
         id
         alternativeID
         text
@@ -20,11 +21,6 @@ query alternativeTexts($alternativeID: ID!, $language: String!) {
 
 export default class Options extends Component {
 
-    formatOptions = (arg) => {
-        let newArr = []
-        arg.map((item, index) => newArr.push({label: item, value: item}))
-        return newArr
-    }
 
     onPress = (active) => this.setState({selected: value})
 
@@ -34,21 +30,20 @@ export default class Options extends Component {
           text: `Selected index: ${index} , value: ${value}`
         })
       }
-
-      options = (element) => array.push(element)
+      
 
     render() {
 
-        const radioOptions = this.formatOptions(this.props.options)
+        const options = []
 
         return (
-            <View>              
-                iterate through alternatives, query, and make the first a radio option
+            <View>           
                 {this.props.alternatives.map((option, index) => {
+                    return (
                     <Query query={GET_ALT_TEXT}
                     variables={{
-                        alternativeID: option.alternativeID,
-                        language: this.props.language
+                        alternativeID: option.id,
+                        language: {name: this.props.language}
                     }}>
                     {({ loading, error, data, refetch }) => {
                         if (loading) {
@@ -59,15 +54,22 @@ export default class Options extends Component {
                         }
                         
                         if (data.alternativeTexts) {
-                            options(data.alternativeTexts[0])
+                            options.push({label: data.alternativeTexts[0].text, value: data.alternativeTexts[0].text})
+                            
+                            return (
+                                <Text>options so far  {options[0].label}</Text>
+                            )
                         }
                     }}
                     </Query>
+                    )
                     
                 })}
-
+                <Text>ABOVE RADIO</Text>
+                <Text>{options[0]}</Text>
                 <RadioForm
-                    radio_props={radioOptions}
+                    key="options-display"
+                    dataSource={options}
                     itemShowKey="label"
                     itemRealKey="value"
                     onPress={this.onPress}

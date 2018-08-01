@@ -16,6 +16,7 @@ query alternatives($listID: ID) {
        description
        value
        order
+       listID
     }
 }
 `
@@ -49,13 +50,11 @@ export default class Question extends Component {
                     
                     return (
                         <View>
-                            <Text>i am wuerying</Text>
-                           {/* <Options alternatives={data.alternatives}/> */}
+                           <Options alternatives={data.alternatives}/>
                         </View>
                     )
                 }}
                 </Query>
-                <Text>query for alternatives</Text>
                 </View>
               
               );
