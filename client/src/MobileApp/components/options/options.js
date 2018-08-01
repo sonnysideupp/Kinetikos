@@ -34,13 +34,13 @@ export default class Options extends Component {
 
     render() {
 
-        const options = []
 
         return (
-            <View>           
+            <View>  
+                <RadioGroup onSelect = {(index, value) => this.onSelect(index, value)}>         
                 {this.props.alternatives.map((option, index) => {
                     return (
-                    <Query query={GET_ALT_TEXT}
+                    <Query query={GET_ALT_TEXT} key="altTextQuery"
                     variables={{
                         alternativeID: option.id,
                         language: {name: this.props.language}
@@ -54,10 +54,11 @@ export default class Options extends Component {
                         }
                         
                         if (data.alternativeTexts) {
-                            options.push({label: data.alternativeTexts[0].text, value: data.alternativeTexts[0].text})
                             
                             return (
-                                <Text>options so far  {options[0].label}</Text>
+                                <RadioButton value={data.alternativeTexts[0].text}>
+                                    <Text>This is item #</Text>
+                                </RadioButton>
                             )
                         }
                     }}
@@ -65,15 +66,7 @@ export default class Options extends Component {
                     )
                     
                 })}
-                <Text>ABOVE RADIO</Text>
-                <Text>{options[0]}</Text>
-                <RadioForm
-                    key="options-display"
-                    dataSource={options}
-                    itemShowKey="label"
-                    itemRealKey="value"
-                    onPress={this.onPress}
-                />
+                </RadioGroup>
 
             </View>
         )
