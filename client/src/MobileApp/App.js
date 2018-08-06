@@ -7,11 +7,9 @@
  */
 
 import React, { Component } from 'react';
-// import { createStackNavigator } from 'react-navigation'; 
-import { Switch, Route, Link } from "react-router-dom";
 import { NativeRouter, Platform, StyleSheet, Text, View, Button } from 'react-native';
 import Questionnaire from './components/questionaire/questionaire';
-import Question from './components/question/question';
+import Question from './components/question/end';
 import Test from './components/testing/testing'
 import { createStackNavigator } from 'react-navigation';
 import Home from "./components/homepage/Home"
@@ -19,6 +17,8 @@ import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import Sensor from "./components/Sensor/sensor"
+import Done from "./components/question/end"
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -31,13 +31,16 @@ const Navigation = createStackNavigator(
   {
     First: {screen: Home},
     Second: {screen: Questionnaire},
-    // Third:{screen: Questions}
+    Third: {screen: Sensor},
+    Fourth: {screen: Done},
 
   },
   {
     initialRouteName: 'First',
   }
 );
+
+
 
 const client = new ApolloClient({
   link: new HttpLink({uri: `http://10.0.2.2:4000`}),

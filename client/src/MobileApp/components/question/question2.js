@@ -1,22 +1,27 @@
 //use query for question type
 import React, { Component } from 'react'
 import RadioForm, { RadioButton, RadioButtonInput } from 'react-native-simple-radio-button'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet,TouchableOpacity, } from 'react-native'
 import { Query, ApolloProvider } from 'react-apollo'
-import { ApolloClient } from 'apollo-client'
-import { HttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { FormLabel, FormInput } from "react-native-elements"
 import gql from 'graphql-tag'
-import Options from '../options/options'
+import { AsyncStorage } from "react-native"
+import { CheckBox } from 'react-native-elements'
 
-const GET_ALT = gql`
-query alternatives($listID: ID) {
-    alternatives(listID: $listID) {
-       id
-       description
-       value
-       order
-       listID
+const GET_ALT_TEXT = gql`
+query alternativeTexts($where:AlternativeTextWhereInput) {
+    alternativeTexts(where:$where) {
+        id
+        alternativeID{
+            question{
+              number
+            }
+          }
+        text
+        language {
+            id
+            name
+        }
     }
 }
 `
@@ -24,69 +29,157 @@ query alternatives($listID: ID) {
 
 export default class Question extends Component {
 
-    radio_props = [
-        {label: 'param1', value: 0 },
-        {label: 'param2', value: 1 }
-    ]
+   
+    state = {checked: false}
+   
+    render ()
+{
+    if( this.props.questiontype == "Input"){
+return(
+        <View>  
+        <FormLabel labelStyle={styles.label}>Answer</FormLabel>
+                <FormInput
+                  onChangeText={text => {
+                    this.setState({ answer: text });
+                  }}
+                />
+         <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.signinButton}
+            onPress={() => {
+
+                if(this.props.state.number == this.props.numberofquestions - 1){
+                    this.props.navigate.navigate("Fourth")
+                }
+                else{
+                this.props.function(this.props.state.number+1)
+                this.props.navigate.navigate("Second") }}}
+          >
+            <Text style={styles.signinButtonText}>Submit!</Text>
+          </TouchableOpacity>
+
+        </View>
+        </View>
+)
+    }
+    if( this.props.questiontype == "Select Multiple"){
+        const 
+        var options = []
+        return(
+                <View>  
+            <Query query={GET_ALT_TEXT} key="altTextQuery1"
+                    variables={{
+                        where:{language:{name:this.props.language},alternativeID:{question:{number:this.props.number}}}
+                    }}>
+                    {({ loading, error, data, refetch }) => {
+                        if (loading) {
+                            return(<Text>Loading</Text>);
+                        }
+                        if (error) {
+                            return(<Text>`Error! ${error.message}`</Text>);
+                        }
+                        for(var i = 0; i < data.alternativeTexts.length; i ++)
+                        {
+                            options.push(<CheckBox title ={data.alternativeTexts[i].text} checkedIcon='dot-circle-o'
+                            uncheckedIcon='circle-o'checked={this.state.checked} onPress={() => this.setState({checked: !this.state.checked})}/>)
+                        }
+                        
+                            return (
+                                <View>
+                                {options}
+                                <TouchableOpacity
+                                style={styles.signinButton}
+                                onPress={() => { 
+
+                                    if(this.props.state.number == this.props.numberofquestions - 1){
+                                    this.props.navigate.navigate("Fourth")
+                                }
+                                else{
+                                this.props.function(this.props.state.number + 1)
+                                this.props.navigate.navigate("Second") }}}
+                                
+                                   
+                              >
+                                <Text style={styles.signinButtonText}>Submit!</Text>
+                              </TouchableOpacity>
+                              </View>
+                            )
+                        }
+                    }
+                    </Query>
+                </View>
+        )
+            }
 
 
-
-    questionType(data) {
-        if(data.question.questionTypeID === "cjk9udmj618c60b0683u1uzfh") {
+        if( this.props.questiontype == "Multiple Choice") {
+            var options = []
             return (
                 
-                <View>
-                <Query query={GET_ALT}
-                variables={{
-                    listID: data.question.listID
-                }}>
-                {({ loading, error, data, refetch }) => {
-                    if (loading) {
-                        return(<Text>Loading</Text>);
+                <View>  
+               
+                    <Query query={GET_ALT_TEXT} key="altTextQuery"
+                    variables={{
+                        where:{language:{name:this.props.language},alternativeID:{question:{number:this.props.number}}}
+                    }}>
+                    {({ loading, error, data, refetch }) => {
+                        if (loading) {
+                            return(<Text>Loading</Text>);
+                        }
+                        if (error) {
+                            return(<Text>`Error! ${error.message}`</Text>);
+                        }
+                        for(var i = 0; i < data.alternativeTexts.length; i ++)
+                        {
+                            options.push({label:data.alternativeTexts[i].text,value:data.alternativeTexts[i].alternativeID.value})
+                        }
+                        
+                            return (
+                                <View>
+                                <RadioForm 
+                                radio_props = {options}
+                                onPress={(label) => this.setState({ answer: label })}
+                                />
+                                <TouchableOpacity
+                                style={styles.signinButton}
+                                onPress={() => {
+                
+                                    if(this.props.state.number == this.props.numberofquestions - 1){
+                                        this.props.navigate.navigate("Fourth")
+                                    }
+                                    else{
+                                    this.props.function(this.props.state.number+1)
+                                    this.props.navigate.navigate("Second") }}}
+                              >
+                                <Text style={styles.signinButtonText}>Submit!</Text>
+                              </TouchableOpacity>
+                              </View>
+                            )
+                        }
                     }
-                    if (error) {
-                        return(<Text>`Error! ${error.message}`</Text>);
-                    }
+                    </Query>
                     
-                    return (
-                        <View>
-                           <Options alternatives={data.alternatives}/>
-                        </View>
-                    )
-                }}
-                </Query>
-                </View>
-              
-              );
-        } else {
-            return (
-                <View style={styles.question}>
-                    <Text>place input</Text>
-                </View>
-            )
-        }
-    }
-
-    function(data) {
-        return (
-            <Text>testing the function</Text>
-        )
-    }
-
-    render () {
-
-        type = this.questionType(this.props)
-
-        return (
-            <View style={styles.container}>
-
-                <Text style={styles.question}>{this.props.index}) {this.props.questionText.text}</Text>
-                {type}               
+                
 
             </View>
-        )
+              
+              )
+        }
+    
     }
+ 
+
+    retrieveData = async () => {
+        try {
+    
+         const x = await AsyncStorage.getItem('number');
+         return JSON.parse(x);
+        } catch (error) {
+          console.log("error")
+        }
+      }   
 }
+
 
 const styles = StyleSheet.create({
     question: {
@@ -94,11 +187,30 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "#00008b"
     },
+    signinButton: {
+        width: "45%",
+        borderRadius: 15,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "white",
+        paddingTop: 7.5,
+        paddingBottom: 7.5
+      },
 
     container: {
         alignSelf: "flex-start", 
         justifyContent: "flex-start",
         borderStyle: "solid",
         borderColor: "#ff8c00"
-    }
+    },
+    label: {
+        color: "white",
+        fontSize: 14
+      },
+      buttonContainer: {
+        justifyContent: "space-between",
+        width: "75%",
+        paddingTop: 50,
+        flexDirection: "row"
+      }
 });

@@ -2,11 +2,12 @@
 
 type Query {
   me: User!
-  questionnaire: [Question]!
-  questionTexts(questionID: ID, language: LanguageWhereInput): [QuestionText]!
+  questions(where: QuestionWhereInput): [Question!]!
+  questionTexts(where: QuestionTextWhereInput): [QuestionText!]!
   #change this to order by the order variable
-  alternatives(listID: ID): [Alternatives]!
-  alternativeTexts(alternativeID: ID!, language: LanguageWhereInput!): [AlternativeText]!
+  alternatives(where: AlternativesWhereInput): [Alternatives!]!
+  alternativeTexts(where: AlternativeTextWhereInput): [AlternativeText!]!
+  questionnaires(where:QuestionnaireWhereInput):[Questionnaire!]!
 }
 
 type Mutation {
@@ -19,6 +20,7 @@ type Mutation {
   # createQuestionType(description: String!): QuestionType!
   # questionText(questionID: ID!, text: String!, language: Language!): QuestionText!
   # create a mutation for creating a question with text
+  submitanswer(value:String!,questionnumber:Int!,alternativeId:String): User!
 }
 
 type AuthPayload {

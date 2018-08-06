@@ -3,25 +3,44 @@ type User {
   name: String!
   email: String! @unique
   password: String!
+  answers:[Answer!]!
+}
+
+type Questionnaire{
+  id: ID! @unique
+  numberID: Int! @unique
+  questions:[Question!]!
+  questionairename: [Questionnairename!]!
+}
+
+type Questionnairename
+{
+  id: ID! @unique
+  text: String!
+  language: Language! 
+  questionaire: Questionnaire!
 }
 
 type Question {
   id: ID! @unique
+  number: Int! @unique
   description: String!
-  questionTypeID: ID!
-  listID: ID
+  questionType: QuestionType!
+  questionText: [QuestionText!]!
+  list: List
+  alternative:[Alternatives!]!
 }
 
 type QuestionType {
   id: ID! @unique
-  description: String! @unique
+  type: String! @unique
 }
 
 type QuestionText {
   id: ID! @unique
   text: String!
   language: Language!
-  questionID: ID!
+  question: Question!
 }
 
 type Language {
@@ -34,12 +53,14 @@ type Alternatives {
   description: String!
   value: Float!
   order: Int!
-  listID: ID!
+  listID: List
+  alternativeText:[AlternativeText!]!
+  question: Question
 }
 
 type AlternativeText {
   id: ID! @unique
-  alternativeID: ID!
+  alternativeID: Alternatives!
   language: Language!
   text: String!
 }
@@ -51,8 +72,8 @@ type List {
 
 type Answer {
   id: ID! @unique
-  questionID: ID!
-  value: Float
-  alternativeID: ID
+  question: Question!
+  value: String!
+  alternative: [Alternatives!]!
 }
 

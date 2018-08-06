@@ -6,27 +6,28 @@ export default {
     return ctx.db.query.user({ where: { id } }, info)
   },
 
-  questionnaire: (parent, args, ctx: Context, info) => {
-    return ctx.db.query.questions({}, info)
+  questionnaires: (parent, args, ctx: Context, info) => {
+    return ctx.db.query.questionnaires({...args}, info)
   },
 
   questionTexts: (parent, args, ctx: Context, info) => {
-    if(args) {
-      return ctx.db.query.questionTexts({where: {AND: {...args}}}, info)
-    } else {
-      return ctx.db.query.questionTexts({}, info)
-    }
+    
+      return ctx.db.query.questionTexts({...args}, info)
+   
   }, 
+  questions: (parent, args, ctx: Context, info) => {
+    
+    return ctx.db.query.questions({...args}, info)
+ 
+}, 
 
   alternatives: (parent, args, ctx: Context, info) => {
-    if(args) {
-      return ctx.db.query.alternativeses({where: {listID: args.listID}}, info)
-    }
-
-    return ctx.db.query.alternativeses({}, info)
+  
+      return ctx.db.query.alternativeses({...args}, info)
+  
   },
 
   alternativeTexts: (parent, args, ctx: Context, info) => {
-    return ctx.db.query.alternativeTexts({where: {AND: [{alternativeID: args.alternativeID},{language: args.language}]}}, info)
+    return ctx.db.query.alternativeTexts({...args}, info)
   },
 }

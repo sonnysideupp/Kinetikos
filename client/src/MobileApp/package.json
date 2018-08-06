@@ -18,13 +18,18 @@
     "react-apollo": "^2.1.9",
     "react-dom": "^16.4.1",
     "react-native": "^0.56.0",
+    "react-native-elements": "^0.19.1",
     "react-native-flexi-radio-button": "^0.2.2",
     "react-native-radio-buttons": "^1.0.0",
     "react-native-radio-form": "^1.1.0",
+    "react-native-select-multiple": "^1.2.0",
+    "react-native-sensors": "^3.0.0",
     "react-native-simple-radio-button": "^2.7.2",
+    "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^2.9.3",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "2.16.0",
+    "rn-fetch-blob": "^0.10.12",
     "sanitize.css": "^6.0.0"
   },
   "devDependencies": {

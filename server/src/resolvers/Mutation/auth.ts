@@ -35,7 +35,7 @@ export const auth = {
   async addList(parent, args, ctx: Context, info) {
     const question = await ctx.db.query.question({ where: {id: args.questionID} }, info)
     if(args.listID) {
-      return ctx.db.mutation.updateQuestion({data: {listID: args.listID}, where: {id: args.questionID}}, info)
+      return ctx.db.mutation.updateQuestion({data: {}, where: {id: args.questionID}}, info)
     } 
     return question
   }

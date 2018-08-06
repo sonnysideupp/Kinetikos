@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import { AsyncStorage } from "react-native"
 
 
 const instructions = Platform.select({
@@ -14,23 +15,28 @@ export default class Home extends React.Component {
     static navigationOptions = {
         title: "Home"
     }
+    
     render() {
+       console.log(this.props.state)
         var {navigate} = this.props.navigation;
       return (
         <View style={styles.container}>
-        <Button onPress= {()=> navigate("Second")} title ="Go to questionnaire"/>
+        <Button onPress= {async() => {
+           
+          navigate("Second")}} title ="Go to questionnaire"/>
         <Text/>
-        {/* <Button onPress= {()=> navigate("Third")} title ="Go to sensor"/>
+         <Button onPress= {()=> navigate("Third")} title ="Go to sensor"/>
         <Text/>
-        <Button onPress= {()=> navigate("Fourth")} title ="Go to Test"/> */}
+        {/* <Button onPress= {()=> navigate("Fourth")} title ="Go to Test"/>  */}
           <Text style={styles.welcome}>Hello!</Text>
           <Text style={styles.instructions}>testing</Text>
           <Text style={styles.instructions}></Text>
         </View>
       );
     }
-  }
+    
   
+}
   
   
   
