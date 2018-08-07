@@ -1,10 +1,14 @@
 import * as bcrypt from "bcryptjs"
 import * as jwt from "jsonwebtoken"
+import * as EmailValidator from "email-validator"
 import { Context } from "../../utils"
 
 export const auth = {
   async signup(parent, args, ctx: Context, info) {
     const password = await bcrypt.hash(args.password, 10)
+    if (!EmailValidator.validate(args.email)) {
+      throw new Error("Invalid email")
+    }
     const user = await ctx.db.mutation.createUser({
       data: { ...args, password }
     })

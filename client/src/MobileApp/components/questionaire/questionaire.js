@@ -94,7 +94,8 @@ checked: false}
                         
                 <Query query={GET_TEXTS} key="quesQuery" 
                 variables= {{
-                    where: {language:{name:"English"},question:{number:data.questionnaires[0].questions[this.state.number].number}}
+                    where: {language:{name:"English"},
+                    question:{number:data.questionnaires[0].questions[this.state.number].number}}
                 }}>
                 {({ loading, error, data, refetch }) => {
                    
@@ -108,7 +109,14 @@ checked: false}
                     return (
                         <View >
                          <Text style={styles.question}>{data.questionTexts[0].text}</Text>
-                 <Question state={this.state} function={this.Update} navigate = {this.props.navigation} questiontype= {data.questionTexts[0].question.questionType.type}language={data.questionTexts[0].language.name} numberofquestions={number} number={data.questionTexts[0].question.number}/>
+                 <Question 
+                 state={this.state} 
+                 function={this.Update} 
+                 navigate={this.props.navigation} 
+                 questiontype= {data.questionTexts[0].question.questionType.type}
+                 language={data.questionTexts[0].language.name} 
+                 numberofquestions={number} number={data.questionTexts[0].question.number}
+                 />
                             
                         </View>
                     )

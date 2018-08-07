@@ -19,6 +19,8 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import Sensor from "./components/Sensor/sensor"
 import Done from "./components/question/end"
+import Login from "./components/entry/login"
+import Signup from "./components/entry/signup"
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -33,7 +35,8 @@ const Navigation = createStackNavigator(
     Second: {screen: Questionnaire},
     Third: {screen: Sensor},
     Fourth: {screen: Done},
-
+    Fifth: {screen: Login},
+    Sixth: {screen: Signup},
   },
   {
     initialRouteName: 'First',

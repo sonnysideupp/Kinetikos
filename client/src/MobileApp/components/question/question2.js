@@ -39,6 +39,7 @@ return(
         <View>  
         <FormLabel labelStyle={styles.label}>Answer</FormLabel>
                 <FormInput
+                  underlineColorAndroid="black"
                   onChangeText={text => {
                     this.setState({ answer: text });
                   }}
@@ -63,13 +64,14 @@ return(
 )
     }
     if( this.props.questiontype == "Select Multiple"){
-        const 
+        
         var options = []
         return(
                 <View>  
             <Query query={GET_ALT_TEXT} key="altTextQuery1"
                     variables={{
-                        where:{language:{name:this.props.language},alternativeID:{question:{number:this.props.number}}}
+                        where:{language:{name:this.props.language},
+                        alternativeID:{question:{number:this.props.number}}}
                     }}>
                     {({ loading, error, data, refetch }) => {
                         if (loading) {
@@ -81,7 +83,9 @@ return(
                         for(var i = 0; i < data.alternativeTexts.length; i ++)
                         {
                             options.push(<CheckBox title ={data.alternativeTexts[i].text} checkedIcon='dot-circle-o'
-                            uncheckedIcon='circle-o'checked={this.state.checked} onPress={() => this.setState({checked: !this.state.checked})}/>)
+                            uncheckedIcon='circle-o'
+                            checked={this.state.checked} 
+                            onPress={() => this.setState({checked: !this.state.checked})}/>)
                         }
                         
                             return (
@@ -120,7 +124,8 @@ return(
                
                     <Query query={GET_ALT_TEXT} key="altTextQuery"
                     variables={{
-                        where:{language:{name:this.props.language},alternativeID:{question:{number:this.props.number}}}
+                        where:{language:{name:this.props.language},
+                        alternativeID:{question:{number:this.props.number}}}
                     }}>
                     {({ loading, error, data, refetch }) => {
                         if (loading) {
@@ -136,7 +141,8 @@ return(
                         
                             return (
                                 <View>
-                                <RadioForm 
+                                <RadioForm
+                                sytle={styles.radio} 
                                 radio_props = {options}
                                 onPress={(label) => this.setState({ answer: label })}
                                 />
@@ -187,10 +193,14 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "#00008b"
     },
+    radio: {
+
+    },
     signinButton: {
-        width: "45%",
+        width: "75%",
         borderRadius: 15,
         justifyContent: "center",
+        alignSelf: "center",
         alignItems: "center",
         backgroundColor: "white",
         paddingTop: 7.5,
@@ -204,12 +214,13 @@ const styles = StyleSheet.create({
         borderColor: "#ff8c00"
     },
     label: {
-        color: "white",
-        fontSize: 14
+        color: "purple",
+        fontSize: 18
       },
       buttonContainer: {
-        justifyContent: "space-between",
-        width: "75%",
+        alignSelf: "center",
+        justifyContent: "center",
+        width: "100%",
         paddingTop: 50,
         flexDirection: "row"
       }
