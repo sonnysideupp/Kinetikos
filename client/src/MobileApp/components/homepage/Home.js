@@ -17,7 +17,7 @@ export default class Home extends React.Component {
     }
     
     render() {
-       console.log(this.props.state)
+  
         var {navigate} = this.props.navigation;
       return (
         <View style={styles.container}>

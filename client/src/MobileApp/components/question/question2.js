@@ -1,21 +1,24 @@
 //use query for question type
 import React, { Component } from 'react'
 import RadioForm, { RadioButton, RadioButtonInput } from 'react-native-simple-radio-button'
-import { Text, View, StyleSheet,TouchableOpacity, } from 'react-native'
+import { Text, View, StyleSheet,TouchableOpacity,Button } from 'react-native'
 import { Query, ApolloProvider } from 'react-apollo'
 import { FormLabel, FormInput } from "react-native-elements"
 import gql from 'graphql-tag'
 import { AsyncStorage } from "react-native"
 import { CheckBox } from 'react-native-elements'
+import SelectMultiple from 'react-native-select-multiple'
 
 const GET_ALT_TEXT = gql`
 query alternativeTexts($where:AlternativeTextWhereInput) {
     alternativeTexts(where:$where) {
         id
         alternativeID{
+            id
             question{
               number
             }
+            value
           }
         text
         language {
@@ -30,10 +33,18 @@ query alternativeTexts($where:AlternativeTextWhereInput) {
 export default class Question extends Component {
 
    
-    state = {checked: false}
+    state = { selectedAnswers: [] ,
+    answer:"",
+value:0,
+number:0}
+    onSelectionsChange = (selectedAnswers) => {
+        // selectedFruits is array of { label, value }
+        this.setState({ selectedAnswers })
+      }
    
     render ()
 {
+
     if( this.props.questiontype == "Input"){
 return(
         <View>  
@@ -48,13 +59,9 @@ return(
           <TouchableOpacity
             style={styles.signinButton}
             onPress={() => {
-
-                if(this.props.state.number == this.props.numberofquestions - 1){
-                    this.props.navigate.navigate("Fourth")
-                }
-                else{
+                this.props.function1(this.state.answer,this.props.number,null)     
                 this.props.function(this.props.state.number+1)
-                this.props.navigate.navigate("Second") }}}
+                this.props.navigate.navigate("Second") }}
           >
             <Text style={styles.signinButtonText}>Submit!</Text>
           </TouchableOpacity>
@@ -64,8 +71,7 @@ return(
 )
     }
     if( this.props.questiontype == "Select Multiple"){
-        
-        var options = []
+        const answers = []
         return(
                 <View>  
             <Query query={GET_ALT_TEXT} key="altTextQuery1"
@@ -82,25 +88,30 @@ return(
                         }
                         for(var i = 0; i < data.alternativeTexts.length; i ++)
                         {
-                            options.push(<CheckBox title ={data.alternativeTexts[i].text} checkedIcon='dot-circle-o'
-                            uncheckedIcon='circle-o'
-                            checked={this.state.checked} 
-                            onPress={() => this.setState({checked: !this.state.checked})}/>)
+                            answers.push({label:data.alternativeTexts[i].text,value:i})
                         }
+
+
+                      
                         
                             return (
                                 <View>
-                                {options}
+                                
+                                <SelectMultiple
+                                   items={answers}
+                                    selectedItems={this.state.selectedAnswers}
+                                 onSelectionsChange={this.onSelectionsChange} />
                                 <TouchableOpacity
                                 style={styles.signinButton}
                                 onPress={() => { 
-
-                                    if(this.props.state.number == this.props.numberofquestions - 1){
-                                    this.props.navigate.navigate("Fourth")
+                                console.log(this.state.selectedAnswers)
+                                for(var j = 0; j < this.state.selectedAnswers.length; j++){
+                                 this.props.function1(data.alternativeTexts[this.state.selectedAnswers[j].value].alternativeID.value,this.props.number,data.alternativeTexts[this.state.selectedAnswers[j].value].alternativeID.id)
                                 }
-                                else{
-                                this.props.function(this.props.state.number + 1)
-                                this.props.navigate.navigate("Second") }}}
+                             
+                                this.props.function(this.props.state.number+1)
+                              
+                                this.props.navigate.navigate("Second") }}
                                 
                                    
                               >
@@ -136,7 +147,7 @@ return(
                         }
                         for(var i = 0; i < data.alternativeTexts.length; i ++)
                         {
-                            options.push({label:data.alternativeTexts[i].text,value:data.alternativeTexts[i].alternativeID.value})
+                            options.push({label:data.alternativeTexts[i].text,value:i})
                         }
                         
                             return (
@@ -144,18 +155,18 @@ return(
                                 <RadioForm
                                 sytle={styles.radio} 
                                 radio_props = {options}
-                                onPress={(label) => this.setState({ answer: label })}
+                                onPress={(label, value) => {
+                                    console.log(value)
+                                    this.setState({ answer: label, number:value})}}
                                 />
                                 <TouchableOpacity
                                 style={styles.signinButton}
                                 onPress={() => {
-                
-                                    if(this.props.state.number == this.props.numberofquestions - 1){
-                                        this.props.navigate.navigate("Fourth")
-                                    }
-                                    else{
+                                    console.log(this.state)
+                                    console.log(data.alternativeTexts)
+                                    this.props.function1(data.alternativeTexts[this.state.number].alternativeID.value,this.props.number,data.alternativeTexts[this.state.number].alternativeID.id)
                                     this.props.function(this.props.state.number+1)
-                                    this.props.navigate.navigate("Second") }}}
+                                    this.props.navigate.navigate("Second") }}
                               >
                                 <Text style={styles.signinButtonText}>Submit!</Text>
                               </TouchableOpacity>
@@ -174,16 +185,7 @@ return(
     
     }
  
-
-    retrieveData = async () => {
-        try {
-    
-         const x = await AsyncStorage.getItem('number');
-         return JSON.parse(x);
-        } catch (error) {
-          console.log("error")
-        }
-      }   
+ 
 }
 
 

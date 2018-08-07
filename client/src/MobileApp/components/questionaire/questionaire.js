@@ -1,7 +1,7 @@
 //use query for all questions
 import React, { Component } from 'react'
-import { View, Text ,StyleSheet} from 'react-native'
-import { Query, ApolloProvider } from 'react-apollo'
+import { View, Text ,StyleSheet, Button} from 'react-native'
+import { Query, Mutation } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
@@ -48,12 +48,18 @@ query questionnaires($where:QuestionnaireWhereInput) {
     }
 }
 `
-
+const SUBMIT_ANSWERS = gql`
+mutation submitanswer($value:String!,$questionnumber:Int!,$alternativeId:String) {
+    submitanswer(value:$value,questionnumber:$questionnumber,alternativeId:$alternativeId) {
+      name
+      email
+    }
+}
+`
 export default class Questionaire extends Component {
  
 state = {number:0,
-    answer: "",
-checked: false}
+    answers:[]}
 
     constructor(props) {
         super(props)
@@ -66,12 +72,15 @@ checked: false}
  Update(value) {
     this.setState({number: value})
 }
-    
+
+UpdateAnswer(value,questionNumber,alternativeId){
+    this.state.answers.push({value:value,questionNumber:questionNumber,alternativeId:alternativeId})
+
+}
 
     render() {  
 
-      
-          
+        var {navigate} = this.props.navigation;
     
         return (
            
@@ -90,6 +99,44 @@ checked: false}
                         return(<Text>`Error! ${error.message}`</Text>);
                     }
                     const number = data.questionnaires[0].questions.length
+                    if(this.state.number == number)
+        {
+            console.log(this.state)
+            return(
+                
+        <View>
+        <Mutation mutation={SUBMIT_ANSWERS}>
+        {submitanswer => {return (
+          <View>  
+        <Text>Congradualtions you are finished!</Text>
+        <Button onPress= {async e => {
+                    e.preventDefault()
+                    for(var i =0; i < this.state.answers.length; i ++)
+                    {
+                    try {
+                      const { data } = await submitanswer({
+                        variables: {
+                            value: this.state.answers[i].value,
+                            questionnumber: this.state.answers[i].questionNumber,
+                            alternativeId: this.state.answers[i].alternativeId
+                        }
+                      })
+                      
+                    } catch (error) {
+                      
+                    }}
+                    navigate("First")
+                  }} title ="Complete Questionnaire"/>
+        </View>
+         ) }}
+        </Mutation>
+
+
+        </View>
+    
+            )
+        }
+          else{
                     return (
                         
                 <Query query={GET_TEXTS} key="quesQuery" 
@@ -111,8 +158,9 @@ checked: false}
                          <Text style={styles.question}>{data.questionTexts[0].text}</Text>
                  <Question 
                  state={this.state} 
+                 function1 = {this.UpdateAnswer} 
                  function={this.Update} 
-                 navigate={this.props.navigation} 
+                 navigate = {this.props.navigation} 
                  questiontype= {data.questionTexts[0].question.questionType.type}
                  language={data.questionTexts[0].language.name} 
                  numberofquestions={number} number={data.questionTexts[0].question.number}
@@ -121,7 +169,7 @@ checked: false}
                         </View>
                     )
                 }}
-                </Query>)
+                </Query>)}
                 }}
                 </Query>
                 </View>
