@@ -4,7 +4,8 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView 
 } from "react-native";
 import { FormLabel, FormInput } from "react-native-elements";
 import gql from "graphql-tag";
@@ -41,9 +42,11 @@ export default class SignUpScreen extends React.Component {
         {signup => {
           return (
             <View style={styles.container}>
-              <View>
+            
+              
+                <View style={styles.container}>
                 <Text style={styles.errorText}>{this.state.error}</Text>
-                <View style={{ alignItems: "center", marginBottom: 20 }}>
+                <View style={{ alignItems: "center", marginBottom: 20,marginTop:-40 }}>
                   <Text style={{ color: "#191970", fontSize: 26 }}>
                     Make an account
                   </Text>
@@ -68,7 +71,7 @@ export default class SignUpScreen extends React.Component {
                     this.setState({ email: text });
                   }}
                 />
-
+              
                 <FormLabel labelStyle={styles.label}>Password</FormLabel>
                 <FormInput
                 underlineColorAndroid="black"
@@ -79,7 +82,8 @@ export default class SignUpScreen extends React.Component {
                     this.setState({ password: text });
                   }}
                 />
-              </View>
+                </View>
+              
 
               <View style={styles.centerContainer}>
                 <View style={styles.buttonContainer}>
@@ -91,10 +95,12 @@ export default class SignUpScreen extends React.Component {
                   </TouchableOpacity>
                 </View>
               </View>
-            </View>
+              
+             </View>
           );
         }}
       </Mutation>
+     
     );
   }
 
@@ -126,8 +132,11 @@ export default class SignUpScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#F5FCFF',
+   
+  },
+  avoidview:{
     flex: 1,
-    backgroundColor: '#F5FCFF'
   },
   centerContainer: {
     alignItems: "center"

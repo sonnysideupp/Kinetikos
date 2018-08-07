@@ -32,7 +32,6 @@ export default class Home extends React.Component {
     }
     
     render() {
-    
         var {navigate} = this.props.navigation;
         
       return (
@@ -43,10 +42,14 @@ export default class Home extends React.Component {
         <Text/>
          <Button onPress= {()=> navigate("Third")} title ="Go to sensor"/>
         <Text/>
+       
         <Button onPress= {async() => {
            
            navigate("Fifth")}} title ="Go to Login"/>
+           
         <Text/>
+
+       
         <Button onPress= {async() => {
            
            navigate("Sixth")}} title ="Go to Sign up"/>

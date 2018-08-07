@@ -4,7 +4,8 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView 
 } from "react-native";
 import { FormLabel, FormInput } from "react-native-elements";
 import gql from "graphql-tag";
@@ -34,10 +35,12 @@ export default class SignInScreen extends React.Component {
   };
   render() {
     return (
+      
       <Mutation mutation={LOGIN}>
         {login => {
           return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} behavior="padding" enable>
+            <View >
               <View>
                 <Text style={styles.errorText}>{this.state.error}</Text>
                 <View style={{ alignItems: "center", marginBottom: 20 }}>
@@ -77,9 +80,11 @@ export default class SignInScreen extends React.Component {
                 </View>
               </View>
             </View>
+            </KeyboardAvoidingView>
           );
         }}
       </Mutation>
+     
     );
   }
 
