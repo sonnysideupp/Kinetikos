@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
         color: "#00008b"
     },
     radio: {
-
+        width: "100%",
     },
     signinButton: {
         width: "75%",

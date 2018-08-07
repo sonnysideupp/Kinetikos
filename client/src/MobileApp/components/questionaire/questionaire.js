@@ -1,6 +1,6 @@
 //use query for all questions
 import React, { Component } from 'react'
-import { View, Text ,StyleSheet, Button} from 'react-native'
+import { View, Text ,StyleSheet, Button, AsyncStorage} from 'react-native'
 import { Query, Mutation } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
@@ -81,9 +81,14 @@ UpdateAnswer(value,questionNumber,alternativeId){
     render() {  
 
         var {navigate} = this.props.navigation;
+        var token = AsyncStorage.getItem("token");
+
+        if(!token) {
+            this.props.navigation.navigate("Fifth");
+        }
     
         return (
-           
+            
             <View>
                
                 <Query query = {Questionnaire} key= "questionnaireQuery"
