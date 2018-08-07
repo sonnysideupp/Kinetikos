@@ -5,6 +5,9 @@ export default {
     const id = getUserId(ctx)
     return ctx.db.query.user({ where: { id } }, info)
   },
+  answers:(parent, args, ctx: Context, info) => {
+    return ctx.db.query.answers({...args}, info)
+  },
 
   questionnaires: (parent, args, ctx: Context, info) => {
     return ctx.db.query.questionnaires({...args}, info)

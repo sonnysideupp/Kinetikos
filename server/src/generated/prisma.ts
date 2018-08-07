@@ -232,14 +232,14 @@ input AlternativesCreateInput {
   question: QuestionCreateOneWithoutAlternativeInput
 }
 
-input AlternativesCreateManyInput {
-  create: [AlternativesCreateInput!]
-  connect: [AlternativesWhereUniqueInput!]
-}
-
 input AlternativesCreateManyWithoutQuestionInput {
   create: [AlternativesCreateWithoutQuestionInput!]
   connect: [AlternativesWhereUniqueInput!]
+}
+
+input AlternativesCreateOneInput {
+  create: AlternativesCreateInput
+  connect: AlternativesWhereUniqueInput
 }
 
 input AlternativesCreateOneWithoutAlternativeTextInput {
@@ -351,15 +351,6 @@ input AlternativesUpdateInput {
   question: QuestionUpdateOneWithoutAlternativeInput
 }
 
-input AlternativesUpdateManyInput {
-  create: [AlternativesCreateInput!]
-  connect: [AlternativesWhereUniqueInput!]
-  disconnect: [AlternativesWhereUniqueInput!]
-  delete: [AlternativesWhereUniqueInput!]
-  update: [AlternativesUpdateWithWhereUniqueNestedInput!]
-  upsert: [AlternativesUpsertWithWhereUniqueNestedInput!]
-}
-
 input AlternativesUpdateManyWithoutQuestionInput {
   create: [AlternativesCreateWithoutQuestionInput!]
   connect: [AlternativesWhereUniqueInput!]
@@ -367,6 +358,15 @@ input AlternativesUpdateManyWithoutQuestionInput {
   delete: [AlternativesWhereUniqueInput!]
   update: [AlternativesUpdateWithWhereUniqueWithoutQuestionInput!]
   upsert: [AlternativesUpsertWithWhereUniqueWithoutQuestionInput!]
+}
+
+input AlternativesUpdateOneInput {
+  create: AlternativesCreateInput
+  connect: AlternativesWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: AlternativesUpdateDataInput
+  upsert: AlternativesUpsertNestedInput
 }
 
 input AlternativesUpdateOneWithoutAlternativeTextInput {
@@ -393,25 +393,19 @@ input AlternativesUpdateWithoutQuestionDataInput {
   alternativeText: AlternativeTextUpdateManyWithoutAlternativeIDInput
 }
 
-input AlternativesUpdateWithWhereUniqueNestedInput {
-  where: AlternativesWhereUniqueInput!
-  data: AlternativesUpdateDataInput!
-}
-
 input AlternativesUpdateWithWhereUniqueWithoutQuestionInput {
   where: AlternativesWhereUniqueInput!
   data: AlternativesUpdateWithoutQuestionDataInput!
 }
 
+input AlternativesUpsertNestedInput {
+  update: AlternativesUpdateDataInput!
+  create: AlternativesCreateInput!
+}
+
 input AlternativesUpsertWithoutAlternativeTextInput {
   update: AlternativesUpdateWithoutAlternativeTextDataInput!
   create: AlternativesCreateWithoutAlternativeTextInput!
-}
-
-input AlternativesUpsertWithWhereUniqueNestedInput {
-  where: AlternativesWhereUniqueInput!
-  update: AlternativesUpdateDataInput!
-  create: AlternativesCreateInput!
 }
 
 input AlternativesUpsertWithWhereUniqueWithoutQuestionInput {
@@ -793,7 +787,7 @@ type Answer implements Node {
   id: ID!
   question(where: QuestionWhereInput): Question!
   value: String!
-  alternative(where: AlternativesWhereInput, orderBy: AlternativesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Alternatives!]
+  alternative(where: AlternativesWhereInput): Alternatives
 }
 
 """A connection to a list of items."""
@@ -809,7 +803,7 @@ type AnswerConnection {
 input AnswerCreateInput {
   value: String!
   question: QuestionCreateOneInput!
-  alternative: AlternativesCreateManyInput
+  alternative: AlternativesCreateOneInput
 }
 
 input AnswerCreateManyInput {
@@ -884,13 +878,13 @@ input AnswerSubscriptionWhereInput {
 input AnswerUpdateDataInput {
   value: String
   question: QuestionUpdateOneInput
-  alternative: AlternativesUpdateManyInput
+  alternative: AlternativesUpdateOneInput
 }
 
 input AnswerUpdateInput {
   value: String
   question: QuestionUpdateOneInput
-  alternative: AlternativesUpdateManyInput
+  alternative: AlternativesUpdateOneInput
 }
 
 input AnswerUpdateManyInput {
@@ -1003,9 +997,7 @@ input AnswerWhereInput {
   """All values not ending with the given string."""
   value_not_ends_with: String
   question: QuestionWhereInput
-  alternative_every: AlternativesWhereInput
-  alternative_some: AlternativesWhereInput
-  alternative_none: AlternativesWhereInput
+  alternative: AlternativesWhereInput
 }
 
 input AnswerWhereUniqueInput {
@@ -3198,9 +3190,9 @@ export type ListOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export interface QuestionnairenameCreateWithoutQuestionaireInput {
-  text: String
-  language: LanguageCreateOneInput
+export interface QuestionnairenameCreateManyWithoutQuestionaireInput {
+  create?: QuestionnairenameCreateWithoutQuestionaireInput[] | QuestionnairenameCreateWithoutQuestionaireInput
+  connect?: QuestionnairenameWhereUniqueInput[] | QuestionnairenameWhereUniqueInput
 }
 
 export interface UserWhereInput {
@@ -3268,6 +3260,20 @@ export interface UserWhereInput {
   answers_none?: AnswerWhereInput
 }
 
+export interface QuestionUpdateOneWithoutAlternativeInput {
+  create?: QuestionCreateWithoutAlternativeInput
+  connect?: QuestionWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: QuestionUpdateWithoutAlternativeDataInput
+  upsert?: QuestionUpsertWithoutAlternativeInput
+}
+
+export interface AlternativeTextUpdateWithWhereUniqueWithoutAlternativeIDInput {
+  where: AlternativeTextWhereUniqueInput
+  data: AlternativeTextUpdateWithoutAlternativeIDDataInput
+}
+
 export interface AlternativesUpdateDataInput {
   description?: String
   value?: Float
@@ -3277,29 +3283,21 @@ export interface AlternativesUpdateDataInput {
   question?: QuestionUpdateOneWithoutAlternativeInput
 }
 
-export interface AlternativeTextUpdateWithoutAlternativeIDDataInput {
-  text?: String
-  language?: LanguageUpdateOneInput
+export interface QuestionCreateWithoutQuestionTextInput {
+  number: Int
+  description: String
+  questionType: QuestionTypeCreateOneInput
+  list?: ListCreateOneInput
+  alternative?: AlternativesCreateManyWithoutQuestionInput
 }
 
-export interface AlternativesUpdateWithWhereUniqueNestedInput {
-  where: AlternativesWhereUniqueInput
-  data: AlternativesUpdateDataInput
-}
-
-export interface AlternativeTextCreateInput {
-  text: String
-  alternativeID: AlternativesCreateOneWithoutAlternativeTextInput
-  language: LanguageCreateOneInput
-}
-
-export interface AlternativesUpdateManyInput {
-  create?: AlternativesCreateInput[] | AlternativesCreateInput
-  connect?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
-  disconnect?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
-  delete?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
-  update?: AlternativesUpdateWithWhereUniqueNestedInput[] | AlternativesUpdateWithWhereUniqueNestedInput
-  upsert?: AlternativesUpsertWithWhereUniqueNestedInput[] | AlternativesUpsertWithWhereUniqueNestedInput
+export interface AlternativesUpdateOneInput {
+  create?: AlternativesCreateInput
+  connect?: AlternativesWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: AlternativesUpdateDataInput
+  upsert?: AlternativesUpsertNestedInput
 }
 
 export interface AlternativesSubscriptionWhereInput {
@@ -3346,11 +3344,10 @@ export interface QuestionSubscriptionWhereInput {
   node?: QuestionWhereInput
 }
 
-export interface UserCreateInput {
-  name: String
-  email: String
-  password: String
-  answers?: AnswerCreateManyInput
+export interface AlternativeTextUpsertWithWhereUniqueWithoutAlternativeIDInput {
+  where: AlternativeTextWhereUniqueInput
+  update: AlternativeTextUpdateWithoutAlternativeIDDataInput
+  create: AlternativeTextCreateWithoutAlternativeIDInput
 }
 
 export interface AlternativeTextSubscriptionWhereInput {
@@ -3364,9 +3361,11 @@ export interface AlternativeTextSubscriptionWhereInput {
   node?: AlternativeTextWhereInput
 }
 
-export interface AnswerCreateManyInput {
-  create?: AnswerCreateInput[] | AnswerCreateInput
-  connect?: AnswerWhereUniqueInput[] | AnswerWhereUniqueInput
+export interface UserCreateInput {
+  name: String
+  email: String
+  password: String
+  answers?: AnswerCreateManyInput
 }
 
 export interface QuestionTextSubscriptionWhereInput {
@@ -3380,10 +3379,9 @@ export interface QuestionTextSubscriptionWhereInput {
   node?: QuestionTextWhereInput
 }
 
-export interface AnswerCreateInput {
-  value: String
-  question: QuestionCreateOneInput
-  alternative?: AlternativesCreateManyInput
+export interface AnswerCreateManyInput {
+  create?: AnswerCreateInput[] | AnswerCreateInput
+  connect?: AnswerWhereUniqueInput[] | AnswerWhereUniqueInput
 }
 
 export interface QuestionnairenameSubscriptionWhereInput {
@@ -3397,9 +3395,10 @@ export interface QuestionnairenameSubscriptionWhereInput {
   node?: QuestionnairenameWhereInput
 }
 
-export interface QuestionCreateOneInput {
-  create?: QuestionCreateInput
-  connect?: QuestionWhereUniqueInput
+export interface AnswerCreateInput {
+  value: String
+  question: QuestionCreateOneInput
+  alternative?: AlternativesCreateOneInput
 }
 
 export interface QuestionnairenameWhereInput {
@@ -3438,13 +3437,9 @@ export interface QuestionnairenameWhereInput {
   questionaire?: QuestionnaireWhereInput
 }
 
-export interface QuestionCreateInput {
-  number: Int
-  description: String
-  questionType: QuestionTypeCreateOneInput
-  questionText?: QuestionTextCreateManyWithoutQuestionInput
-  list?: ListCreateOneInput
-  alternative?: AlternativesCreateManyWithoutQuestionInput
+export interface QuestionCreateOneInput {
+  create?: QuestionCreateInput
+  connect?: QuestionWhereUniqueInput
 }
 
 export interface QuestionnaireSubscriptionWhereInput {
@@ -3458,9 +3453,13 @@ export interface QuestionnaireSubscriptionWhereInput {
   node?: QuestionnaireWhereInput
 }
 
-export interface QuestionTypeCreateOneInput {
-  create?: QuestionTypeCreateInput
-  connect?: QuestionTypeWhereUniqueInput
+export interface QuestionCreateInput {
+  number: Int
+  description: String
+  questionType: QuestionTypeCreateOneInput
+  questionText?: QuestionTextCreateManyWithoutQuestionInput
+  list?: ListCreateOneInput
+  alternative?: AlternativesCreateManyWithoutQuestionInput
 }
 
 export interface QuestionTypeWhereInput {
@@ -3497,8 +3496,9 @@ export interface QuestionTypeWhereInput {
   type_not_ends_with?: String
 }
 
-export interface QuestionTypeCreateInput {
-  type: String
+export interface QuestionTypeCreateOneInput {
+  create?: QuestionTypeCreateInput
+  connect?: QuestionTypeWhereUniqueInput
 }
 
 export interface AlternativesUpdateInput {
@@ -3510,9 +3510,8 @@ export interface AlternativesUpdateInput {
   question?: QuestionUpdateOneWithoutAlternativeInput
 }
 
-export interface QuestionTextCreateManyWithoutQuestionInput {
-  create?: QuestionTextCreateWithoutQuestionInput[] | QuestionTextCreateWithoutQuestionInput
-  connect?: QuestionTextWhereUniqueInput[] | QuestionTextWhereUniqueInput
+export interface QuestionTypeCreateInput {
+  type: String
 }
 
 export interface AnswerWhereInput {
@@ -3548,14 +3547,12 @@ export interface AnswerWhereInput {
   value_ends_with?: String
   value_not_ends_with?: String
   question?: QuestionWhereInput
-  alternative_every?: AlternativesWhereInput
-  alternative_some?: AlternativesWhereInput
-  alternative_none?: AlternativesWhereInput
+  alternative?: AlternativesWhereInput
 }
 
-export interface QuestionTextCreateWithoutQuestionInput {
-  text: String
-  language: LanguageCreateOneInput
+export interface QuestionTextCreateManyWithoutQuestionInput {
+  create?: QuestionTextCreateWithoutQuestionInput[] | QuestionTextCreateWithoutQuestionInput
+  connect?: QuestionTextWhereUniqueInput[] | QuestionTextWhereUniqueInput
 }
 
 export interface QuestionnaireWhereUniqueInput {
@@ -3563,12 +3560,21 @@ export interface QuestionnaireWhereUniqueInput {
   numberID?: Int
 }
 
+export interface QuestionTextCreateWithoutQuestionInput {
+  text: String
+  language: LanguageCreateOneInput
+}
+
+export interface QuestionTextWhereUniqueInput {
+  id?: ID_Input
+}
+
 export interface LanguageCreateOneInput {
   create?: LanguageCreateInput
   connect?: LanguageWhereUniqueInput
 }
 
-export interface QuestionTextWhereUniqueInput {
+export interface ListWhereUniqueInput {
   id?: ID_Input
 }
 
@@ -3576,7 +3582,7 @@ export interface LanguageCreateInput {
   name: String
 }
 
-export interface ListWhereUniqueInput {
+export interface AnswerWhereUniqueInput {
   id?: ID_Input
 }
 
@@ -3585,16 +3591,16 @@ export interface ListCreateOneInput {
   connect?: ListWhereUniqueInput
 }
 
-export interface AnswerWhereUniqueInput {
+export interface LanguageWhereUniqueInput {
   id?: ID_Input
+  name?: String
 }
 
 export interface ListCreateInput {
   description: String
 }
 
-export interface LanguageWhereUniqueInput {
-  id?: ID_Input
+export interface LanguageUpdateInput {
   name?: String
 }
 
@@ -3603,8 +3609,10 @@ export interface AlternativesCreateManyWithoutQuestionInput {
   connect?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
 }
 
-export interface LanguageUpdateInput {
-  name?: String
+export interface AnswerUpdateInput {
+  value?: String
+  question?: QuestionUpdateOneInput
+  alternative?: AlternativesUpdateOneInput
 }
 
 export interface AlternativesCreateWithoutQuestionInput {
@@ -3615,24 +3623,13 @@ export interface AlternativesCreateWithoutQuestionInput {
   alternativeText?: AlternativeTextCreateManyWithoutAlternativeIDInput
 }
 
-export interface AnswerUpdateInput {
-  value?: String
-  question?: QuestionUpdateOneInput
-  alternative?: AlternativesUpdateManyInput
+export interface ListUpdateInput {
+  description?: String
 }
 
 export interface AlternativeTextCreateManyWithoutAlternativeIDInput {
   create?: AlternativeTextCreateWithoutAlternativeIDInput[] | AlternativeTextCreateWithoutAlternativeIDInput
   connect?: AlternativeTextWhereUniqueInput[] | AlternativeTextWhereUniqueInput
-}
-
-export interface ListUpdateInput {
-  description?: String
-}
-
-export interface AlternativeTextCreateWithoutAlternativeIDInput {
-  text: String
-  language: LanguageCreateOneInput
 }
 
 export interface AlternativesUpdateWithoutAlternativeTextDataInput {
@@ -3643,15 +3640,28 @@ export interface AlternativesUpdateWithoutAlternativeTextDataInput {
   question?: QuestionUpdateOneWithoutAlternativeInput
 }
 
-export interface AlternativesCreateManyInput {
-  create?: AlternativesCreateInput[] | AlternativesCreateInput
-  connect?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
+export interface AlternativeTextCreateWithoutAlternativeIDInput {
+  text: String
+  language: LanguageCreateOneInput
 }
 
 export interface AlternativeTextUpdateInput {
   text?: String
   alternativeID?: AlternativesUpdateOneWithoutAlternativeTextInput
   language?: LanguageUpdateOneInput
+}
+
+export interface AlternativesCreateOneInput {
+  create?: AlternativesCreateInput
+  connect?: AlternativesWhereUniqueInput
+}
+
+export interface QuestionUpdateWithoutQuestionTextDataInput {
+  number?: Int
+  description?: String
+  questionType?: QuestionTypeUpdateOneInput
+  list?: ListUpdateOneInput
+  alternative?: AlternativesUpdateManyWithoutQuestionInput
 }
 
 export interface AlternativesCreateInput {
@@ -3663,12 +3673,10 @@ export interface AlternativesCreateInput {
   question?: QuestionCreateOneWithoutAlternativeInput
 }
 
-export interface QuestionUpdateWithoutQuestionTextDataInput {
-  number?: Int
-  description?: String
-  questionType?: QuestionTypeUpdateOneInput
-  list?: ListUpdateOneInput
-  alternative?: AlternativesUpdateManyWithoutQuestionInput
+export interface QuestionTextUpdateInput {
+  text?: String
+  language?: LanguageUpdateOneInput
+  question?: QuestionUpdateOneWithoutQuestionTextInput
 }
 
 export interface QuestionCreateOneWithoutAlternativeInput {
@@ -3676,10 +3684,9 @@ export interface QuestionCreateOneWithoutAlternativeInput {
   connect?: QuestionWhereUniqueInput
 }
 
-export interface QuestionTextUpdateInput {
-  text?: String
-  language?: LanguageUpdateOneInput
-  question?: QuestionUpdateOneWithoutQuestionTextInput
+export interface QuestionnaireUpdateWithoutQuestionairenameDataInput {
+  numberID?: Int
+  questions?: QuestionUpdateManyInput
 }
 
 export interface QuestionCreateWithoutAlternativeInput {
@@ -3690,9 +3697,10 @@ export interface QuestionCreateWithoutAlternativeInput {
   list?: ListCreateOneInput
 }
 
-export interface QuestionnaireUpdateWithoutQuestionairenameDataInput {
-  numberID?: Int
-  questions?: QuestionUpdateManyInput
+export interface QuestionnairenameUpdateInput {
+  text?: String
+  language?: LanguageUpdateOneInput
+  questionaire?: QuestionnaireUpdateOneWithoutQuestionairenameInput
 }
 
 export interface QuestionnaireCreateInput {
@@ -3701,25 +3709,14 @@ export interface QuestionnaireCreateInput {
   questionairename?: QuestionnairenameCreateManyWithoutQuestionaireInput
 }
 
-export interface QuestionnairenameUpdateInput {
-  text?: String
-  language?: LanguageUpdateOneInput
-  questionaire?: QuestionnaireUpdateOneWithoutQuestionairenameInput
-}
-
-export interface QuestionCreateManyInput {
-  create?: QuestionCreateInput[] | QuestionCreateInput
-  connect?: QuestionWhereUniqueInput[] | QuestionWhereUniqueInput
-}
-
 export interface QuestionnairenameUpdateWithoutQuestionaireDataInput {
   text?: String
   language?: LanguageUpdateOneInput
 }
 
-export interface QuestionnairenameCreateManyWithoutQuestionaireInput {
-  create?: QuestionnairenameCreateWithoutQuestionaireInput[] | QuestionnairenameCreateWithoutQuestionaireInput
-  connect?: QuestionnairenameWhereUniqueInput[] | QuestionnairenameWhereUniqueInput
+export interface QuestionCreateManyInput {
+  create?: QuestionCreateInput[] | QuestionCreateInput
+  connect?: QuestionWhereUniqueInput[] | QuestionWhereUniqueInput
 }
 
 export interface QuestionnairenameUpdateManyWithoutQuestionaireInput {
@@ -3731,10 +3728,9 @@ export interface QuestionnairenameUpdateManyWithoutQuestionaireInput {
   upsert?: QuestionnairenameUpsertWithWhereUniqueWithoutQuestionaireInput[] | QuestionnairenameUpsertWithWhereUniqueWithoutQuestionaireInput
 }
 
-export interface AlternativeTextUpsertWithWhereUniqueWithoutAlternativeIDInput {
-  where: AlternativeTextWhereUniqueInput
-  update: AlternativeTextUpdateWithoutAlternativeIDDataInput
-  create: AlternativeTextCreateWithoutAlternativeIDInput
+export interface AlternativeTextUpdateWithoutAlternativeIDDataInput {
+  text?: String
+  language?: LanguageUpdateOneInput
 }
 
 export interface QuestionUpdateWithWhereUniqueNestedInput {
@@ -3742,10 +3738,9 @@ export interface QuestionUpdateWithWhereUniqueNestedInput {
   data: QuestionUpdateDataInput
 }
 
-export interface QuestionnairenameCreateInput {
+export interface QuestionnairenameCreateWithoutQuestionaireInput {
   text: String
   language: LanguageCreateOneInput
-  questionaire: QuestionnaireCreateOneWithoutQuestionairenameInput
 }
 
 export interface QuestionnaireUpdateInput {
@@ -3754,20 +3749,20 @@ export interface QuestionnaireUpdateInput {
   questionairename?: QuestionnairenameUpdateManyWithoutQuestionaireInput
 }
 
-export interface QuestionnaireCreateOneWithoutQuestionairenameInput {
-  create?: QuestionnaireCreateWithoutQuestionairenameInput
-  connect?: QuestionnaireWhereUniqueInput
+export interface QuestionnairenameCreateInput {
+  text: String
+  language: LanguageCreateOneInput
+  questionaire: QuestionnaireCreateOneWithoutQuestionairenameInput
 }
 
-export interface AlternativesUpsertWithWhereUniqueNestedInput {
-  where: AlternativesWhereUniqueInput
+export interface AlternativesUpsertNestedInput {
   update: AlternativesUpdateDataInput
   create: AlternativesCreateInput
 }
 
-export interface QuestionnaireCreateWithoutQuestionairenameInput {
-  numberID: Int
-  questions?: QuestionCreateManyInput
+export interface QuestionnaireCreateOneWithoutQuestionairenameInput {
+  create?: QuestionnaireCreateWithoutQuestionairenameInput
+  connect?: QuestionnaireWhereUniqueInput
 }
 
 export interface QuestionUpdateWithoutAlternativeDataInput {
@@ -3778,10 +3773,247 @@ export interface QuestionUpdateWithoutAlternativeDataInput {
   list?: ListUpdateOneInput
 }
 
+export interface QuestionnaireCreateWithoutQuestionairenameInput {
+  numberID: Int
+  questions?: QuestionCreateManyInput
+}
+
+export interface LanguageSubscriptionWhereInput {
+  AND?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
+  OR?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
+  NOT?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: LanguageWhereInput
+}
+
 export interface QuestionTextCreateInput {
   text: String
   language: LanguageCreateOneInput
   question: QuestionCreateOneWithoutQuestionTextInput
+}
+
+export interface ListSubscriptionWhereInput {
+  AND?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput
+  OR?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput
+  NOT?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ListWhereInput
+}
+
+export interface QuestionCreateOneWithoutQuestionTextInput {
+  create?: QuestionCreateWithoutQuestionTextInput
+  connect?: QuestionWhereUniqueInput
+}
+
+export interface ListWhereInput {
+  AND?: ListWhereInput[] | ListWhereInput
+  OR?: ListWhereInput[] | ListWhereInput
+  NOT?: ListWhereInput[] | ListWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
+}
+
+export interface LanguageWhereInput {
+  AND?: LanguageWhereInput[] | LanguageWhereInput
+  OR?: LanguageWhereInput[] | LanguageWhereInput
+  NOT?: LanguageWhereInput[] | LanguageWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface AlternativeTextCreateInput {
+  text: String
+  alternativeID: AlternativesCreateOneWithoutAlternativeTextInput
+  language: LanguageCreateOneInput
+}
+
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  email?: String
+}
+
+export interface AlternativesCreateOneWithoutAlternativeTextInput {
+  create?: AlternativesCreateWithoutAlternativeTextInput
+  connect?: AlternativesWhereUniqueInput
+}
+
+export interface AlternativeTextWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface AlternativesCreateWithoutAlternativeTextInput {
+  description: String
+  value: Float
+  order: Int
+  listID?: ListCreateOneInput
+  question?: QuestionCreateOneWithoutAlternativeInput
+}
+
+export interface QuestionTypeWhereUniqueInput {
+  id?: ID_Input
+  type?: String
+}
+
+export interface UserUpdateInput {
+  name?: String
+  email?: String
+  password?: String
+  answers?: AnswerUpdateManyInput
+}
+
+export interface QuestionTypeUpdateInput {
+  type?: String
+}
+
+export interface AnswerUpdateManyInput {
+  create?: AnswerCreateInput[] | AnswerCreateInput
+  connect?: AnswerWhereUniqueInput[] | AnswerWhereUniqueInput
+  disconnect?: AnswerWhereUniqueInput[] | AnswerWhereUniqueInput
+  delete?: AnswerWhereUniqueInput[] | AnswerWhereUniqueInput
+  update?: AnswerUpdateWithWhereUniqueNestedInput[] | AnswerUpdateWithWhereUniqueNestedInput
+  upsert?: AnswerUpsertWithWhereUniqueNestedInput[] | AnswerUpsertWithWhereUniqueNestedInput
+}
+
+export interface AlternativesUpsertWithoutAlternativeTextInput {
+  update: AlternativesUpdateWithoutAlternativeTextDataInput
+  create: AlternativesCreateWithoutAlternativeTextInput
+}
+
+export interface AnswerUpdateWithWhereUniqueNestedInput {
+  where: AnswerWhereUniqueInput
+  data: AnswerUpdateDataInput
+}
+
+export interface QuestionUpsertWithoutQuestionTextInput {
+  update: QuestionUpdateWithoutQuestionTextDataInput
+  create: QuestionCreateWithoutQuestionTextInput
+}
+
+export interface AnswerUpdateDataInput {
+  value?: String
+  question?: QuestionUpdateOneInput
+  alternative?: AlternativesUpdateOneInput
+}
+
+export interface QuestionnaireUpsertWithoutQuestionairenameInput {
+  update: QuestionnaireUpdateWithoutQuestionairenameDataInput
+  create: QuestionnaireCreateWithoutQuestionairenameInput
+}
+
+export interface QuestionUpdateOneInput {
+  create?: QuestionCreateInput
+  connect?: QuestionWhereUniqueInput
+  delete?: Boolean
+  update?: QuestionUpdateDataInput
+  upsert?: QuestionUpsertNestedInput
+}
+
+export interface QuestionnairenameUpsertWithWhereUniqueWithoutQuestionaireInput {
+  where: QuestionnairenameWhereUniqueInput
+  update: QuestionnairenameUpdateWithoutQuestionaireDataInput
+  create: QuestionnairenameCreateWithoutQuestionaireInput
+}
+
+export interface QuestionUpdateDataInput {
+  number?: Int
+  description?: String
+  questionType?: QuestionTypeUpdateOneInput
+  questionText?: QuestionTextUpdateManyWithoutQuestionInput
+  list?: ListUpdateOneInput
+  alternative?: AlternativesUpdateManyWithoutQuestionInput
+}
+
+export interface QuestionUpsertWithWhereUniqueNestedInput {
+  where: QuestionWhereUniqueInput
+  update: QuestionUpdateDataInput
+  create: QuestionCreateInput
+}
+
+export interface QuestionTypeUpdateOneInput {
+  create?: QuestionTypeCreateInput
+  connect?: QuestionTypeWhereUniqueInput
+  delete?: Boolean
+  update?: QuestionTypeUpdateDataInput
+  upsert?: QuestionTypeUpsertNestedInput
+}
+
+export interface AnswerUpsertWithWhereUniqueNestedInput {
+  where: AnswerWhereUniqueInput
+  update: AnswerUpdateDataInput
+  create: AnswerCreateInput
+}
+
+export interface QuestionTypeUpdateDataInput {
+  type?: String
 }
 
 export interface AlternativeTextWhereInput {
@@ -3820,28 +4052,9 @@ export interface AlternativeTextWhereInput {
   language?: LanguageWhereInput
 }
 
-export interface QuestionCreateOneWithoutQuestionTextInput {
-  create?: QuestionCreateWithoutQuestionTextInput
-  connect?: QuestionWhereUniqueInput
-}
-
-export interface AnswerSubscriptionWhereInput {
-  AND?: AnswerSubscriptionWhereInput[] | AnswerSubscriptionWhereInput
-  OR?: AnswerSubscriptionWhereInput[] | AnswerSubscriptionWhereInput
-  NOT?: AnswerSubscriptionWhereInput[] | AnswerSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: AnswerWhereInput
-}
-
-export interface QuestionCreateWithoutQuestionTextInput {
-  number: Int
-  description: String
-  questionType: QuestionTypeCreateOneInput
-  list?: ListCreateOneInput
-  alternative?: AlternativesCreateManyWithoutQuestionInput
+export interface QuestionTypeUpsertNestedInput {
+  update: QuestionTypeUpdateDataInput
+  create: QuestionTypeCreateInput
 }
 
 export interface AlternativesWhereInput {
@@ -3899,38 +4112,13 @@ export interface AlternativesWhereInput {
   question?: QuestionWhereInput
 }
 
-export interface QuestionnaireWhereInput {
-  AND?: QuestionnaireWhereInput[] | QuestionnaireWhereInput
-  OR?: QuestionnaireWhereInput[] | QuestionnaireWhereInput
-  NOT?: QuestionnaireWhereInput[] | QuestionnaireWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  numberID?: Int
-  numberID_not?: Int
-  numberID_in?: Int[] | Int
-  numberID_not_in?: Int[] | Int
-  numberID_lt?: Int
-  numberID_lte?: Int
-  numberID_gt?: Int
-  numberID_gte?: Int
-  questions_every?: QuestionWhereInput
-  questions_some?: QuestionWhereInput
-  questions_none?: QuestionWhereInput
-  questionairename_every?: QuestionnairenameWhereInput
-  questionairename_some?: QuestionnairenameWhereInput
-  questionairename_none?: QuestionnairenameWhereInput
+export interface QuestionTextUpdateManyWithoutQuestionInput {
+  create?: QuestionTextCreateWithoutQuestionInput[] | QuestionTextCreateWithoutQuestionInput
+  connect?: QuestionTextWhereUniqueInput[] | QuestionTextWhereUniqueInput
+  disconnect?: QuestionTextWhereUniqueInput[] | QuestionTextWhereUniqueInput
+  delete?: QuestionTextWhereUniqueInput[] | QuestionTextWhereUniqueInput
+  update?: QuestionTextUpdateWithWhereUniqueWithoutQuestionInput[] | QuestionTextUpdateWithWhereUniqueWithoutQuestionInput
+  upsert?: QuestionTextUpsertWithWhereUniqueWithoutQuestionInput[] | QuestionTextUpsertWithWhereUniqueWithoutQuestionInput
 }
 
 export interface QuestionTextWhereInput {
@@ -3969,9 +4157,90 @@ export interface QuestionTextWhereInput {
   question?: QuestionWhereInput
 }
 
-export interface AlternativesCreateOneWithoutAlternativeTextInput {
+export interface QuestionTextUpdateWithWhereUniqueWithoutQuestionInput {
+  where: QuestionTextWhereUniqueInput
+  data: QuestionTextUpdateWithoutQuestionDataInput
+}
+
+export interface QuestionnairenameWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface QuestionTextUpdateWithoutQuestionDataInput {
+  text?: String
+  language?: LanguageUpdateOneInput
+}
+
+export interface AlternativesWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface LanguageUpdateOneInput {
+  create?: LanguageCreateInput
+  connect?: LanguageWhereUniqueInput
+  delete?: Boolean
+  update?: LanguageUpdateDataInput
+  upsert?: LanguageUpsertNestedInput
+}
+
+export interface AlternativesUpdateOneWithoutAlternativeTextInput {
   create?: AlternativesCreateWithoutAlternativeTextInput
   connect?: AlternativesWhereUniqueInput
+  delete?: Boolean
+  update?: AlternativesUpdateWithoutAlternativeTextDataInput
+  upsert?: AlternativesUpsertWithoutAlternativeTextInput
+}
+
+export interface LanguageUpdateDataInput {
+  name?: String
+}
+
+export interface QuestionnaireUpdateOneWithoutQuestionairenameInput {
+  create?: QuestionnaireCreateWithoutQuestionairenameInput
+  connect?: QuestionnaireWhereUniqueInput
+  delete?: Boolean
+  update?: QuestionnaireUpdateWithoutQuestionairenameDataInput
+  upsert?: QuestionnaireUpsertWithoutQuestionairenameInput
+}
+
+export interface LanguageUpsertNestedInput {
+  update: LanguageUpdateDataInput
+  create: LanguageCreateInput
+}
+
+export interface QuestionUpdateManyInput {
+  create?: QuestionCreateInput[] | QuestionCreateInput
+  connect?: QuestionWhereUniqueInput[] | QuestionWhereUniqueInput
+  disconnect?: QuestionWhereUniqueInput[] | QuestionWhereUniqueInput
+  delete?: QuestionWhereUniqueInput[] | QuestionWhereUniqueInput
+  update?: QuestionUpdateWithWhereUniqueNestedInput[] | QuestionUpdateWithWhereUniqueNestedInput
+  upsert?: QuestionUpsertWithWhereUniqueNestedInput[] | QuestionUpsertWithWhereUniqueNestedInput
+}
+
+export interface QuestionTextUpsertWithWhereUniqueWithoutQuestionInput {
+  where: QuestionTextWhereUniqueInput
+  update: QuestionTextUpdateWithoutQuestionDataInput
+  create: QuestionTextCreateWithoutQuestionInput
+}
+
+export interface AnswerSubscriptionWhereInput {
+  AND?: AnswerSubscriptionWhereInput[] | AnswerSubscriptionWhereInput
+  OR?: AnswerSubscriptionWhereInput[] | AnswerSubscriptionWhereInput
+  NOT?: AnswerSubscriptionWhereInput[] | AnswerSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: AnswerWhereInput
+}
+
+export interface ListUpdateOneInput {
+  create?: ListCreateInput
+  connect?: ListWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: ListUpdateDataInput
+  upsert?: ListUpsertNestedInput
 }
 
 export interface QuestionWhereInput {
@@ -4024,46 +4293,8 @@ export interface QuestionWhereInput {
   alternative_none?: AlternativesWhereInput
 }
 
-export interface AlternativesCreateWithoutAlternativeTextInput {
-  description: String
-  value: Float
-  order: Int
-  listID?: ListCreateOneInput
-  question?: QuestionCreateOneWithoutAlternativeInput
-}
-
-export interface QuestionnairenameWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface UserUpdateInput {
-  name?: String
-  email?: String
-  password?: String
-  answers?: AnswerUpdateManyInput
-}
-
-export interface QuestionWhereUniqueInput {
-  id?: ID_Input
-  number?: Int
-}
-
-export interface AnswerUpdateManyInput {
-  create?: AnswerCreateInput[] | AnswerCreateInput
-  connect?: AnswerWhereUniqueInput[] | AnswerWhereUniqueInput
-  disconnect?: AnswerWhereUniqueInput[] | AnswerWhereUniqueInput
-  delete?: AnswerWhereUniqueInput[] | AnswerWhereUniqueInput
-  update?: AnswerUpdateWithWhereUniqueNestedInput[] | AnswerUpdateWithWhereUniqueNestedInput
-  upsert?: AnswerUpsertWithWhereUniqueNestedInput[] | AnswerUpsertWithWhereUniqueNestedInput
-}
-
-export interface AlternativesWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface AnswerUpdateWithWhereUniqueNestedInput {
-  where: AnswerWhereUniqueInput
-  data: AnswerUpdateDataInput
+export interface ListUpdateDataInput {
+  description?: String
 }
 
 export interface QuestionUpdateInput {
@@ -4075,263 +4306,14 @@ export interface QuestionUpdateInput {
   alternative?: AlternativesUpdateManyWithoutQuestionInput
 }
 
-export interface AnswerUpdateDataInput {
-  value?: String
-  question?: QuestionUpdateOneInput
-  alternative?: AlternativesUpdateManyInput
-}
-
-export interface AlternativesUpdateOneWithoutAlternativeTextInput {
-  create?: AlternativesCreateWithoutAlternativeTextInput
-  connect?: AlternativesWhereUniqueInput
-  delete?: Boolean
-  update?: AlternativesUpdateWithoutAlternativeTextDataInput
-  upsert?: AlternativesUpsertWithoutAlternativeTextInput
-}
-
-export interface QuestionUpdateOneInput {
-  create?: QuestionCreateInput
-  connect?: QuestionWhereUniqueInput
-  delete?: Boolean
-  update?: QuestionUpdateDataInput
-  upsert?: QuestionUpsertNestedInput
-}
-
-export interface QuestionUpdateOneWithoutQuestionTextInput {
-  create?: QuestionCreateWithoutQuestionTextInput
-  connect?: QuestionWhereUniqueInput
-  delete?: Boolean
-  update?: QuestionUpdateWithoutQuestionTextDataInput
-  upsert?: QuestionUpsertWithoutQuestionTextInput
-}
-
-export interface QuestionUpdateDataInput {
-  number?: Int
-  description?: String
-  questionType?: QuestionTypeUpdateOneInput
-  questionText?: QuestionTextUpdateManyWithoutQuestionInput
-  list?: ListUpdateOneInput
-  alternative?: AlternativesUpdateManyWithoutQuestionInput
-}
-
-export interface QuestionnaireUpdateOneWithoutQuestionairenameInput {
-  create?: QuestionnaireCreateWithoutQuestionairenameInput
-  connect?: QuestionnaireWhereUniqueInput
-  delete?: Boolean
-  update?: QuestionnaireUpdateWithoutQuestionairenameDataInput
-  upsert?: QuestionnaireUpsertWithoutQuestionairenameInput
-}
-
-export interface QuestionTypeUpdateOneInput {
-  create?: QuestionTypeCreateInput
-  connect?: QuestionTypeWhereUniqueInput
-  delete?: Boolean
-  update?: QuestionTypeUpdateDataInput
-  upsert?: QuestionTypeUpsertNestedInput
-}
-
-export interface QuestionnairenameUpdateWithWhereUniqueWithoutQuestionaireInput {
-  where: QuestionnairenameWhereUniqueInput
-  data: QuestionnairenameUpdateWithoutQuestionaireDataInput
-}
-
-export interface QuestionTypeUpdateDataInput {
-  type?: String
-}
-
-export interface QuestionUpdateManyInput {
-  create?: QuestionCreateInput[] | QuestionCreateInput
-  connect?: QuestionWhereUniqueInput[] | QuestionWhereUniqueInput
-  disconnect?: QuestionWhereUniqueInput[] | QuestionWhereUniqueInput
-  delete?: QuestionWhereUniqueInput[] | QuestionWhereUniqueInput
-  update?: QuestionUpdateWithWhereUniqueNestedInput[] | QuestionUpdateWithWhereUniqueNestedInput
-  upsert?: QuestionUpsertWithWhereUniqueNestedInput[] | QuestionUpsertWithWhereUniqueNestedInput
-}
-
-export interface QuestionTypeUpsertNestedInput {
-  update: QuestionTypeUpdateDataInput
-  create: QuestionTypeCreateInput
-}
-
-export interface QuestionUpsertWithoutAlternativeInput {
-  update: QuestionUpdateWithoutAlternativeDataInput
-  create: QuestionCreateWithoutAlternativeInput
-}
-
-export interface QuestionTextUpdateManyWithoutQuestionInput {
-  create?: QuestionTextCreateWithoutQuestionInput[] | QuestionTextCreateWithoutQuestionInput
-  connect?: QuestionTextWhereUniqueInput[] | QuestionTextWhereUniqueInput
-  disconnect?: QuestionTextWhereUniqueInput[] | QuestionTextWhereUniqueInput
-  delete?: QuestionTextWhereUniqueInput[] | QuestionTextWhereUniqueInput
-  update?: QuestionTextUpdateWithWhereUniqueWithoutQuestionInput[] | QuestionTextUpdateWithWhereUniqueWithoutQuestionInput
-  upsert?: QuestionTextUpsertWithWhereUniqueWithoutQuestionInput[] | QuestionTextUpsertWithWhereUniqueWithoutQuestionInput
-}
-
-export interface LanguageSubscriptionWhereInput {
-  AND?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
-  OR?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
-  NOT?: LanguageSubscriptionWhereInput[] | LanguageSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: LanguageWhereInput
-}
-
-export interface QuestionTextUpdateWithWhereUniqueWithoutQuestionInput {
-  where: QuestionTextWhereUniqueInput
-  data: QuestionTextUpdateWithoutQuestionDataInput
-}
-
-export interface ListWhereInput {
-  AND?: ListWhereInput[] | ListWhereInput
-  OR?: ListWhereInput[] | ListWhereInput
-  NOT?: ListWhereInput[] | ListWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  description?: String
-  description_not?: String
-  description_in?: String[] | String
-  description_not_in?: String[] | String
-  description_lt?: String
-  description_lte?: String
-  description_gt?: String
-  description_gte?: String
-  description_contains?: String
-  description_not_contains?: String
-  description_starts_with?: String
-  description_not_starts_with?: String
-  description_ends_with?: String
-  description_not_ends_with?: String
-}
-
-export interface QuestionTextUpdateWithoutQuestionDataInput {
-  text?: String
-  language?: LanguageUpdateOneInput
-}
-
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
-}
-
-export interface LanguageUpdateOneInput {
-  create?: LanguageCreateInput
-  connect?: LanguageWhereUniqueInput
-  delete?: Boolean
-  update?: LanguageUpdateDataInput
-  upsert?: LanguageUpsertNestedInput
-}
-
-export interface AlternativeTextWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface LanguageUpdateDataInput {
-  name?: String
-}
-
-export interface QuestionTypeUpdateInput {
-  type?: String
-}
-
-export interface LanguageUpsertNestedInput {
-  update: LanguageUpdateDataInput
-  create: LanguageCreateInput
-}
-
-export interface QuestionUpsertWithoutQuestionTextInput {
-  update: QuestionUpdateWithoutQuestionTextDataInput
-  create: QuestionCreateWithoutQuestionTextInput
-}
-
-export interface QuestionTextUpsertWithWhereUniqueWithoutQuestionInput {
-  where: QuestionTextWhereUniqueInput
-  update: QuestionTextUpdateWithoutQuestionDataInput
-  create: QuestionTextCreateWithoutQuestionInput
-}
-
-export interface QuestionnairenameUpsertWithWhereUniqueWithoutQuestionaireInput {
-  where: QuestionnairenameWhereUniqueInput
-  update: QuestionnairenameUpdateWithoutQuestionaireDataInput
-  create: QuestionnairenameCreateWithoutQuestionaireInput
-}
-
-export interface ListUpdateOneInput {
-  create?: ListCreateInput
-  connect?: ListWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: ListUpdateDataInput
-  upsert?: ListUpsertNestedInput
-}
-
-export interface AnswerUpsertWithWhereUniqueNestedInput {
-  where: AnswerWhereUniqueInput
-  update: AnswerUpdateDataInput
-  create: AnswerCreateInput
-}
-
-export interface ListUpdateDataInput {
-  description?: String
-}
-
-export interface ListSubscriptionWhereInput {
-  AND?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput
-  OR?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput
-  NOT?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ListWhereInput
-}
-
 export interface ListUpsertNestedInput {
   update: ListUpdateDataInput
   create: ListCreateInput
 }
 
-export interface UserWhereUniqueInput {
-  id?: ID_Input
-  email?: String
-}
-
-export interface AlternativesUpdateManyWithoutQuestionInput {
-  create?: AlternativesCreateWithoutQuestionInput[] | AlternativesCreateWithoutQuestionInput
-  connect?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
-  disconnect?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
-  delete?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
-  update?: AlternativesUpdateWithWhereUniqueWithoutQuestionInput[] | AlternativesUpdateWithWhereUniqueWithoutQuestionInput
-  upsert?: AlternativesUpsertWithWhereUniqueWithoutQuestionInput[] | AlternativesUpsertWithWhereUniqueWithoutQuestionInput
-}
-
-export interface AlternativesUpsertWithoutAlternativeTextInput {
-  update: AlternativesUpdateWithoutAlternativeTextDataInput
-  create: AlternativesCreateWithoutAlternativeTextInput
-}
-
-export interface AlternativeTextUpdateWithWhereUniqueWithoutAlternativeIDInput {
-  where: AlternativeTextWhereUniqueInput
-  data: AlternativeTextUpdateWithoutAlternativeIDDataInput
+export interface QuestionnairenameUpdateWithWhereUniqueWithoutQuestionaireInput {
+  where: QuestionnairenameWhereUniqueInput
+  data: QuestionnairenameUpdateWithoutQuestionaireDataInput
 }
 
 export interface AlternativeTextUpdateManyWithoutAlternativeIDInput {
@@ -4356,20 +4338,37 @@ export interface AlternativesUpdateWithWhereUniqueWithoutQuestionInput {
   data: AlternativesUpdateWithoutQuestionDataInput
 }
 
-export interface QuestionnaireUpsertWithoutQuestionairenameInput {
-  update: QuestionnaireUpdateWithoutQuestionairenameDataInput
-  create: QuestionnaireCreateWithoutQuestionairenameInput
+export interface AlternativesUpdateManyWithoutQuestionInput {
+  create?: AlternativesCreateWithoutQuestionInput[] | AlternativesCreateWithoutQuestionInput
+  connect?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
+  disconnect?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
+  delete?: AlternativesWhereUniqueInput[] | AlternativesWhereUniqueInput
+  update?: AlternativesUpdateWithWhereUniqueWithoutQuestionInput[] | AlternativesUpdateWithWhereUniqueWithoutQuestionInput
+  upsert?: AlternativesUpsertWithWhereUniqueWithoutQuestionInput[] | AlternativesUpsertWithWhereUniqueWithoutQuestionInput
 }
 
-export interface QuestionTypeWhereUniqueInput {
+export interface QuestionUpsertWithoutAlternativeInput {
+  update: QuestionUpdateWithoutAlternativeDataInput
+  create: QuestionCreateWithoutAlternativeInput
+}
+
+export interface QuestionUpdateOneWithoutQuestionTextInput {
+  create?: QuestionCreateWithoutQuestionTextInput
+  connect?: QuestionWhereUniqueInput
+  delete?: Boolean
+  update?: QuestionUpdateWithoutQuestionTextDataInput
+  upsert?: QuestionUpsertWithoutQuestionTextInput
+}
+
+export interface QuestionWhereUniqueInput {
   id?: ID_Input
-  type?: String
+  number?: Int
 }
 
-export interface LanguageWhereInput {
-  AND?: LanguageWhereInput[] | LanguageWhereInput
-  OR?: LanguageWhereInput[] | LanguageWhereInput
-  NOT?: LanguageWhereInput[] | LanguageWhereInput
+export interface QuestionnaireWhereInput {
+  AND?: QuestionnaireWhereInput[] | QuestionnaireWhereInput
+  OR?: QuestionnaireWhereInput[] | QuestionnaireWhereInput
+  NOT?: QuestionnaireWhereInput[] | QuestionnaireWhereInput
   id?: ID_Input
   id_not?: ID_Input
   id_in?: ID_Input[] | ID_Input
@@ -4384,35 +4383,20 @@ export interface LanguageWhereInput {
   id_not_starts_with?: ID_Input
   id_ends_with?: ID_Input
   id_not_ends_with?: ID_Input
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-}
-
-export interface QuestionUpdateOneWithoutAlternativeInput {
-  create?: QuestionCreateWithoutAlternativeInput
-  connect?: QuestionWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: QuestionUpdateWithoutAlternativeDataInput
-  upsert?: QuestionUpsertWithoutAlternativeInput
-}
-
-export interface QuestionUpsertWithWhereUniqueNestedInput {
-  where: QuestionWhereUniqueInput
-  update: QuestionUpdateDataInput
-  create: QuestionCreateInput
+  numberID?: Int
+  numberID_not?: Int
+  numberID_in?: Int[] | Int
+  numberID_not_in?: Int[] | Int
+  numberID_lt?: Int
+  numberID_lte?: Int
+  numberID_gt?: Int
+  numberID_gte?: Int
+  questions_every?: QuestionWhereInput
+  questions_some?: QuestionWhereInput
+  questions_none?: QuestionWhereInput
+  questionairename_every?: QuestionnairenameWhereInput
+  questionairename_some?: QuestionnairenameWhereInput
+  questionairename_none?: QuestionnairenameWhereInput
 }
 
 /*
@@ -4500,7 +4484,7 @@ export interface Answer extends Node {
   id: ID_Output
   question: Question
   value: String
-  alternative?: Alternatives[]
+  alternative?: Alternatives
 }
 
 export interface AggregateQuestionType {

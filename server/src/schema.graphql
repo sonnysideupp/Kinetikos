@@ -8,6 +8,7 @@ type Query {
   alternatives(where: AlternativesWhereInput): [Alternatives!]!
   alternativeTexts(where: AlternativeTextWhereInput): [AlternativeText!]!
   questionnaires(where:QuestionnaireWhereInput):[Questionnaire!]!
+  answers(where: AnswerWhereInput): [Answer!]!
 }
 
 type Mutation {

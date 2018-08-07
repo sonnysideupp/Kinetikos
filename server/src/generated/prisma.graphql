@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/shengh/kinetikos/dev
-# timestamp: Thu Aug 02 2018 15:18:51 GMT+0100 (Western European Summer Time)
+# timestamp: Mon Aug 06 2018 15:45:31 GMT+0100 (Western European Summer Time)
 
 type AggregateAlternatives {
   count: Int!
@@ -74,14 +74,14 @@ input AlternativesCreateInput {
   question: QuestionCreateOneWithoutAlternativeInput
 }
 
-input AlternativesCreateManyInput {
-  create: [AlternativesCreateInput!]
-  connect: [AlternativesWhereUniqueInput!]
-}
-
 input AlternativesCreateManyWithoutQuestionInput {
   create: [AlternativesCreateWithoutQuestionInput!]
   connect: [AlternativesWhereUniqueInput!]
+}
+
+input AlternativesCreateOneInput {
+  create: AlternativesCreateInput
+  connect: AlternativesWhereUniqueInput
 }
 
 input AlternativesCreateOneWithoutAlternativeTextInput {
@@ -193,15 +193,6 @@ input AlternativesUpdateInput {
   question: QuestionUpdateOneWithoutAlternativeInput
 }
 
-input AlternativesUpdateManyInput {
-  create: [AlternativesCreateInput!]
-  connect: [AlternativesWhereUniqueInput!]
-  disconnect: [AlternativesWhereUniqueInput!]
-  delete: [AlternativesWhereUniqueInput!]
-  update: [AlternativesUpdateWithWhereUniqueNestedInput!]
-  upsert: [AlternativesUpsertWithWhereUniqueNestedInput!]
-}
-
 input AlternativesUpdateManyWithoutQuestionInput {
   create: [AlternativesCreateWithoutQuestionInput!]
   connect: [AlternativesWhereUniqueInput!]
@@ -209,6 +200,15 @@ input AlternativesUpdateManyWithoutQuestionInput {
   delete: [AlternativesWhereUniqueInput!]
   update: [AlternativesUpdateWithWhereUniqueWithoutQuestionInput!]
   upsert: [AlternativesUpsertWithWhereUniqueWithoutQuestionInput!]
+}
+
+input AlternativesUpdateOneInput {
+  create: AlternativesCreateInput
+  connect: AlternativesWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: AlternativesUpdateDataInput
+  upsert: AlternativesUpsertNestedInput
 }
 
 input AlternativesUpdateOneWithoutAlternativeTextInput {
@@ -235,25 +235,19 @@ input AlternativesUpdateWithoutQuestionDataInput {
   alternativeText: AlternativeTextUpdateManyWithoutAlternativeIDInput
 }
 
-input AlternativesUpdateWithWhereUniqueNestedInput {
-  where: AlternativesWhereUniqueInput!
-  data: AlternativesUpdateDataInput!
-}
-
 input AlternativesUpdateWithWhereUniqueWithoutQuestionInput {
   where: AlternativesWhereUniqueInput!
   data: AlternativesUpdateWithoutQuestionDataInput!
 }
 
+input AlternativesUpsertNestedInput {
+  update: AlternativesUpdateDataInput!
+  create: AlternativesCreateInput!
+}
+
 input AlternativesUpsertWithoutAlternativeTextInput {
   update: AlternativesUpdateWithoutAlternativeTextDataInput!
   create: AlternativesCreateWithoutAlternativeTextInput!
-}
-
-input AlternativesUpsertWithWhereUniqueNestedInput {
-  where: AlternativesWhereUniqueInput!
-  update: AlternativesUpdateDataInput!
-  create: AlternativesCreateInput!
 }
 
 input AlternativesUpsertWithWhereUniqueWithoutQuestionInput {
@@ -635,7 +629,7 @@ type Answer implements Node {
   id: ID!
   question(where: QuestionWhereInput): Question!
   value: String!
-  alternative(where: AlternativesWhereInput, orderBy: AlternativesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Alternatives!]
+  alternative(where: AlternativesWhereInput): Alternatives
 }
 
 """A connection to a list of items."""
@@ -651,7 +645,7 @@ type AnswerConnection {
 input AnswerCreateInput {
   value: String!
   question: QuestionCreateOneInput!
-  alternative: AlternativesCreateManyInput
+  alternative: AlternativesCreateOneInput
 }
 
 input AnswerCreateManyInput {
@@ -726,13 +720,13 @@ input AnswerSubscriptionWhereInput {
 input AnswerUpdateDataInput {
   value: String
   question: QuestionUpdateOneInput
-  alternative: AlternativesUpdateManyInput
+  alternative: AlternativesUpdateOneInput
 }
 
 input AnswerUpdateInput {
   value: String
   question: QuestionUpdateOneInput
-  alternative: AlternativesUpdateManyInput
+  alternative: AlternativesUpdateOneInput
 }
 
 input AnswerUpdateManyInput {
@@ -845,9 +839,7 @@ input AnswerWhereInput {
   """All values not ending with the given string."""
   value_not_ends_with: String
   question: QuestionWhereInput
-  alternative_every: AlternativesWhereInput
-  alternative_some: AlternativesWhereInput
-  alternative_none: AlternativesWhereInput
+  alternative: AlternativesWhereInput
 }
 
 input AnswerWhereUniqueInput {
