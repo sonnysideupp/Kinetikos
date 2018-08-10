@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button, TouchableOpacity, Image} from 'react-native';
 import { AsyncStorage } from "react-native"
 
 
@@ -12,6 +12,7 @@ const instructions = Platform.select({
 
 
 export default class Home extends React.Component {
+  
     static navigationOptions = {
         title: "Home"
     }
@@ -30,11 +31,17 @@ export default class Home extends React.Component {
     
     render() {
         var {navigate} = this.props.navigation;
-        var storage = AsyncStorage.getItem("name", (err, item) => console.log(item))
-        console.log(`storageeeeee is ${storage}`)
-        AsyncStorage.getItem("name", (err, item) => {console.log(item); console.log(err)})
+        
+
+        // var token 
+        // AsyncStorage.getItem("token").then(res => token = res);
+
+        // if(!token) {
+        //     this.props.navigation.navigate("Fifth");
+        // }
         
       return (
+
         <View style={styles.container}>
         <Button onPress= {async() => {
            
@@ -54,17 +61,48 @@ export default class Home extends React.Component {
            
            navigate("Sixth")}} title ="Go to Sign up"/>
 
-        <Button onPress= {async() => {
-          await AsyncStorage.setItem("token", data.login.token);
-          await AsyncStorage.setItem("email", data.login.user.email);
-          await AsyncStorage.setItem("name", data.login.user.name);
-        }} title ="Log Out"/>
+        <Text/>
+
+        <Button onPress= {() => {
+           
+           this.signOut()
+           navigate("Fifth")}} title ="Signout"/>
+
+        <Text/>
+
+        <Button onPress= {() => {
+  
+            navigate("Seventh")}} title ="Pretty home"/>
+
+        <Text/>
         
+        <Button onPress= {() => {
+  
+            navigate("Eighth")}} title ="activity"/>
+
+
+        {/* <TouchableOpacity onPress={async() => {
+           
+           navigate("Second")}}>
+          <Image
+           style={styles.container}
+           source={require('../../src/assets/Gradient_SJFK8K4.png')}
+          />
+        </TouchableOpacity> */}
+
+        {/* <Button onPress= {()=> navigate("Fourth")} title ="Go to Test"/>  */}
           <Text style={styles.welcome}>Hello!</Text>
           <Text style={styles.instructions}>testing</Text>
-          <Text style={styles.instructions}></Text>
+          <Text style={styles.instructions}>//</Text>
         </View>
       );
+    }
+
+    signOut = async() => {
+      await AsyncStorage.removeItem("token");
+      await AsyncStorage.removeItem("email");
+      await AsyncStorage.removeItem("name");
+      
     }
     
   

@@ -5,7 +5,9 @@ import {
   View,
   Text,
   TouchableOpacity,
-  KeyboardAvoidingView 
+  KeyboardAvoidingView,
+  Button,
+  Image
 } from "react-native";
 import { FormLabel, FormInput } from "react-native-elements";
 import gql from "graphql-tag";
@@ -25,8 +27,20 @@ const LOGIN = gql`
 `;
 
 export default class SignInScreen extends React.Component {
-  static navigationOptions = {
-    title: "Please log in"
+  static navigationOptions = ({navigation}) => {
+      return {
+    title: "Home Page",
+    headerRight: (
+        
+        <TouchableOpacity onPress= {async() => {navigation.navigate("First")}}>
+          <Image
+            style={styles.icon}         
+            source={require("../../home-icon.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.14"},"gradientType":"LinearGradient","id":"A89BEB24-5A8C-449D-A203-D7DBC980A82C","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(146,223,178,1)","style":{}},{"offset":1,"stopColor":"rgba(123,214,160,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
+          />
+          </TouchableOpacity>
+
+      ),
+    }
   };
   state = {
     email: "",
@@ -162,5 +176,8 @@ const styles = StyleSheet.create({
     borderColor: "#000080",
     paddingTop: 7.5,
     paddingBottom: 7.5
+  },
+  icon: {
+      
   }
 });

@@ -34,19 +34,19 @@ export default class Question extends Component {
 
    
     state = { selectedAnswers: [] ,
-    answer:"",
-value:0,
-number:0}
+            answer:"",
+            value:0,
+            number:0
+        }
     onSelectionsChange = (selectedAnswers) => {
         // selectedFruits is array of { label, value }
         this.setState({ selectedAnswers })
       }
    
-    render ()
-{
+    render () {
 
     if( this.props.questiontype == "Input"){
-return(
+    return(
         <View>  
         <FormLabel labelStyle={styles.label}>Answer</FormLabel>
                 <FormInput

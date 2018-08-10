@@ -81,15 +81,18 @@ UpdateAnswer(value,questionNumber,alternativeId){
     render() {  
 
         var {navigate} = this.props.navigation;
-        // var token = AsyncStorage.getItem("token");
 
-        // if(!token) {
-        //     this.props.navigation.navigate("Fifth");
-        // }
+        var token = AsyncStorage.getItem("name", (item, err) => {console.log(err)})
+
+        if(!token) {
+            navigate("Fifth")
+        }
+      
     
         return (
             
-            <View>
+            <View style={styles.margin}> 
+            {/* the styles is adding the distance to the top */}
                
                 <Query query = {Questionnaire} key= "questionnaireQuery"
                  variables= {{
@@ -108,7 +111,7 @@ UpdateAnswer(value,questionNumber,alternativeId){
         {
             console.log(this.state)
             return(
-                
+
         <View>
         <Mutation mutation={SUBMIT_ANSWERS}>
         {submitanswer => {return (
@@ -133,9 +136,9 @@ UpdateAnswer(value,questionNumber,alternativeId){
                     navigate("First")
                   }} title ="Complete Questionnaire"/>
         </View>
+        
          ) }}
         </Mutation>
-
 
         </View>
     
@@ -183,22 +186,13 @@ UpdateAnswer(value,questionNumber,alternativeId){
         )
     }
 
-    
-
-
-    //   retrieveData = async () => {
-    //     try {
-    
-    //      const x = await AsyncStorage.getItem('number');
-    //      return JSON.parse(x);
-    //     } catch (error) {
-    //       console.log("error")
-    //     }
-    //   }
 }
 
     
 const styles = StyleSheet.create({
+    margin: {
+        top: 50,
+    },
     question: {
         fontSize: 25,
         textAlign: "center",

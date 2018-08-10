@@ -5,7 +5,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  KeyboardAvoidingView 
+  KeyboardAvoidingView,
+  Image
 } from "react-native";
 import { FormLabel, FormInput } from "react-native-elements";
 import gql from "graphql-tag";
@@ -25,8 +26,19 @@ const SIGNUP = gql`
 `;
 
 export default class SignUpScreen extends React.Component {
-  static navigationOptions = {
-    title: "Please sign up"
+  static navigationOptions = ({navigation}) => {
+      return {
+    title: "Please sign up",
+    headerRight: (
+
+        <TouchableOpacity onPress= {async() => {navigation.navigate("First")}}>
+          <Image
+            source={require("../../home-icon.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.14"},"gradientType":"LinearGradient","id":"A89BEB24-5A8C-449D-A203-D7DBC980A82C","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(146,223,178,1)","style":{}},{"offset":1,"stopColor":"rgba(123,214,160,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
+          />
+          </TouchableOpacity>
+
+      ),
+    }
   };
   state = {
     email: "",
@@ -41,12 +53,13 @@ export default class SignUpScreen extends React.Component {
       <Mutation mutation={SIGNUP}>
         {signup => {
           return (
+            <KeyboardAvoidingView style={styles.container} behavior="padding" enable>
             <View style={styles.container}>
             
               
                 <View style={styles.container}>
                 <Text style={styles.errorText}>{this.state.error}</Text>
-                <View style={{ alignItems: "center", marginBottom: 20,marginTop:-40 }}>
+                <View style={{ alignItems: "center", marginBottom: 20}}>
                   <Text style={{ color: "#191970", fontSize: 26 }}>
                     Make an account
                   </Text>
@@ -97,6 +110,7 @@ export default class SignUpScreen extends React.Component {
               </View>
               
              </View>
+             </KeyboardAvoidingView>
           );
         }}
       </Mutation>
