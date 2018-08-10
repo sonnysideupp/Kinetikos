@@ -15,9 +15,25 @@ export default class Home extends React.Component {
     static navigationOptions = {
         title: "Home"
     }
+
+    // _retrieveData = async () => {
+    //   try {
+    //     const value = await AsyncStorage.getItem('name');
+    //     if (value !== null) {
+    //       // We have data!!
+    //       console.log(`value is ${value}`);
+    //     }
+    //    } catch (error) {
+    //      // Error retrieving data
+    //    }
+    // }
     
     render() {
         var {navigate} = this.props.navigation;
+        var storage = AsyncStorage.getItem("name", (err, item) => console.log(item))
+        console.log(`storageeeeee is ${storage}`)
+        AsyncStorage.getItem("name", (err, item) => {console.log(item); console.log(err)})
+        
       return (
         <View style={styles.container}>
         <Button onPress= {async() => {
@@ -37,7 +53,13 @@ export default class Home extends React.Component {
         <Button onPress= {async() => {
            
            navigate("Sixth")}} title ="Go to Sign up"/>
-        {/* <Button onPress= {()=> navigate("Fourth")} title ="Go to Test"/>  */}
+
+        <Button onPress= {async() => {
+          await AsyncStorage.setItem("token", data.login.token);
+          await AsyncStorage.setItem("email", data.login.user.email);
+          await AsyncStorage.setItem("name", data.login.user.name);
+        }} title ="Log Out"/>
+        
           <Text style={styles.welcome}>Hello!</Text>
           <Text style={styles.instructions}>testing</Text>
           <Text style={styles.instructions}></Text>

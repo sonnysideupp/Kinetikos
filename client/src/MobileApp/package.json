@@ -19,6 +19,7 @@
     "react-apollo": "^2.1.9",
     "react-dom": "^16.4.1",
     "react-native": "^0.56.0",
+    "react-native-create-bridge": "^2.0.1",
     "react-native-elements": "^0.19.1",
     "react-native-flexi-radio-button": "^0.2.2",
     "react-native-radio-buttons": "^1.0.0",

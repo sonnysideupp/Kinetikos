@@ -81,11 +81,11 @@ UpdateAnswer(value,questionNumber,alternativeId){
     render() {  
 
         var {navigate} = this.props.navigation;
-        var token = AsyncStorage.getItem("token");
+        // var token = AsyncStorage.getItem("token");
 
-        if(!token) {
-            this.props.navigation.navigate("Fifth");
-        }
+        // if(!token) {
+        //     this.props.navigation.navigate("Fifth");
+        // }
     
         return (
             
