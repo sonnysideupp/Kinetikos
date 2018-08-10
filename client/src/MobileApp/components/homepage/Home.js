@@ -67,6 +67,18 @@ export default class Home extends React.Component {
         <Button onPress= {() => {
   
             navigate("Eighth")}} title ="activity"/>
+        
+        <Text/>
+        
+        <Button onPress= {() => {
+  
+            navigate("Nineth")}} title ="questionaire"/>
+
+        <Text/>
+        
+        <Button onPress= {() => {
+  
+            navigate("Tenth")}} title ="question1"/>
 
 
         {/* <TouchableOpacity onPress={async() => {

@@ -1,6 +1,7 @@
 //use query for all questions
 import React, { Component } from 'react'
-import { View, Text ,StyleSheet, Button, AsyncStorage} from 'react-native'
+import { View, Text ,StyleSheet, Button, AsyncStorage, Image} from 'react-native'
+import { Svg, Path } from "react-native-svg"
 import { Query, Mutation } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
@@ -162,7 +163,29 @@ UpdateAnswer(value,questionNumber,alternativeId){
                     }
                     
                     return (
-                        <View >
+                        <View>
+
+                        {/* <View style={styles.header}>
+          <View style={styles.rectangle7} />
+          <Image
+            source={require("../../src/assets/953f88ea27175375d51167f2e35e70b3aa71adc3.png")}
+            style={styles.kinetikosIconTransparent85Balck}
+          />
+          <Svg
+            viewBox="0 0 360.90 2.90"
+            preserveAspectRatio="none"
+            style={styles.lineCopy}
+          >
+            <Path
+              strokeWidth={0.45}
+              fill="transparent"
+              stroke="rgba(179,179,179,1)"
+              isClosed={false}
+              d="M0.23 1.23 L360.23 1.23 "
+            />
+          </Svg>
+          <Text style={styles.homePage}>Home Page</Text>
+        </View> */}
                          <Text style={styles.question}>{data.questionTexts[0].text}</Text>
                  <Question 
                  state={this.state} 
@@ -204,5 +227,53 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         borderStyle: "solid",
         borderColor: "#ff8c00"
-    }
+    },
+    header: {
+        height: 97,
+        width: 360
+    },
+      rectangle7: {
+        position: "absolute",
+        top: "0.00%",
+        left: "-50%",
+        height: "97.94%",
+        width: "200.00%",
+        backgroundColor: "rgba(248,248,248,1)"
+    },
+    homePage: {
+        position: "absolute",
+        top: "46.39%",
+        left: "4.44%",
+        height: "48.45%",
+        width: "80.56%",
+        backgroundColor: "transparent",
+        color: "rgba(0,0,0,1)",
+        fontSize: 36,
+        fontFamily: "Aller-Bold"
+      },
+      lineCopy: {
+        position: "absolute",
+        height: "2.53%",
+        width: "100.13%",
+        top: "97.71%",
+        left: "-0.06%",
+        backgroundColor: "transparent",
+        borderColor: "transparent"
+      },
+      kinetikosIconTransparent85Balck: {
+        position: "absolute",
+        top: "36.08%",
+        left: "85.00%",
+        height: "46.39%",
+        width: "10.00%",
+        backgroundColor: "transparent"
+      },
+      root: {
+        // backgroundColor: "white",
+        // flex: 1,
+        // flexDirection: "column-reverse",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        padding: 0
+      },
 })
