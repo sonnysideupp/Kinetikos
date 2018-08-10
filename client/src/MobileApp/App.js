@@ -23,6 +23,8 @@ import Done from "./components/question/end"
 import Login from "./components/entry/login"
 import Signup from "./components/entry/signup"
 import { setContext } from "apollo-link-context"
+import HomePage from "./trial2/src/screens/HomePage"
+import Activity from "./trial2/src/screens/ActivityMonitor"
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -30,6 +32,7 @@ const instructions = Platform.select({
     'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
+
 
 const Navigation = createStackNavigator(
   {
@@ -39,9 +42,20 @@ const Navigation = createStackNavigator(
     Fourth: {screen: Done},
     Fifth: {screen: Login},
     Sixth: {screen: Signup},
+    Seventh: {screen: HomePage},
+    Eighth: {screen: Activity}
   },
   {
     initialRouteName: 'First',
+    navigationOptions:{
+      headerStyle: {
+        backgroundColor: 'transparent'
+      },
+      headerTitleStyle:{
+        fontSize:17
+      },
+      headerTransparent: true,
+    }
   }
 );
 
