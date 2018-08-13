@@ -11,7 +11,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.MobileApp.MyGNSS.MyGNSSPackage;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,8 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
             new SvgPackage(),
             new RNFetchBlobPackage(),
             new VectorIconsPackage(),
-            new RNSensorsPackage(),
-            new MyGNSSPackage()
+            new RNSensorsPackage()
+        
       );
     }
 

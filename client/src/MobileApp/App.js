@@ -25,25 +25,21 @@ import Signup from "./components/entry/signup"
 import { setContext } from "apollo-link-context"
 import HomePage from "./trial2/src/screens/HomePage"
 import Activity from "./trial2/src/screens/ActivityMonitor"
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import Settings from "./components/settings/settings"
+import Language from "./components/language/language"
 
 
 const Navigation = createStackNavigator(
   {
-    First: {screen: Home},
+    First: {screen: Login},
     Second: {screen: Questionnaire},
     Third: {screen: Sensor},
     Fourth: {screen: Done},
-    Fifth: {screen: Login},
+    Fifth: {screen: HomePage},
     Sixth: {screen: Signup},
-    Seventh: {screen: HomePage},
-    Eighth: {screen: Activity}
+    Seventh: {screen: Activity},
+    Eighth: {screen: Settings},
+    Ninth: {screen: Language}
   },
   {
     initialRouteName: 'First',

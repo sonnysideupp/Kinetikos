@@ -128,7 +128,7 @@ export default class Question extends Component {
 
 
         if( this.props.questiontype == "Multiple Choice") {
-            var options = []
+            const options = []
             return (
                 
                 <View>  
@@ -149,7 +149,8 @@ export default class Question extends Component {
                         {
                             options.push({label:data.alternativeTexts[i].text,value:i})
                         }
-                        
+                        console.log(options)
+                        console.log(this.props.language)
                             return (
                                 <View>
                                 <RadioForm
