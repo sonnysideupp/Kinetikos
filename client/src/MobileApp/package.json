@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@builderx/utils": "^0.1.6",
+    "adb": "^0.2.0",
     "apollo-cache-inmemory": "^1.2.5",
     "apollo-client": "^2.3.5",
     "apollo-link": "^1.2.2",
