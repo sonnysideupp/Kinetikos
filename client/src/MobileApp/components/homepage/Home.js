@@ -80,17 +80,6 @@ export default class Home extends React.Component {
   
             navigate("Tenth")}} title ="question1"/>
 
-
-        {/* <TouchableOpacity onPress={async() => {
-           
-           navigate("Second")}}>
-          <Image
-           style={styles.container}
-           source={require('../../src/assets/Gradient_SJFK8K4.png')}
-          />
-        </TouchableOpacity> */}
-
-        {/* <Button onPress= {()=> navigate("Fourth")} title ="Go to Test"/>  */}
           <Text style={styles.welcome}>Hello!</Text>
           <Text style={styles.instructions}>testing</Text>
           <Text style={styles.instructions}>//</Text>

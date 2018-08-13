@@ -172,7 +172,7 @@ export default class Question extends Component {
                                    }}>
                                         <Image
                                            style={styles.radioImage}
-                                           source={require(`../../src/assets/Gradient_QvTTfdx.png`)}
+                                           source={require(`../../trial1/assets/Gradient_QvTTfdx.png`)}
                                            opacity={opacity}
                                        />
                                         <Text style={styles.text}>{data.alternativeTexts[i].text}</Text>
