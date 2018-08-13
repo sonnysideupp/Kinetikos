@@ -1,7 +1,7 @@
 //use query for question type
 import React, { Component } from 'react'
 import RadioForm, { RadioButton, RadioButtonInput } from 'react-native-simple-radio-button'
-import { Text, View, StyleSheet,TouchableOpacity,Button } from 'react-native'
+import { Text, View, StyleSheet,TouchableOpacity,Button, Image } from 'react-native'
 import { Query, ApolloProvider } from 'react-apollo'
 import { FormLabel, FormInput } from "react-native-elements"
 import gql from 'graphql-tag'
@@ -36,12 +36,16 @@ export default class Question extends Component {
     state = { selectedAnswers: [] ,
             answer:"",
             value:0,
-            number:0
+            number: 0
         }
     onSelectionsChange = (selectedAnswers) => {
         // selectedFruits is array of { label, value }
         this.setState({ selectedAnswers })
       }
+    radioSelection = (info) => {
+        console.log("printing info")
+        console.log(info.Button)
+    }
    
     render () {
 
@@ -98,9 +102,13 @@ export default class Question extends Component {
                                 <View>
                                 
                                 <SelectMultiple
-                                   items={answers}
-                                    selectedItems={this.state.selectedAnswers}
-                                 onSelectionsChange={this.onSelectionsChange} />
+                                 items={answers}
+                                 selectedItems={this.state.selectedAnswers}
+                                 onSelectionsChange={this.onSelectionsChange}
+                                 style={styles.multiple}
+                                 rowStyle={styles.row}
+                                 checkboxStyle={{justifyContent: "space-between", height: 30}}
+                                 labelStyle={{fontSize: 20}} />
                                 <TouchableOpacity
                                 style={styles.signinButton}
                                 onPress={() => { 
@@ -128,7 +136,12 @@ export default class Question extends Component {
 
 
         if( this.props.questiontype == "Multiple Choice") {
+<<<<<<< HEAD
             const options = []
+=======
+            var options = []
+            var buttons = []
+>>>>>>> 61e7cd66d1034f637b22162347b92fed80a17c76
             return (
                 
                 <View>  
@@ -145,21 +158,59 @@ export default class Question extends Component {
                         if (error) {
                             return(<Text>`Error! ${error.message}`</Text>);
                         }
-                        for(var i = 0; i < data.alternativeTexts.length; i ++)
+                        for(let i = 0; i < data.alternativeTexts.length; i ++)
                         {
-                            options.push({label:data.alternativeTexts[i].text,value:i})
+                            options.push({label:data.alternativeTexts[i].text,value:i});
+                            var number = i;
+                            var opacity = null;
+                            var image = "Gradient_QvTTfdx.png";
+                            var text = data.alternativeTexts[i].text;
+                            var integer= options[i].value
+                            if (this.state.number === i) {
+                                opacity = 0;
+                                image = "Gradient_eUSP669.png";
+                            }
+                           
+                            buttons.push(
+                                <TouchableOpacity
+                                int = {integer}
+                                style={styles.radioButton}
+                                onPress={() => {
+                                console.log()
+                                this.setState({number:i})}}>
+                                        <Image
+                                           style={styles.radioImage}
+                                           source={require(`../../trial1/assets/Gradient_QvTTfdx.png`)}
+                                           opacity={opacity}
+                                       />
+                                        <Text style={styles.text}>{data.alternativeTexts[i].text}</Text>
+                                   </TouchableOpacity>
+                                
+                            )
                         }
+<<<<<<< HEAD
                         console.log(options)
                         console.log(this.props.language)
+=======
+                        
+                        console.log(buttons)
+>>>>>>> 61e7cd66d1034f637b22162347b92fed80a17c76
                             return (
                                 <View>
-                                <RadioForm
-                                sytle={styles.radio} 
+
+                                    <View style={styles.radioGroup}>
+                                    {buttons}
+                                    </View>
+                                  
+                                
+                                {/* <RadioForm
+                                style={styles.radio} 
                                 radio_props = {options}
                                 onPress={(label, value) => {
                                     console.log(value)
                                     this.setState({ answer: label, number:value})}}
-                                />
+                                /> */}
+
                                 <TouchableOpacity
                                 style={styles.signinButton}
                                 onPress={() => {
@@ -226,5 +277,55 @@ const styles = StyleSheet.create({
         width: "100%",
         paddingTop: 50,
         flexDirection: "row"
+      },
+      multiple: {
+          width: "85%",
+          alignSelf: "center",
+          padding: 25,
+      },
+      row: {
+          padding: 15,
+          
+      },
+      radioImage: {
+        top: 0,
+        left: 0,
+        bottom: 0,
+        width: 132,
+        height: 38,
+        // position: "absolute",
+        backgroundColor: "transparent",
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        borderTopRightRadius: 8,
+        borderTopLeftRadius: 8
+      },
+      radioGroup: {
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        justifyContent: "space-around",
+        paddingBottom: 20,
+        paddingTop: 10,
+        height: "85%"
+      },
+      radioButton: {
+        alignContent: "center",
+        alignItems: "center",
+      },
+      text: {
+        // top: 5,
+        // bottom: 5,
+        // left: "22.73%",
+        // width: 72,
+        // height: 40,
+        position: "absolute",
+        // alignSelf: "center",
+        backgroundColor: "transparent",
+        marginBottom: 0,
+        padding: 0,
+        fontSize: 20,
+        fontFamily: "Aller-Bold",
+        textAlign: "center",
+        color: "rgba(255,255,255,1)"
       }
 });
