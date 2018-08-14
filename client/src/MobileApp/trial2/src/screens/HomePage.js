@@ -57,6 +57,8 @@ export default class HomePage extends Component {
 
 
         <View style={styles.profile}>
+        <TouchableOpacity onPress= {async() => {
+          navigate("Eleventh")}}>
           <Image
             style={styles.ProfileContainer}
             source={require("../assets/GradientProfile.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.00"},"gradientType":"LinearGradient","id":"1104293A-226E-409B-941F-D1009305AD23","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(106,225,212,1)","style":{}},{"offset":1,"stopColor":"rgba(70,205,182,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
@@ -66,6 +68,7 @@ export default class HomePage extends Component {
             style={styles.user}
             source={require("../assets/User.png")}
           />
+         </TouchableOpacity>
         </View>
 
 
