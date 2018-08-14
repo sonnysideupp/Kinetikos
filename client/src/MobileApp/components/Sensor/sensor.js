@@ -46,30 +46,11 @@ import {
   Button
 } from 'react-native';
 import { decorator as sensors } from "react-native-sensors";
-import { Accelerometer,Gyroscope} from "react-native-sensors";
+import { Accelerometer,Gyroscope,Magnetometer} from "react-native-sensors";
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import RNFetchBlob from 'rn-fetch-blob';
 import { PermissionsAndroid } from 'react-native';
-
-const CREATE_ABC = gql`
-  mutation createABC($data:ABCCreateInput!) {
-    createABC(data:$data) {
-      a
-      b
-      c
-    }
-  }
-`
-const CREATE_XYZ = gql`
-  mutation createXYZ($data:XYZCreateInput!) {
-    createXYZ(data:$data) {
-      x
-      y
-      z
-    }
-  }
-`
 
 
 const Value = ({name, value}) => (
@@ -83,7 +64,8 @@ class Sensor extends Component{
   constructor(props) {
     super(props);
     this.state = {csvData:[{time:0,x: 0, y: 0, z: 0, latitude:0, longitude:0}],
-    csvData1:[{time:0 ,a: 0, b: 0, c: 0, latitude:0, longitude:0}],
+    csvData1:[{time:0 ,x: 0, y: 0, z: 0, latitude:0, longitude:0}],
+    csvData2:[{time:0 ,x: 0, y: 0, z: 0, latitude:0, longitude:0}],
   showStart:true,showStop:false};
 
 
@@ -156,19 +138,33 @@ class Sensor extends Component{
       updateInterval: 10
     })
       .then(observable => {
-        observable.subscribe(({x,y,z}) => { navigator.geolocation.getCurrentPosition(position =>this.state.csvData1.push({time:Date.now(),a:x, b:y, c:z,latitude:position.coords.latitude,longitude:position.coords.longitude }));
+        observable.subscribe(({x,y,z}) => { navigator.geolocation.getCurrentPosition(position =>this.state.csvData1.push({time:Date.now(),x:x, y:y, z:z,latitude:position.coords.latitude,longitude:position.coords.longitude }));
       });console.log(this.state.csvData1)})
       .catch(error => {
         console.log("The sensor is not available");
       });
 
+      new Magnetometer({
+        updateInterval: 10// defaults to 100ms
+      }).then(observable => {
+        observable.subscribe(({x,y,z}) => { navigator.geolocation.getCurrentPosition(position =>this.state.csvData2.push({time:Date.now(),x:x, y:y, z:z,latitude:position.coords.latitude,longitude:position.coords.longitude }));
+      });console.log(this.state.csvData2)})
+        .catch(error => {
+          console.log("The sensor is not available");
+        });
+    
+    
+    
+    
+    
+    
     }
- 
+  
 
   startRecording(){
 
     this.setState({csvData:[{time:0,x: 0, y: 0, z: 0,latitude:0, longitude:0}],
-    csvData1:[{time:0 ,a: 0, b: 0, c: 0,latitude:0, longitude:0}],showStart:false,showStop:true})
+    csvData1:[{time:0 ,x: 0, y: 0, z: 0,latitude:0, longitude:0}],csvData2:[{time:0,x: 0, y: 0, z: 0,latitude:0, longitude:0}],showStart:false,showStop:true})
    
 
   }
@@ -266,7 +262,7 @@ RNFetchBlob.fs
 
 
   const headerString1 = 'time,a,b,c,longitdue,latitude\n';
-    const rowString1 = this.state.csvData1.map(d => `${d.time},${d.a},${d.b},${d.c},${d.longitude},${d.latitude}\n`).join('');
+    const rowString1 = this.state.csvData1.map(d => `${d.time},${d.x},${d.y},${d.z},${d.longitude},${d.latitude}\n`).join('');
     const csvString1 = `${headerString1}${rowString1}`;
     console.log(csvString1)
 
@@ -274,6 +270,8 @@ RNFetchBlob.fs
 
    
  
+
+   
 
     
 
@@ -285,6 +283,19 @@ RNFetchBlob.fs
     })
     .catch(error => console.error(error));
 
+    const headerString2 = 'time,a,b,c,longitdue,latitude\n';
+    const rowString2 = this.state.csvData2.map(d => `${d.time},${d.x},${d.y},${d.z},${d.longitude},${d.latitude}\n`).join('');
+    const csvString2 = `${headerString2}${rowString2}`;
+    console.log(csvString2)
+    const pathToWrite2 = `${RNFetchBlob.fs.dirs.DownloadDir}/data2.csv`;
+
+    RNFetchBlob.fs
+    .appendFile(pathToWrite2, csvString2, 'utf8')
+    .then(() => {
+      console.log(`wrote file ${pathToWrite1}`);
+      // wrote file /storage/emulated/0/Download/data.csv
+    })
+    .catch(error => console.error(error));
 
     this.setState({showStart:true,showStop:false})
 
@@ -302,13 +313,17 @@ RNFetchBlob.fs
     
     <View style={styles.container}>
      <Text style={styles.headline}>Gyroscope values</Text>
-    <Value name="a" value={this.state.csvData1[this.state.csvData1.length-1].a} />
-    <Value name="b" value={this.state.csvData1[this.state.csvData1.length-1].b} />
-    <Value name="c" value={this.state.csvData1[this.state.csvData1.length-1].c} />
+    <Value name="x" value={this.state.csvData1[this.state.csvData1.length-1].x} />
+    <Value name="y" value={this.state.csvData1[this.state.csvData1.length-1].y} />
+    <Value name="z" value={this.state.csvData1[this.state.csvData1.length-1].z} />
     <Text style={styles.headline}>Accelerometer values</Text>
     <Value name="x" value={this.state.csvData[this.state.csvData.length-1].x} />
     <Value name="y" value={this.state.csvData[this.state.csvData.length-1].y} />
     <Value name="z" value={this.state.csvData[this.state.csvData.length-1].z} />
+    <Text style={styles.headline}>Magnetometer values</Text>
+    <Value name="x" value={this.state.csvData2[this.state.csvData2.length-1].x} />
+    <Value name="y" value={this.state.csvData2[this.state.csvData2.length-1].y} />
+    <Value name="z" value={this.state.csvData2[this.state.csvData2.length-1].z} />
     {this.state.showStart && <Button onPress= {()=> this.startRecording()}title ="Start Recording!"/>}
     <Text/>
    { this.state.showStop && <Button onPress= {()=> this.exportCSV()}title ="Stop Recording!"/>}
@@ -350,11 +365,11 @@ const styles = StyleSheet.create({
  });
 
 export default sensors({
-Accelerometer: {
-  updateInterval: 300 // optional
+Accelerometer: true,
+Gyroscope: true,
+Magnetometer: true,
 },
-Gyroscope: true
-})(Sensor);
+)(Sensor);
 //     return (
 //       <View style={styles.container}>
 //       <Text style={styles.headline}>
@@ -373,6 +388,3 @@ Gyroscope: true
 //     );
 //   }
 // }
-
-
-export const Createxyz = graphql(CREATE_XYZ)(Sensor);

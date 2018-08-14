@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import Settings from "../symbols/Settings";
-import User from "../symbols/User";
+import Setting from "../symbols/Settings";
+import User from "../symbols/User.js";
 import { Svg, Path } from "react-native-svg";
 import Question from "../symbols/Question";
 import Footprint1 from "../symbols/Footprint1";
 import {
+  AsyncStorage,
   View,
   Text,
   Image,
@@ -15,16 +16,38 @@ import {
 } from "react-native";
 
 export default class HomePage extends Component {
-  render() {
+  static navigationOptions = {
+    title: "Home",
+    header: null
+}
 
-    var {navigate} = this.props.navigation;
+  
+  
+  render() {
+  
+
+
+
+
+ 
+ 
+ 
     
+ var {navigate} = this.props.navigation;
+
     return (
+    
+
+
+
+
       <View style={styles.root}>
 
 
         <View style={styles.logout}>
-        <TouchableOpacity onPress= {async() => {navigate("Fifth")}}>
+        <TouchableOpacity onPress= {async() => {
+          this.signOut()
+          navigate("First")}}>
           <Image
             style={styles.rectangle8}
             source={require("../assets/Gradient_FcnSNCE.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.00"},"gradientType":"LinearGradient","id":"8FF95A09-FDA1-4230-8E57-EF958F62C253","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(129,150,201,1)","style":{}},{"offset":1,"stopColor":"rgba(86,110,190,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
@@ -35,12 +58,15 @@ export default class HomePage extends Component {
 
 
         <View style={styles.settings}>
+        <TouchableOpacity onPress= {async() => {
+          navigate("Eighth")}}>
           <Image
             style={styles.rectangleCopy2}
             source={require("../assets/Gradient_gQRlBCs.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.14"},"gradientType":"LinearGradient","id":"820C6536-B8A0-4824-A202-9091D0582C1F","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(146,223,178,1)","style":{}},{"offset":1,"stopColor":"rgba(123,214,160,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
           />
           <Text style={styles.settings1}>Settings</Text>
-          <Settings style={styles.settings2} />
+          <Setting style={styles.settings2} />
+          </TouchableOpacity>
         </View>
 
 
@@ -111,7 +137,7 @@ export default class HomePage extends Component {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            this.props.navigation.push("ActivityMonitor");
+            this.props.navigation.push("Third");
           }}
         >
           <Image
@@ -146,6 +172,12 @@ export default class HomePage extends Component {
         </View>
       </View>
     );
+  }
+  signOut = async() => {
+    await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("email");
+    await AsyncStorage.removeItem("name");
+    
   }
 }
 const styles = StyleSheet.create({

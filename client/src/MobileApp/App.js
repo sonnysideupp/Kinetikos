@@ -34,20 +34,21 @@ const instructions = Platform.select({
     'Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
+import Settings from "./components/settings/settings"
+import Language from "./components/language/language"
 
 
 const Navigation = createStackNavigator(
   {
-    First: {screen: Home},
+    First: {screen: Login},
     Second: {screen: Questionnaire},
     Third: {screen: Sensor},
     Fourth: {screen: Done},
-    Fifth: {screen: Login},
+    Fifth: {screen: HomePage},
     Sixth: {screen: Signup},
-    Seventh: {screen: HomePage},
-    Eighth: {screen: Activity},
-    Nineth: {screen: QuestionaireDesign},
-    Tenth: {screen: Question1}
+    Seventh: {screen: Activity},
+    Eighth: {screen: Settings},
+    Ninth: {screen: Language}
   },
   {
     initialRouteName: 'First',

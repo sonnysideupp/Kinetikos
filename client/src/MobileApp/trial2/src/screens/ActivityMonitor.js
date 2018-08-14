@@ -12,14 +12,18 @@ import {
 
 export default class ActivityMonitor extends Component {
   render() {
+    var {navigate} = this.props.navigation;
+
     return (
       <View style={styles.root}>
         <View style={styles.activity}>
           <View style={styles.activityIconCopy2}>
+          
             <ImageBackground
               style={styles.mask}
               source={require("../assets/Gradient_bymg3Ss.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.15"},"gradientType":"LinearGradient","id":"F21F3791-3E8B-4EF6-A54B-E759E73C49E5","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(138,187,231,1)","style":{}},{"offset":1,"stopColor":"rgba(96,164,226,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
             >
+          
               <View style={styles.activityIconCopy21}>
                 <View style={styles.lFoot}>
                   <Svg
@@ -198,10 +202,14 @@ export default class ActivityMonitor extends Component {
                       d="M4.67 43.81 C4.62 43.55 4.46 43.05 4.25 42.42 C4.25 42.42 4.79 42.26 4.79 42.26 L9.93 40.80 C9.93 40.80 22.04 37.92 22.04 37.92 C22.13 38.19 22.21 38.46 22.25 38.70 C22.34 39.24 22.26 38.78 22.41 39.57 C22.86 42.06 22.78 42.03 22.99 44.07 C22.99 48.04 22.51 52.00 19.88 53.61 C18.62 54.39 16.65 55.15 14.50 55.15 C7.50 55.15 6.41 51.33 4.67 43.81 Z M1.11 31.60 C-1.17 22.31 -0.72 2.35 10.10 0.19 C17.55 -1.30 23.18 6.23 23.18 17.24 C23.04 24.60 22.43 28.65 21.96 31.38 C21.96 31.38 2.06 35.80 2.06 35.80 C1.70 34.41 1.46 32.88 1.11 31.60 Z"
                     />
                   </Svg>
+                  
                 </View>
+                
               </View>
-            </ImageBackground>
+              </ImageBackground>
+             
           </View>
+          
           <View style={styles.activityIcon}>
             <View style={styles.lFoot2}>
               <Svg
@@ -413,13 +421,7 @@ export default class ActivityMonitor extends Component {
             />
           </Svg>
           <Text style={styles.activityMonitor}>Activity Monitor</Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              this.props.navigation.push("HomePage");
-            }}
-          >
-          </TouchableOpacity>
+         
         </View>
       </View>
     );

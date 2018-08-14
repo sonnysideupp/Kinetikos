@@ -186,6 +186,8 @@ export default class Question extends Component {
                         }
                         
                         console.log(buttons)
+                        console.log(options)
+                        console.log(this.props.language)
                             return (
                                 <View>
 
