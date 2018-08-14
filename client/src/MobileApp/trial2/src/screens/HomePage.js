@@ -71,6 +71,8 @@ export default class HomePage extends Component {
 
 
         <View style={styles.profile}>
+        <TouchableOpacity onPress= {async() => {
+          navigate("Eleventh")}}>
           <Image
             style={styles.rectangleCopy4}
             source={require("../assets/Gradient_eUSP669.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.00"},"gradientType":"LinearGradient","id":"1104293A-226E-409B-941F-D1009305AD23","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(106,225,212,1)","style":{}},{"offset":1,"stopColor":"rgba(70,205,182,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
@@ -118,13 +120,13 @@ export default class HomePage extends Component {
             <View style={styles.rectangle5} />
             <View style={styles.rectangle5Copy} />
           </View> */}
-
+          </TouchableOpacity>
         </View>
 
 
         <View style={styles.questionnaire}>
         <TouchableOpacity onPress= {async() => {
-          navigate("Second")}}>
+          navigate("Tenth")}}>
           <Image
             style={styles.questionContainer}
             source={require("../assets/Gradient_Fppwvc3.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.10"},"gradientType":"LinearGradient","id":"11D407E8-F25B-4216-B420-F3A69B34CFE0","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(124,204,227,1)","style":{}},{"offset":1,"stopColor":"rgba(84,175,200,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"0.98"}}*/

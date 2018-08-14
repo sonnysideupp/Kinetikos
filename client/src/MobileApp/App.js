@@ -27,6 +27,8 @@ import HomePage from "./trial2/src/screens/HomePage"
 import Activity from "./trial2/src/screens/ActivityMonitor"
 import Settings from "./components/settings/settings"
 import Language from "./components/language/language"
+import QuestionnaireEntry from "./questions/screens/Questionnaire2"
+import Q1 from "./trial3/screens/Q1"
 
 
 const Navigation = createStackNavigator(
@@ -39,7 +41,9 @@ const Navigation = createStackNavigator(
     Sixth: {screen: Signup},
     Seventh: {screen: Activity},
     Eighth: {screen: Settings},
-    Ninth: {screen: Language}
+    Ninth: {screen: Language},
+    Tenth: {screen: QuestionnaireEntry},
+    Eleventh: {screen: Q1}
   },
   {
     initialRouteName: 'First',

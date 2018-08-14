@@ -8,6 +8,7 @@ import gql from 'graphql-tag'
 import { AsyncStorage } from "react-native"
 import { CheckBox } from 'react-native-elements'
 import SelectMultiple from 'react-native-select-multiple'
+import MultipleChoice from "../../trial3/screens/Q1"
 
 const GET_ALT_TEXT = gql`
 query alternativeTexts($where:AlternativeTextWhereInput) {
@@ -190,7 +191,8 @@ export default class Question extends Component {
                                 <View>
 
                                     <View style={styles.radioGroup}>
-                                    {buttons}
+                                    {/* {buttons} */}
+                                    <MultipleChoice questionText={this.props.questionText}/>
                                     </View>
                                   
                                 
