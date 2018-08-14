@@ -15,7 +15,7 @@ import {
 export default class Settings extends Component {
   static navigationOptions = {
     title: "Settings",
-    header: null
+
 }
 
   
@@ -43,7 +43,7 @@ export default class Settings extends Component {
 
         <View style={styles.questionnaire}>
         <TouchableOpacity onPress= {async() => {
-          navigate("First")}}>
+          navigate("Tenth")}}>
           <Image
             style={styles.questionContainer}
             source={require("../../trial2/src/assets/Gradient_Fppwvc3.png")}  /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.00"},"gradientType":"LinearGradient","id":"8FF95A09-FDA1-4230-8E57-EF958F62C253","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(129,150,201,1)","style":{}},{"offset":1,"stopColor":"rgba(86,110,190,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/

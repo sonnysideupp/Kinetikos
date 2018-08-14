@@ -27,7 +27,8 @@ import HomePage from "./trial2/src/screens/HomePage"
 import Activity from "./trial2/src/screens/ActivityMonitor"
 import Settings from "./components/settings/settings"
 import Language from "./components/language/language"
-
+import Fonts from "./components/fonts/fonts"
+import Profile from "./components/profile/profile"
 
 const Navigation = createStackNavigator(
   {
@@ -39,7 +40,9 @@ const Navigation = createStackNavigator(
     Sixth: {screen: Signup},
     Seventh: {screen: Activity},
     Eighth: {screen: Settings},
-    Ninth: {screen: Language}
+    Ninth: {screen: Language},
+    Tenth: {screen: Fonts},
+    Eleventh: {screen: Profile},
   },
   {
     initialRouteName: 'First',

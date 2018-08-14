@@ -61,7 +61,8 @@ export default class Questionaire extends Component {
  
 state = {number:0,
     answers:[],
-    language:"English"
+    language:"English",
+    font: 25
 }
 
     constructor(props) {
@@ -82,19 +83,22 @@ UpdateAnswer(value,questionNumber,alternativeId){
 }
 componentWillMount() {
     var reallanguage
-  
-
+    var font
+    var font1
     (async ()=> {
       try{
      
      reallanguage =  await  AsyncStorage.getItem("Language");
-     console.log("reallanguage" + reallanguage)
+     font =  await  AsyncStorage.getItem("Font");
+     font1 = JSON.parse(font)
+     console.log("font" + font)
     if(reallanguage == undefined)
       {
     reallanguage = "English"
       };
       this.setState({language:reallanguage});
-      console.log("language2"+ this.state.language)
+      this.setState({font:font1});
+   
            }
            catch (err) {
              console.warn(err)
@@ -129,12 +133,12 @@ componentWillMount() {
                         return(<Text>`Error! ${error.message}`</Text>);
                     }
                     const number = data.questionnaires[0].questions.length;
-                    console.log("language3"+this.state.language)
+                   
                   
                       
                     if(this.state.number == number)
         {
-            console.log(this.state)
+            
             return(
 
         <View>
@@ -186,7 +190,7 @@ componentWillMount() {
                     if (error) {
                         return(<Text>`Error! ${error.message}`</Text>);
                     } 
-                    console.log("language1"+this.state.language)
+          
                     
                     return (
                         <View>
@@ -212,7 +216,7 @@ componentWillMount() {
           </Svg>
           <Text style={styles.homePage}>Home Page</Text>
         </View> */}
-                         <Text style={styles.question}>{data.questionTexts[0].text}</Text>
+                         <Text style={{fontSize:this.state.font,textAlign: "center",color: "#00008b" }}>{data.questionTexts[0].text}</Text>
                  <Question 
                  state={this.state} 
                  function1 = {this.UpdateAnswer} 
@@ -221,6 +225,7 @@ componentWillMount() {
                  questiontype= {data.questionTexts[0].question.questionType.type}
                  language={this.state.language} 
                  numberofquestions={number} number={data.questionTexts[0].question.number}
+                 font={this.state.font}
                  />
                             
                         </View>

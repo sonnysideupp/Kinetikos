@@ -71,13 +71,16 @@ export default class HomePage extends Component {
 
 
         <View style={styles.profile}>
+        <TouchableOpacity onPress= {async() => {
+          navigate("Eleventh")}}>
           <Image
             style={styles.rectangleCopy4}
             source={require("../assets/Gradient_eUSP669.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.00"},"gradientType":"LinearGradient","id":"1104293A-226E-409B-941F-D1009305AD23","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(106,225,212,1)","style":{}},{"offset":1,"stopColor":"rgba(70,205,182,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
           />
           <Text style={styles.myProfile}>My Profile</Text>
           <User style={styles.user} />
-          
+          </TouchableOpacity>
+          </View>
           {/* <View style={styles.group}>
             <Svg
               viewBox="0 0 13.00 8.00"
@@ -119,7 +122,7 @@ export default class HomePage extends Component {
             <View style={styles.rectangle5Copy} />
           </View> */}
 
-        </View>
+     
 
 
         <View style={styles.questionnaire}>
