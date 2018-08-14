@@ -136,12 +136,8 @@ export default class Question extends Component {
 
 
         if( this.props.questiontype == "Multiple Choice") {
-<<<<<<< HEAD
-            const options = []
-=======
             var options = []
             var buttons = []
->>>>>>> 61e7cd66d1034f637b22162347b92fed80a17c76
             return (
                 
                 <View>  
@@ -188,13 +184,8 @@ export default class Question extends Component {
                                 
                             )
                         }
-<<<<<<< HEAD
-                        console.log(options)
-                        console.log(this.props.language)
-=======
                         
                         console.log(buttons)
->>>>>>> 61e7cd66d1034f637b22162347b92fed80a17c76
                             return (
                                 <View>
 

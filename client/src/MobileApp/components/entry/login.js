@@ -38,7 +38,9 @@ export default class SignInScreen extends React.Component {
     password: "",
     error: ""
   };
-  render() {
+
+
+  componentWillMount(){
 
     var token
     var {navigate} = this.props.navigation;
@@ -70,10 +72,8 @@ export default class SignInScreen extends React.Component {
 })();
 
 
-
-
-
-
+  }
+  render() {
 
 
 
