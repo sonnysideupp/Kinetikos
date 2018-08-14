@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Setting from "../symbols/Settings";
+import User from "../symbols/User.js";
 import { Svg, Path } from "react-native-svg";
 import {
   AsyncStorage,
@@ -17,13 +19,25 @@ export default class HomePage extends Component {
     header: null
 }
 
+  
+  
   render() {
+  
 
+
+
+
+ 
+ 
+ 
     
  var {navigate} = this.props.navigation;
 
     return (
-  
+    
+
+
+
 
       <View style={styles.root}>
 
@@ -128,7 +142,12 @@ export default class HomePage extends Component {
       </View>
     );
   }
-
+  signOut = async() => {
+    await AsyncStorage.removeItem("token");
+    await AsyncStorage.removeItem("email");
+    await AsyncStorage.removeItem("name");
+    
+  }
 }
 const styles = StyleSheet.create({
   root: {

@@ -16,6 +16,18 @@ export default class Home extends React.Component {
     static navigationOptions = {
         title: "Home"
     }
+
+    // _retrieveData = async () => {
+    //   try {
+    //     const value = await AsyncStorage.getItem('name');
+    //     if (value !== null) {
+    //       // We have data!!
+    //       console.log(`value is ${value}`);
+    //     }
+    //    } catch (error) {
+    //      // Error retrieving data
+    //    }
+    // }
     
     render() {
         var {navigate} = this.props.navigation;

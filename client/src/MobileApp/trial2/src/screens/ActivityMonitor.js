@@ -13,10 +13,13 @@ import {
 
 export default class ActivityMonitor extends Component {
   render() {
+    var {navigate} = this.props.navigation;
+
     return (
       <View style={styles.root}>
         <View style={styles.activity}>
           <View style={styles.activityIconCopy2}>
+          
             <ImageBackground
               style={styles.mask}
               source={require("../assets/GradientActivity.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.15"},"gradientType":"LinearGradient","id":"F21F3791-3E8B-4EF6-A54B-E759E73C49E5","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(138,187,231,1)","style":{}},{"offset":1,"stopColor":"rgba(96,164,226,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/

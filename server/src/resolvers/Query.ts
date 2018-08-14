@@ -8,6 +8,9 @@ export default {
   answers:(parent, args, ctx: Context, info) => {
     return ctx.db.query.answers({...args}, info)
   },
+  languages:(parent, args, ctx: Context, info) => {
+    return ctx.db.query.languages({...args}, info)
+  },
 
   questionnaires: (parent, args, ctx: Context, info) => {
     return ctx.db.query.questionnaires({...args}, info)

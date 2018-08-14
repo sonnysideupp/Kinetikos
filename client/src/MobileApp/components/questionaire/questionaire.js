@@ -60,7 +60,9 @@ mutation submitanswer($value:String!,$questionnumber:Int!,$alternativeId:String)
 export default class Questionaire extends Component {
  
 state = {number:0,
-    answers:[]}
+    answers:[],
+    language:"English"
+}
 
     constructor(props) {
         super(props)
@@ -78,28 +80,47 @@ UpdateAnswer(value,questionNumber,alternativeId){
     this.state.answers.push({value:value,questionNumber:questionNumber,alternativeId:alternativeId})
 
 }
+componentWillMount() {
+    var reallanguage
+  
+
+    (async ()=> {
+      try{
+     
+     reallanguage =  await  AsyncStorage.getItem("Language");
+     console.log("reallanguage" + reallanguage)
+    if(reallanguage == undefined)
+      {
+    reallanguage = "English"
+      };
+      this.setState({language:reallanguage});
+      console.log("language2"+ this.state.language)
+           }
+           catch (err) {
+             console.warn(err)
+           }
+    })()
+  }
+
 
     render() {  
 
         var {navigate} = this.props.navigation;
+       
 
-        var token = AsyncStorage.getItem("name", (item, err) => {console.log(err)})
+     
 
-        if(!token) {
-            navigate("Fifth")
-        }
-      
-    
-        return (
+
+    return (
             
             <View style={styles.margin}> 
-            {/* the styles is adding the distance to the top */}
+            
                
                 <Query query = {Questionnaire} key= "questionnaireQuery"
                  variables= {{
                     where: {numberID:1}
                 }}>
-                {({ loading, error, data, refetch }) => {
+                { ({ loading, error, data, refetch }) => {
                    
                     if (loading) {
                         return(<Text>Loading</Text>);
@@ -107,7 +128,10 @@ UpdateAnswer(value,questionNumber,alternativeId){
                     if (error) {
                         return(<Text>`Error! ${error.message}`</Text>);
                     }
-                    const number = data.questionnaires[0].questions.length
+                    const number = data.questionnaires[0].questions.length;
+                    console.log("language3"+this.state.language)
+                  
+                      
                     if(this.state.number == number)
         {
             console.log(this.state)
@@ -146,11 +170,12 @@ UpdateAnswer(value,questionNumber,alternativeId){
             )
         }
           else{
+    
                     return (
                         
                 <Query query={GET_TEXTS} key="quesQuery" 
                 variables= {{
-                    where: {language:{name:"English"},
+                    where: {language:{name:this.state.language},
                     question:{number:data.questionnaires[0].questions[this.state.number].number}}
                 }}>
                 {({ loading, error, data, refetch }) => {
@@ -160,7 +185,8 @@ UpdateAnswer(value,questionNumber,alternativeId){
                     }
                     if (error) {
                         return(<Text>`Error! ${error.message}`</Text>);
-                    }
+                    } 
+                    console.log("language1"+this.state.language)
                     
                     return (
                         <View>
@@ -193,7 +219,7 @@ UpdateAnswer(value,questionNumber,alternativeId){
                  function={this.Update} 
                  navigate = {this.props.navigation} 
                  questiontype= {data.questionTexts[0].question.questionType.type}
-                 language={data.questionTexts[0].language.name} 
+                 language={this.state.language} 
                  numberofquestions={number} number={data.questionTexts[0].question.number}
                  />
                             
@@ -203,6 +229,7 @@ UpdateAnswer(value,questionNumber,alternativeId){
                 </Query>)}
                 }}
                 </Query>
+               
                 </View>
            
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Svg, Path } from "react-native-svg";
 import { View, StyleSheet } from "react-native";
 
-export default class Settings extends Component {
+export default class Setting extends Component {
   // Only for displaying symbol in BuilderX.
   static containerStyle = {
     width: 85,

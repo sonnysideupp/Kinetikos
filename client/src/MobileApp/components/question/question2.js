@@ -36,12 +36,16 @@ export default class Question extends Component {
     state = { selectedAnswers: [] ,
             answer:"",
             value:0,
-            number:0
+            number: 0
         }
     onSelectionsChange = (selectedAnswers) => {
         // selectedFruits is array of { label, value }
         this.setState({ selectedAnswers })
       }
+    radioSelection = (info) => {
+        console.log("printing info")
+        console.log(info.Button)
+    }
    
     render () {
 
@@ -150,26 +154,26 @@ export default class Question extends Component {
                         if (error) {
                             return(<Text>`Error! ${error.message}`</Text>);
                         }
-                        for(var i = 0; i < data.alternativeTexts.length; i ++)
+                        for(let i = 0; i < data.alternativeTexts.length; i ++)
                         {
                             options.push({label:data.alternativeTexts[i].text,value:i});
-
-                            var opacity;
+                            var number = i;
+                            var opacity = null;
                             var image = "Gradient_QvTTfdx.png";
                             var text = data.alternativeTexts[i].text;
-
-                            if (this.state.answer === text) {
+                            var integer= options[i].value
+                            if (this.state.number === i) {
                                 opacity = 0;
                                 image = "Gradient_eUSP669.png";
-                            } 
+                            }
+                           
                             buttons.push(
-                                <View key={`option${i}`}>
-                                <TouchableOpacity 
+                                <TouchableOpacity
+                                int = {integer}
                                 style={styles.radioButton}
                                 onPress={() => {
-                                    console.log()
-                                   this.setState({ answer: text, number:i})
-                                   }}>
+                                console.log()
+                                this.setState({number:i})}}>
                                         <Image
                                            style={styles.radioImage}
                                            source={require(`../../trial1/assets/Gradient_QvTTfdx.png`)}
@@ -177,11 +181,13 @@ export default class Question extends Component {
                                        />
                                         <Text style={styles.text}>{data.alternativeTexts[i].text}</Text>
                                    </TouchableOpacity>
-                                   </View>
+                                
                             )
                         }
                         
-                        
+                        console.log(buttons)
+                        console.log(options)
+                        console.log(this.props.language)
                             return (
                                 <View>
 

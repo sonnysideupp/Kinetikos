@@ -27,27 +27,57 @@ const LOGIN = gql`
 `;
 
 export default class SignInScreen extends React.Component {
-  static navigationOptions = ({navigation}) => {
-      return {
-    title: "Home Page",
-    headerRight: (
-        
-        <TouchableOpacity onPress= {async() => {navigation.navigate("First")}}>
-          <Image
-            style={styles.icon}         
-            source={require("../../home-icon.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.14"},"gradientType":"LinearGradient","id":"A89BEB24-5A8C-449D-A203-D7DBC980A82C","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(146,223,178,1)","style":{}},{"offset":1,"stopColor":"rgba(123,214,160,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
-          />
-          </TouchableOpacity>
 
-      ),
-    }
-  };
+  static navigationOptions = {
+   
+    header: null
+}
+
   state = {
     email: "",
     password: "",
     error: ""
   };
   render() {
+
+    var token
+    var {navigate} = this.props.navigation;
+
+    async function getToken() {
+      try{
+       
+  token =  await  AsyncStorage.getItem("token");
+  
+
+   }
+   catch (err) {
+     console.warn(err)
+   }
+ 
+ }
+
+ function gotohome(){
+  navigate("Fifth");
+}
+
+
+ (async function() {
+  await  getToken();
+  if(token !== null)
+  {
+    gotohome()
+  };
+})();
+
+
+
+
+
+
+
+
+
+
     return (
       
       <Mutation mutation={LOGIN}>
@@ -91,7 +121,18 @@ export default class SignInScreen extends React.Component {
                   >
                     <Text style={styles.buttonText}>Login!</Text>
                   </TouchableOpacity>
+                
                 </View>
+
+ <View style={styles.buttonContainer}>
+  <TouchableOpacity
+                    style={styles.signinButton}
+                    onPress={() => this.props.navigation.navigate("Sixth")}
+                  >
+                    <Text style={styles.buttonText}>Sign Up!</Text>
+                  </TouchableOpacity>
+
+  </View>
               </View>
             </View>
             </KeyboardAvoidingView>
@@ -115,7 +156,7 @@ export default class SignInScreen extends React.Component {
       await AsyncStorage.setItem("token", data.login.token);
       await AsyncStorage.setItem("email", data.login.user.email);
       await AsyncStorage.setItem("name", data.login.user.name);
-      this.props.navigation.navigate("First");
+      this.props.navigation.navigate("Fifth");
     } catch (e) {
       console.log(e);
       this.setState({
