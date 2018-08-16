@@ -18,7 +18,6 @@ const LOGIN = gql`
     login(email: $email, password: $password) {
       token
       user {
-        id
         email
         name
       }
@@ -124,15 +123,15 @@ export default class SignInScreen extends React.Component {
                 
                 </View>
 
- <View style={styles.buttonContainer}>
-  <TouchableOpacity
+              <View style={styles.buttonContainer}>
+                  <TouchableOpacity
                     style={styles.signinButton}
                     onPress={() => this.props.navigation.navigate("Sixth")}
                   >
                     <Text style={styles.buttonText}>Sign Up!</Text>
                   </TouchableOpacity>
 
-  </View>
+              </View>
               </View>
             </View>
             </KeyboardAvoidingView>
@@ -145,6 +144,7 @@ export default class SignInScreen extends React.Component {
 
   _signInAsync = async login => {
     this.setState({ error: "" });
+    console.log("i am trying to log in")
     try {
       const { data } = await login({
         variables: {
@@ -156,6 +156,7 @@ export default class SignInScreen extends React.Component {
       await AsyncStorage.setItem("token", data.login.token);
       await AsyncStorage.setItem("email", data.login.user.email);
       await AsyncStorage.setItem("name", data.login.user.name);
+      console.log("here")
       this.props.navigation.navigate("Fifth");
     } catch (e) {
       console.log(e);

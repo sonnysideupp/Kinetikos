@@ -195,6 +195,10 @@ componentWillMount() {
                             questionText = {data.questionTexts[0].text}
                             number={data.questionTexts[0].question.number}
                             language={this.state.language} 
+                            state={this.state} 
+                            updateAnswer = {this.UpdateAnswer} 
+                            updateQuestion={this.Update} 
+                            navigate = {this.props.navigation}
                             />
                             </View>
                         )

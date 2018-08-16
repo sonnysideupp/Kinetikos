@@ -77,7 +77,11 @@ state = {
                        buttons.push(
                         <View style={styles.rectangle4Copy8} key={i}>
                         <TouchableOpacity onPress={() => {
-                                this.setState({number:i})}}>
+                                this.setState(
+                                  {number:i,
+                                  value: data.alternativeTexts[i].alternativeID.value,
+                                  id: data.alternativeTexts[i].alternativeID.id}
+                                  )}}>
                         <Image
                           style={styles.container4}
                           source={require("../assets/Gradient_JITHUo5.png")}
@@ -107,11 +111,17 @@ state = {
         </View>
 
         <View style={styles.next}>
-          <ImageBackground
+        <TouchableOpacity
+        onPress={() => {
+          this.props.updateAnswer(this.state.value,this.props.number,this.state.id)
+          this.props.updateQuestion(this.props.state.number+1)
+          this.props.navigate.navigate("Second") }}
+          >
+          <Image
             style={styles.rectangle8}
             source={require("../assets/Gradient_tUOtY99.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.00"},"gradientType":"LinearGradient","id":"BA8E0F41-5522-487C-956C-890D196FFAC9","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(129,150,201,1)","style":{}},{"offset":1,"stopColor":"rgba(86,110,190,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
           />
-          <Text style={styles.next1}>Next</Text>
+          <Text style={styles.next1}>Next </Text>
           <Svg
             viewBox="0 0 12.34 20.84"
             preserveAspectRatio="none"
@@ -124,6 +134,7 @@ state = {
               d="M1.91 12.32 L0.00 10.41 L0.95 9.46 L9.46 0.95 L10.41 0.00 L12.32 1.91 L11.36 2.86 L3.82 10.41 L4.36 10.95 L11.95 18.54 L12.90 19.49 L10.99 21.40 L10.04 20.45 L2.45 12.86 L1.91 12.32 L1.91 12.32 Z"
             />
           </Svg>
+          </TouchableOpacity>
         </View>
 
 
@@ -197,15 +208,13 @@ const styles = StyleSheet.create({
     flex: 1
   },
   body: {
-    top: "13%",
-    flexDirection: "column",
-    // justifyContent: "space-between",
-    // justifyContent: "space-around",
+    top: "20%",
+    // flexDirection: "column",
   },
   radioGroup: {
     flexWrap: "wrap",
-    justifyContent: "space-between",
-    justifyContent: "space-around",
+    // justifyContent: "space-between",
+    // justifyContent: "space-around",
     height: "98%"
   },
   rectangle: {
@@ -238,7 +247,7 @@ const styles = StyleSheet.create({
     color: "rgba(0,0,0,1)",
     fontSize: 20,
     fontFamily: "Aller",
-    lineHeight: 140,
+    // lineHeight: 120,
     letterSpacing: 0.1
   },
   next: {
@@ -246,10 +255,11 @@ const styles = StyleSheet.create({
     top: "86.56%",
     left: "65.65%",
     height: "7.81%",
-    width: "28.81%"
+    width: "28.81%",
+    justifyContent: "center"
   },
   rectangle8: {
-    position: "absolute",
+    // position: "absolute",
     top: "0.00%",
     left: "0.00%",
     height: "100.00%",
@@ -258,11 +268,11 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
-    backgroundColor: "transparent"
+    // backgroundColor: "transparent"
   },
   next1: {
     position: "absolute",
-    top: "32%",
+    top: "18%",
     left: "0%",
     height: "72%",
     width: "83.65%",
@@ -270,7 +280,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "rgba(255,255,255,1)",
     fontSize: 20,
-    fontFamily: "Aller-Bold"
+    fontFamily: "Aller-Bold",
+    alignSelf: "center"
   },
   combinedShapeCopy: {
     position: "absolute",
@@ -278,6 +289,7 @@ const styles = StyleSheet.create({
     left: 76,
     right: 15.66,
     bottom: 15.16,
+    width: "15%",
     backgroundColor: "transparent",
     borderColor: "transparent",
     transform: [
