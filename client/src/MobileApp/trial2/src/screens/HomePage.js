@@ -104,7 +104,7 @@ export default class HomePage extends Component {
 
       <View style={styles.activity}>
       <TouchableOpacity onPress= {async() => {
-          navigate("Eighth")}}>
+          navigate("Seventh")}}>
           <Image
             style={styles.ActivityContainer}
             source={require("../assets/GradientActivityBtn.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.15"},"gradientType":"LinearGradient","id":"77BA93AB-6ABC-430E-9FB9-3BA0260989E2","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(138,187,231,1)","style":{}},{"offset":1,"stopColor":"rgba(96,164,226,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
