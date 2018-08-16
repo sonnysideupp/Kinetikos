@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
     color: "rgba(0,0,0,1)",
     fontSize: 20,
     fontFamily: "Aller",
-    lineHeight: "140%",
+    lineHeight: 140,
     letterSpacing: 0.1
   },
   next: {

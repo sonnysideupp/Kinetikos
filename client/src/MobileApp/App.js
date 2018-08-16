@@ -28,7 +28,7 @@ import Activity from "./trial2/src/screens/ActivityMonitor"
 import Settings from "./components/settings/settings"
 import Language from "./components/language/language"
 import QuestionnaireEntry from "./questions/screens/Questionnaire2"
-import Q1 from "./trial3/screens/Q1"
+import Q3 from "./trial3/screens/QTextcopy"
 
 
 const Navigation = createStackNavigator(
@@ -43,7 +43,7 @@ const Navigation = createStackNavigator(
     Eighth: {screen: Settings},
     Ninth: {screen: Language},
     Tenth: {screen: QuestionnaireEntry},
-    Eleventh: {screen: Q1}
+    Eleventh: {screen: Q3}
   },
   {
     initialRouteName: 'First',

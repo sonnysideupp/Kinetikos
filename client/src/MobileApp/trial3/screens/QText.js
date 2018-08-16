@@ -9,9 +9,9 @@ export default class QText extends Component {
       <View style={styles.root}>
         <View style={styles.rectangle} />
         <View style={styles.rectangleCopy} />
-        <Text style={styles.doYouFeelYourCon}>
+        {/* <Text style={styles.doYouFeelYourCon}>
           Do you feel your condition is getting better or worse?
-        </Text>
+        </Text> */}
         <View style={styles.next}>
           <ImageBackground
             style={styles.rectangle8}
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     color: "rgba(0,0,0,1)",
     fontSize: 20,
     fontFamily: "Aller",
-    lineHeight: "140%",
+    lineHeight: 140,
     letterSpacing: 0.1
   },
   next: {

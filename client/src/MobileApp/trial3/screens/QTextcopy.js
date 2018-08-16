@@ -1,41 +1,15 @@
 import React, { Component } from "react";
 import { Svg, Path } from "react-native-svg";
 import KinetikosIconTransparent85Balck1 from "../symbols/KinetikosIconTransparent85Balck1";
-import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, ScrollView } from "react-native";
-import { Query, ApolloProvider } from 'react-apollo'
-import gql from 'graphql-tag'
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image, TextInput } from "react-native";
+import { FormInput } from "react-native-elements"
 
-const GET_ALT_TEXT = gql`
-query alternativeTexts($where:AlternativeTextWhereInput) {
-    alternativeTexts(where:$where) {
-        id
-        alternativeID{
-            id
-            question{
-              number
-            }
-            value
-          }
-        text
-        language {
-            id
-            name
-        }
-    }
-}
-`
-
-export default class Q1 extends Component {
-
-state = {
-   number:  null
-}
-
+export default class QText extends Component {
+  state = {
+    number:  null,
+    answer: null
+ }
   render() {
-
-    var options = []
-    var buttons = []
-
     return (
       <View style = {styles.radioGroup}>
       <View style={styles.root}>
@@ -47,67 +21,23 @@ state = {
         <Text style = {styles.question}>{this.props.questionText}</Text>
 
 
-         <View>  
-               
-               <Query query={GET_ALT_TEXT} key="altTextQuery"
-               variables={{
-                   where:{language:{name:this.props.language},
-                   alternativeID:{question:{number:this.props.number}}}
-               }}>
-               {({ loading, error, data, refetch }) => {
-                   if (loading) {
-                       return(<Text>Loading</Text>);
-                   }
-                   if (error) {
-                       return(<Text>`Error! ${error.message}`</Text>);
-                   }
-                   for(let i = 0; i < data.alternativeTexts.length; i ++)
-                   {
-                       options.push({label:data.alternativeTexts[i].text,value:i});
-                       var number = i;
-                       var opacity = null;
-                       var image = "Gradient_QvTTfdx.png";
-                       var text = data.alternativeTexts[i].text;
-                       var integer= options[i].value
-                       if (this.state.number === i) {
-                           opacity = 0;
-                           image = "Gradient_eUSP669.png";
-                       }
-                      
-                       buttons.push(
-                        <View style={styles.rectangle4Copy8} key={i}>
-                        <TouchableOpacity onPress={() => {
-                                this.setState(
-                                  {number:i,
-                                  value: data.alternativeTexts[i].alternativeID.value,
-                                  id: data.alternativeTexts[i].alternativeID.id}
-                                  )}}>
-                        <Image
-                          style={styles.container4}
-                          source={require("../assets/Gradient_JITHUo5.png")}
-                          opacity={opacity}
-                        />
-                        <Text style={styles.times3}>{data.alternativeTexts[i].text}</Text>
-                        </TouchableOpacity>
-                        </View>                           
-                       )
-                   }
-                   
-                   console.log(buttons)
-                       return (
-                         <View style={styles.style3}>
-                         <ScrollView>
-                           {buttons}
-                        </ScrollView>
-                        </View>
-                       )
-                   }
-               }
-               </Query>
-               
-           
-
-       </View>
+        <View style={styles.helpless}>
+          <View style={styles.rectangle4Copy}
+           hitSlop={{top: 20, bottom: 20, left: 0, right: 0}} />
+          <FormInput
+                  hitSlop={{top: 20, bottom: 20, left: 0, right: 0}}
+                  style={styles.input}
+                  onChangeText={text => {
+                    this.setState({ answer: text });
+                  }}
+                />
+                {/* {() => {
+                  if(!this.state.answer || this.state.answer !== "") {
+                    return ( <Text style={styles.helplessCopy}>Type your response here…</Text>)
+                  }
+                }} */}
+          {/* <Text style={styles.helplessCopy}>Type your response here…</Text> */}
+        </View>
 
 
         </View>
@@ -115,7 +45,7 @@ state = {
         <View style={styles.next}>
         <TouchableOpacity
         onPress={() => {
-          this.props.updateAnswer(this.state.value,this.props.number,this.state.id)
+          this.props.updateAnswer(this.state.answer,this.props.number,null)
           this.props.updateQuestion(this.props.state.number+1)
           this.props.navigate.navigate("Second") }}
           >
@@ -127,7 +57,7 @@ state = {
           <Svg
             viewBox="0 0 12.34 20.84"
             preserveAspectRatio="none"
-            style={styles.combinedShapeCopy}
+            style={styles.arrow}
           >
             <Path
               strokeWidth={0}
@@ -141,7 +71,12 @@ state = {
 
 
         <View style={styles.back}>
-          <ImageBackground
+        <TouchableOpacity
+        onPress={() => {
+          this.props.updateQuestion(this.props.state.number-1)
+          this.props.navigate.navigate("Second") }}
+        >
+          <Image
             style={styles.rectangle81}
             source={require("../assets/Gradient_jGWag0U.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.00"},"gradientType":"LinearGradient","id":"AD20E144-7369-4D33-8171-E2AE62F36A25","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(129,150,201,1)","style":{}},{"offset":1,"stopColor":"rgba(86,110,190,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
           />
@@ -158,6 +93,7 @@ state = {
               d="M1.91 12.32 L0.00 10.41 L0.95 9.46 L9.46 0.95 L10.41 0.00 L12.32 1.91 L11.36 2.86 L3.82 10.41 L4.36 10.95 L11.95 18.54 L12.90 19.49 L10.99 21.40 L10.04 20.45 L2.45 12.86 L1.91 12.32 L1.91 12.32 Z"
             />
           </Svg>
+          </TouchableOpacity>
         </View>
 
         
@@ -253,7 +189,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.1
   },
   next: {
-    position: "absolute",
+    // position: "absolute",
     top: "86.56%",
     left: "65.65%",
     height: "7.81%",
@@ -285,7 +221,7 @@ const styles = StyleSheet.create({
     fontFamily: "Aller-Bold",
     alignSelf: "center"
   },
-  combinedShapeCopy: {
+  arrow: {
     position: "absolute",
     top: 15,
     left: 76,
@@ -309,7 +245,7 @@ const styles = StyleSheet.create({
     display: "none"
   },
   rectangle81: {
-    position: "absolute",
+    // position: "absolute",
     top: "0.00%",
     left: "0.00%",
     height: "100.00%",
@@ -318,11 +254,11 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8,
     borderBottomLeftRadius: 8,
-    backgroundColor: "transparent"
+    // backgroundColor: "transparent"
   },
   back1: {
     position: "absolute",
-    top: "9.80%",
+    top: "18%",
     left: "13.46%",
     height: "72.55%",
     width: "86.54%",
@@ -338,6 +274,7 @@ const styles = StyleSheet.create({
     left: 14,
     right: 77.66,
     bottom: 15.16,
+    width: "15%",
     backgroundColor: "transparent",
     borderColor: "transparent"
   },
@@ -661,5 +598,144 @@ const styles = StyleSheet.create({
     color: "rgba(86,110,190,1)",
     fontSize: 20,
     fontFamily: "Aller"
+  },
+  rectangleCopy: {
+    position: "absolute",
+    top: "15.63%",
+    left: "0.00%",
+    height: "1.88%",
+    width: "100.00%",
+    backgroundColor: "rgba(86,110,190,1)"
+  },
+  doYouFeelYourCon: {
+    position: "absolute",
+    top: "18.75%",
+    left: "6.09%",
+    height: "8.78%",
+    width: "88.37%",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    color: "rgba(0,0,0,1)",
+    fontSize: 20,
+    fontFamily: "Aller",
+    lineHeight: 140,
+    letterSpacing: 0.1
+  },
+  next: {
+    position: "absolute",
+    top: "86.72%",
+    left: "65.28%",
+    height: "7.97%",
+    width: "29.44%"
+  },
+  finish: {
+    position: "absolute",
+    top: "32%",
+    left: "8.57%",
+    height: "74%",
+    width: "83.81%",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    color: "rgba(255,255,255,1)",
+    fontSize: 20,
+    fontFamily: "Aller-Bold"
+  },
+  back: {
+    position: "absolute",
+    top: "86.72%",
+    left: "5.56%",
+    height: "7.97%",
+    width: "28.89%"
+  },
+  combinedShapeCopy: {
+    position: "absolute",
+    top: 15,
+    left: 14,
+    right: 77.66,
+    bottom: 15.16,
+    backgroundColor: "transparent",
+    borderColor: "transparent"
+  },
+  helpless: {
+    // position: "absolute",
+    // top: "29.69%",
+    left: "2.77%",
+    height: "58.13%",
+    width: "93.91%"
+  },
+  rectangle4Copy: {
+    position: "absolute",
+    top: "9.41%",
+    left: "0%",
+    height: "81.45%",
+    width: "100%",
+    borderWidth: 0.5,
+    borderColor: "rgba(179,179,179,1)",
+    borderTopLeftRadius: 11,
+    borderTopRightRadius: 11,
+    borderBottomRightRadius: 11,
+    borderBottomLeftRadius: 11,
+    shadowColor: "rgba(0,0,0,0.5)",
+    shadowRadius: 1,
+    shadowOpacity: 1,
+    backgroundColor: "rgba(255,255,255,1)",
+    shadowOffset: {
+      height: 0,
+      width: 0
+    }
+  },
+  helpless1: {
+    position: "absolute",
+    top: "0%",
+    left: "2.63%",
+    height: "7.4%",
+    width: "93.27%",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    color: "rgba(0,0,0,1)",
+    fontSize: 21,
+    fontFamily: "Aller"
+  },
+  header: {
+    position: "absolute",
+    top: "0.00%",
+    left: "0.00%",
+    height: "15.16%",
+    width: "100.00%"
+  },
+  rectangle7: {
+    position: "absolute",
+    top: "0.00%",
+    left: "0.00%",
+    height: "97.94%",
+    width: "100.00%",
+    backgroundColor: "rgba(248,248,248,1)"
+  },
+  combinedShape: {
+    position: "absolute",
+    top: 1.57,
+    left: 0.54,
+    right: 132,
+    bottom: 2,
+    backgroundColor: "transparent",
+    borderColor: "transparent"
+  },
+  helplessCopy: {
+    top: "12.1%",
+    left: "3.56%",
+    width: "93.28%",
+    height: "12.37%",
+    position: "absolute",
+    backgroundColor: "transparent",
+    fontSize: 18,
+    fontFamily: "Aller",
+    color: "rgba(179,179,179,1)"
+  },
+  input: {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    top: 10,
+    fontSize: 20,
   }
 });

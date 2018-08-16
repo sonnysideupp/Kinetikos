@@ -9,6 +9,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import gql from 'graphql-tag'
 import Question from '../question/question2'
 import MultipleChoice from "../../trial3/screens/Q1"
+import Input from "../../trial3/screens/QTextcopy"
 
 const GET_TEXTS = gql`
 query questionTexts($where:QuestionTextWhereInput) {
@@ -202,7 +203,21 @@ componentWillMount() {
                             />
                             </View>
                         )
-                    } 
+                    } else if (data.questionTexts[0].question.questionType.type == "Input") {
+                        return (
+                            <View>
+                            <Input
+                            questionText = {data.questionTexts[0].text}
+                            number={data.questionTexts[0].question.number}
+                            language={this.state.language} 
+                            state={this.state} 
+                            updateAnswer = {this.UpdateAnswer} 
+                            updateQuestion={this.Update} 
+                            navigate = {this.props.navigation}
+                            />
+                            </View>
+                        )
+                    }
                     else {
                         return (
                             <Question 
