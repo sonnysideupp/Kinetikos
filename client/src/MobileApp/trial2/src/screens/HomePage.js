@@ -21,25 +21,13 @@ export default class HomePage extends Component {
     header: null
 }
 
-  
-  
+
+
   render() {
-  
 
-
-
-
- 
- 
- 
-    
  var {navigate} = this.props.navigation;
 
     return (
-    
-
-
-
 
       <View style={styles.root}>
 
@@ -122,7 +110,7 @@ export default class HomePage extends Component {
             <View style={styles.rectangle5Copy} />
           </View> */}
 
-     
+
 
 
         <View style={styles.questionnaire}>
