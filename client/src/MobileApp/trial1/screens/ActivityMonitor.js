@@ -19,7 +19,7 @@ export default class ActivityMonitor extends Component {
           <View style={styles.activityIconCopy2}>
             <ImageBackground
               style={styles.mask}
-              source={require("../assets/Gradient_bymg3Ss.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.15"},"gradientType":"LinearGradient","id":"F21F3791-3E8B-4EF6-A54B-E759E73C49E5","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(138,187,231,1)","style":{}},{"offset":1,"stopColor":"rgba(96,164,226,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
+              source={require("../assets/GradientActivity.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.15"},"gradientType":"LinearGradient","id":"F21F3791-3E8B-4EF6-A54B-E759E73C49E5","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(138,187,231,1)","style":{}},{"offset":1,"stopColor":"rgba(96,164,226,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
             >
               <View style={styles.activityIconCopy21}>
                 <View style={styles.lFoot}>

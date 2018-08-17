@@ -46,7 +46,7 @@ export default class Settings extends Component {
           navigate("Tenth")}}>
           <Image
             style={styles.questionContainer}
-            source={require("../../trial2/src/assets/Gradient_Fppwvc3.png")}  /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.00"},"gradientType":"LinearGradient","id":"8FF95A09-FDA1-4230-8E57-EF958F62C253","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(129,150,201,1)","style":{}},{"offset":1,"stopColor":"rgba(86,110,190,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
+            source={require("../../trial2/src/assets/GradientQuestion.png")}  /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.00"},"gradientType":"LinearGradient","id":"8FF95A09-FDA1-4230-8E57-EF958F62C253","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(129,150,201,1)","style":{}},{"offset":1,"stopColor":"rgba(86,110,190,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
           />
           <Text style={styles.questionnaire1}>Change Font</Text>
           </TouchableOpacity>
@@ -57,7 +57,7 @@ export default class Settings extends Component {
         <TouchableOpacity onPress= {async() => {navigate("Ninth")}}>
           <Image
             style={styles.questionContainer}
-            source={require("../../trial2/src/assets/Gradient_Fppwvc3.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.10"},"gradientType":"LinearGradient","id":"11D407E8-F25B-4216-B420-F3A69B34CFE0","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(124,204,227,1)","style":{}},{"offset":1,"stopColor":"rgba(84,175,200,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"0.98"}}*/
+            source={require("../../trial2/src/assets/GradientQuestion.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.10"},"gradientType":"LinearGradient","id":"11D407E8-F25B-4216-B420-F3A69B34CFE0","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(124,204,227,1)","style":{}},{"offset":1,"stopColor":"rgba(84,175,200,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"0.98"}}*/
           />
           <Text style={styles.questionnaire1}>Choose Language</Text>
           </TouchableOpacity>
@@ -70,8 +70,8 @@ export default class Settings extends Component {
         <View style={styles.header} /*locked*/>
           <View style={styles.rectangle7} />
           <Image
-            source={require("../../trial2/src/assets/953f88ea27175375d51167f2e35e70b3aa71adc3.png")}
-            style={styles.kinetikosIconTransparent85Balck}
+            source={require("../../trial2/src/assets/KIconBlack.png")}
+            style={styles.kIconBlack}
           />
           <Svg
             viewBox="0 0 360.90 2.90"
