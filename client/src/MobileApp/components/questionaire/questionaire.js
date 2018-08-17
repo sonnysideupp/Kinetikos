@@ -209,6 +209,7 @@ componentWillMount() {
                             updateAnswer = {this.UpdateAnswer} 
                             updateQuestion={this.Update} 
                             navigate = {this.props.navigation}
+                            font={this.state.font}
                             />
                             </View>
                         )
@@ -223,6 +224,7 @@ componentWillMount() {
                             updateAnswer = {this.UpdateAnswer} 
                             updateQuestion={this.Update} 
                             navigate = {this.props.navigation}
+                            font={this.state.font}
                             />
                             </View>
                         )
@@ -237,6 +239,7 @@ componentWillMount() {
                             updateAnswer = {this.UpdateAnswer} 
                             updateQuestion={this.Update} 
                             navigate = {this.props.navigation}
+                            font={this.state.font}
                             />
                             </View>
                         )

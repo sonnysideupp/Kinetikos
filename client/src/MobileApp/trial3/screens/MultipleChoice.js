@@ -49,7 +49,15 @@ export default class QText extends Component {
 
         <View style={styles.body}>
 
-        <Text style = {styles.question}>{this.props.questionText}</Text>
+        <Text style = {{  width: "89.42%",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    alignSelf: "center",
+    color: "rgba(0,0,0,1)",
+    fontSize: this.props.font,
+    fontFamily: "Aller",
+    // lineHeight: 120,
+    letterSpacing: 0.1}}>{this.props.questionText}</Text>
 
 
        
@@ -78,6 +86,7 @@ export default class QText extends Component {
                            opacity = 0.2;
                            image = "Gradient_eUSP669.png";
                        }
+                       
                       
                        buttons.push(
                         <View style={styles.rectangle4Copy8} key={i}>
@@ -92,7 +101,17 @@ export default class QText extends Component {
                           source={require("../assets/Gradient_JITHUo5.png")}
                           opacity={opacity}
                         />
-                        <Text style={styles.times3}>{data.alternativeTexts[i].text}</Text>
+                        <Text style={{fontSize:this.props.font,
+                                position: "absolute",
+                                top: "27.78%",
+                                left: "26.88%",
+                                height: "72.22%",
+                                width: "46.88%",
+                                backgroundColor: "transparent",
+                                textAlign: "center",
+                                color: "rgba(0,0,0,1)",
+                                fontFamily: "Aller"
+                            }}>{data.alternativeTexts[i].text}</Text>
                         </TouchableOpacity>
                         </View>                           
                        )
