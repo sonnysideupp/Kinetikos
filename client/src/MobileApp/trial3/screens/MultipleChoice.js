@@ -75,7 +75,7 @@ export default class QText extends Component {
                        var text = data.alternativeTexts[i].text;
                        var integer= options[i].value
                        if (this.state.number === i) {
-                           opacity = 0.6;
+                           opacity = 0.2;
                            image = "Gradient_eUSP669.png";
                        }
                       
