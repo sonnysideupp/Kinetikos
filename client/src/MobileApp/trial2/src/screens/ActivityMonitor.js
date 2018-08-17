@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Svg, Defs, ClipPath, Path } from "react-native-svg";
+import React, { Component } from "react"
+import { Svg, Defs, ClipPath, Path } from "react-native-svg"
 // import { Center } from "@builderx/utils";
 
 import {
@@ -9,32 +9,37 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableOpacity
-} from "react-native";
+} from "react-native"
 
 export default class ActivityMonitor extends Component {
   render() {
-    var {navigate} = this.props.navigation;
+    var { navigate } = this.props.navigation
 
     return (
       <View style={styles.root}>
         <View style={styles.activity}>
           <View style={styles.activityIconCopy2}>
-          
             <ImageBackground
               style={styles.mask}
               source={require("../assets/GradientActivity.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.15"},"gradientType":"LinearGradient","id":"F21F3791-3E8B-4EF6-A54B-E759E73C49E5","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(138,187,231,1)","style":{}},{"offset":1,"stopColor":"rgba(96,164,226,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"1.00"}}*/
             >
-            <Image
+              <Image
                 style={styles.manyFeet}
                 source={require("../assets/ManyFeet.png")}
               />
             </ImageBackground>
           </View>
         </View>
-        <Image
-          style={styles.play}
-          source={require("../assets/Play.png")}
-        />
+        <View>
+          <TouchableOpacity
+            style={styles.play}
+            onPress={async () => {
+              await navigate("Third")
+            }}
+          >
+            <Image style={styles.ActivityContainer} source={require("../assets/Play.png")} />
+          </TouchableOpacity>
+        </View>
         <Text style={styles.tapPlayToCollect}>
           Tap Play to collect activity data
         </Text>
@@ -44,8 +49,7 @@ export default class ActivityMonitor extends Component {
           monitor your motions and the data will be sent directly to your
           clinician.
         </Text>
-        
-        
+
         <View style={styles.header}>
           <View style={styles.HeaderContainer} />
           <Image
@@ -64,25 +68,32 @@ export default class ActivityMonitor extends Component {
               isClosed={false}
               d="M0.23 1.23 L360.23 1.23 "
             />
-            </Svg>
+          </Svg>
           <Text style={styles.activityMonitor}>Activity Monitor</Text>
-          
+
           <TouchableOpacity
             style={styles.homeNav}
             onPress={() => {
-              this.props.navigation.push("HomePage");
+              this.props.navigation.push("HomePage")
             }}
-          >
-          </TouchableOpacity>
+          />
         </View>
       </View>
-    );
+    )
   }
 }
 const styles = StyleSheet.create({
   root: {
     backgroundColor: "white",
     flex: 1
+  },
+  ActivityContainer: {
+    position: "absolute",
+    top: "0.00%",
+    left: "0.00%",
+    height: "97.98%",
+    width: "100.00%",
+    
   },
   activity: {
     position: "absolute",
@@ -133,7 +144,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.1,
     left: "5.56%"
   },
-   
+
   play: {
     top: 141,
     left: 31,
@@ -142,7 +153,6 @@ const styles = StyleSheet.create({
     position: "absolute"
   },
 
-  
   manyFeet: {
     top: -3,
     left: 83,
@@ -198,13 +208,11 @@ const styles = StyleSheet.create({
     position: "absolute"
   },
 
-
   homeNav: {
     top: 8,
     left: 8,
     width: 144,
     height: 23,
     position: "absolute"
-  },
-
-});
+  }
+})

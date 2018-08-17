@@ -19,7 +19,7 @@ import {
 
 export default class Fonts extends Component {
   static navigationOptions = {
-    title: "Change Fonts",
+
 
 }
 state = {number:null,
@@ -136,7 +136,7 @@ state = {number:null,
               d="M0.23 1.23 L360.23 1.23 "
             />
           </Svg>
-          <Text style={styles.homePage}>Settings</Text>
+          <Text style={styles.homePage}>Change Font</Text>
         </View>
       </View>
     );

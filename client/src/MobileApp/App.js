@@ -13,7 +13,6 @@ import Question from './components/question/end';
 import Test from './components/testing/testing'
 import { ApolloLink } from "apollo-link"
 import { createStackNavigator } from 'react-navigation';
-import Home from "./components/homepage/Home"
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
