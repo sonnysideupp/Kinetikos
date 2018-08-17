@@ -8,6 +8,9 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import gql from 'graphql-tag'
 import Question from '../question/question2'
+import MultipleChoice from "../../trial3/screens/MultipleChoice"
+import Input from "../../trial3/screens/Input"
+import SelectMultiple from "../../trial3/screens/SelectMultiple"
 
 const GET_TEXTS = gql`
 query questionTexts($where:QuestionTextWhereInput) {
@@ -140,44 +143,42 @@ componentWillMount() {
                    
                   
                       
-                    if(this.state.number == number)
-        {
-            
-            return(
+                    if(this.state.number == number) {
+                        console.log(this.state)
+                        return(
 
-        <View>
-        <Mutation mutation={SUBMIT_ANSWERS}>
-        {submitanswer => {return (
-          <View>  
-        <Text>Congradualtions you are finished!</Text>
-        <Button onPress= {async e => {
-                    e.preventDefault()
-                    for(var i =0; i < this.state.answers.length; i ++)
-                    {
-                    try {
-                      const { data } = await submitanswer({
-                        variables: {
-                            value: this.state.answers[i].value,
-                            questionnumber: this.state.answers[i].questionNumber,
-                            alternativeId: this.state.answers[i].alternativeId
-                        }
-                      })
-                      
-                    } catch (error) {
-                      
-                    }}
-                    navigate("Fifth")
-                  }} title ="Complete Questionnaire"/>
-        </View>
-        
-         ) }}
-        </Mutation>
+                    <View>
+                    <Mutation mutation={SUBMIT_ANSWERS}>
+                    {submitanswer => {return (
+                    <View>  
+                    <Text>Congradualtions you are finished!</Text>
+                    <Button onPress= {async e => {
+                                e.preventDefault()
+                                for(var i =0; i < this.state.answers.length; i ++)
+                                {
+                                try {
+                                const { data } = await submitanswer({
+                                    variables: {
+                                        value: this.state.answers[i].value,
+                                        questionnumber: this.state.answers[i].questionNumber,
+                                        alternativeId: this.state.answers[i].alternativeId
+                                    }
+                                })
+                                
+                                } catch (error) {
+                                
+                                }}
+                                navigate("Fifth")
+                            }} title ="Complete Questionnaire"/>
+                    </View>
+                    
+                    ) }}
+                    </Mutation>
 
-        </View>
-    
-            )
-        }
-          else{
+                    </View>
+                
+                        )
+                     } else {
     
                     return (
                         
@@ -194,34 +195,55 @@ componentWillMount() {
                     if (error) {
                         return(<Text>`Error! ${error.message}`</Text>);
                     } 
-          
-                    
-                    return (
-                        <View>
+                    console.log("language1"+this.state.language)
+                    console.log(data.questionTexts[0].question.questionType.type)
 
-                        {/* <View style={styles.header}>
-          <View style={styles.rectangle7} />
-          <Image
-            source={require("../../src/assets/953f88ea27175375d51167f2e35e70b3aa71adc3.png")}
-            style={styles.kinetikosIconTransparent85Balck}
-          />
-          <Svg
-            viewBox="0 0 360.90 2.90"
-            preserveAspectRatio="none"
-            style={styles.lineCopy}
-          >
-            <Path
-              strokeWidth={0.45}
-              fill="transparent"
-              stroke="rgba(179,179,179,1)"
-              isClosed={false}
-              d="M0.23 1.23 L360.23 1.23 "
-            />
-          </Svg>
-          <Text style={styles.homePage}>Home Page</Text>
-        </View> */}
-                         <Text style={{fontSize:this.state.font,textAlign: "center",color: "#00008b" }}>{data.questionTexts[0].text}</Text>
-                 <Question 
+                    if(data.questionTexts[0].question.questionType.type == "Multiple Choice") {
+                        return (
+                            <View>
+                            <MultipleChoice
+                            questionText = {data.questionTexts[0].text}
+                            number={data.questionTexts[0].question.number}
+                            language={this.state.language} 
+                            state={this.state} 
+                            updateAnswer = {this.UpdateAnswer} 
+                            updateQuestion={this.Update} 
+                            navigate = {this.props.navigation}
+                            />
+                            </View>
+                        )
+                    } else if (data.questionTexts[0].question.questionType.type == "Input") {
+                        return (
+                            <View>
+                            <Input
+                            questionText = {data.questionTexts[0].text}
+                            number={data.questionTexts[0].question.number}
+                            language={this.state.language} 
+                            state={this.state} 
+                            updateAnswer = {this.UpdateAnswer} 
+                            updateQuestion={this.Update} 
+                            navigate = {this.props.navigation}
+                            />
+                            </View>
+                        )
+                    } else if (data.questionTexts[0].question.questionType.type == "Select Multiple") {
+                        return (
+                            <View>
+                            <SelectMultiple
+                            questionText = {data.questionTexts[0].text}
+                            number={data.questionTexts[0].question.number}
+                            language={this.state.language} 
+                            state={this.state} 
+                            updateAnswer = {this.UpdateAnswer} 
+                            updateQuestion={this.Update} 
+                            navigate = {this.props.navigation}
+                            />
+                            </View>
+                        )
+                    }
+                    else {
+                        return (
+                            <Question 
                  state={this.state} 
                  function1 = {this.UpdateAnswer} 
                  function={this.Update} 
@@ -229,11 +251,13 @@ componentWillMount() {
                  questiontype= {data.questionTexts[0].question.questionType.type}
                  language={this.state.language} 
                  numberofquestions={number} number={data.questionTexts[0].question.number}
+                 questionText = {data.questionTexts[0].text}
                  font={this.state.font}
                  />
-                            
-                        </View>
-                    )
+                        )
+                    }
+                    
+                    
                 }}
                 </Query>)}
                 }}

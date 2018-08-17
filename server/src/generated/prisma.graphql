@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/shengh/kinetikos/dev
-# timestamp: Mon Aug 06 2018 15:45:31 GMT+0100 (Western European Summer Time)
+# timestamp: Tue Aug 14 2018 15:30:00 GMT+0100 (Western European Summer Time)
 
 type AggregateAlternatives {
   count: Int!
@@ -10,6 +10,10 @@ type AggregateAlternativeText {
 }
 
 type AggregateAnswer {
+  count: Int!
+}
+
+type AggregateClinician {
   count: Int!
 }
 
@@ -851,6 +855,305 @@ type BatchPayload {
   count: Long!
 }
 
+type Clinician implements Node {
+  id: ID!
+  name: String!
+  officeaddress: String
+  phonenumber: String
+}
+
+"""A connection to a list of items."""
+type ClinicianConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ClinicianEdge]!
+  aggregate: AggregateClinician!
+}
+
+input ClinicianCreateInput {
+  name: String!
+  officeaddress: String
+  phonenumber: String
+}
+
+input ClinicianCreateOneInput {
+  create: ClinicianCreateInput
+  connect: ClinicianWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type ClinicianEdge {
+  """The item at the end of the edge."""
+  node: Clinician!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ClinicianOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  officeaddress_ASC
+  officeaddress_DESC
+  phonenumber_ASC
+  phonenumber_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ClinicianPreviousValues {
+  id: ID!
+  name: String!
+  officeaddress: String
+  phonenumber: String
+}
+
+type ClinicianSubscriptionPayload {
+  mutation: MutationType!
+  node: Clinician
+  updatedFields: [String!]
+  previousValues: ClinicianPreviousValues
+}
+
+input ClinicianSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ClinicianSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ClinicianSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ClinicianSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ClinicianWhereInput
+}
+
+input ClinicianUpdateDataInput {
+  name: String
+  officeaddress: String
+  phonenumber: String
+}
+
+input ClinicianUpdateInput {
+  name: String
+  officeaddress: String
+  phonenumber: String
+}
+
+input ClinicianUpdateOneInput {
+  create: ClinicianCreateInput
+  connect: ClinicianWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ClinicianUpdateDataInput
+  upsert: ClinicianUpsertNestedInput
+}
+
+input ClinicianUpsertNestedInput {
+  update: ClinicianUpdateDataInput!
+  create: ClinicianCreateInput!
+}
+
+input ClinicianWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ClinicianWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ClinicianWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ClinicianWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  officeaddress: String
+
+  """All values that are not equal to given value."""
+  officeaddress_not: String
+
+  """All values that are contained in given list."""
+  officeaddress_in: [String!]
+
+  """All values that are not contained in given list."""
+  officeaddress_not_in: [String!]
+
+  """All values less than the given value."""
+  officeaddress_lt: String
+
+  """All values less than or equal the given value."""
+  officeaddress_lte: String
+
+  """All values greater than the given value."""
+  officeaddress_gt: String
+
+  """All values greater than or equal the given value."""
+  officeaddress_gte: String
+
+  """All values containing the given string."""
+  officeaddress_contains: String
+
+  """All values not containing the given string."""
+  officeaddress_not_contains: String
+
+  """All values starting with the given string."""
+  officeaddress_starts_with: String
+
+  """All values not starting with the given string."""
+  officeaddress_not_starts_with: String
+
+  """All values ending with the given string."""
+  officeaddress_ends_with: String
+
+  """All values not ending with the given string."""
+  officeaddress_not_ends_with: String
+  phonenumber: String
+
+  """All values that are not equal to given value."""
+  phonenumber_not: String
+
+  """All values that are contained in given list."""
+  phonenumber_in: [String!]
+
+  """All values that are not contained in given list."""
+  phonenumber_not_in: [String!]
+
+  """All values less than the given value."""
+  phonenumber_lt: String
+
+  """All values less than or equal the given value."""
+  phonenumber_lte: String
+
+  """All values greater than the given value."""
+  phonenumber_gt: String
+
+  """All values greater than or equal the given value."""
+  phonenumber_gte: String
+
+  """All values containing the given string."""
+  phonenumber_contains: String
+
+  """All values not containing the given string."""
+  phonenumber_not_contains: String
+
+  """All values starting with the given string."""
+  phonenumber_starts_with: String
+
+  """All values not starting with the given string."""
+  phonenumber_not_starts_with: String
+
+  """All values ending with the given string."""
+  phonenumber_ends_with: String
+
+  """All values not ending with the given string."""
+  phonenumber_not_ends_with: String
+}
+
+input ClinicianWhereUniqueInput {
+  id: ID
+}
+
 type Language implements Node {
   id: ID!
   name: String!
@@ -1275,6 +1578,7 @@ type Mutation {
   createAlternativeText(data: AlternativeTextCreateInput!): AlternativeText!
   createList(data: ListCreateInput!): List!
   createQuestion(data: QuestionCreateInput!): Question!
+  createClinician(data: ClinicianCreateInput!): Clinician!
   createAnswer(data: AnswerCreateInput!): Answer!
   createQuestionType(data: QuestionTypeCreateInput!): QuestionType!
   createLanguage(data: LanguageCreateInput!): Language!
@@ -1286,6 +1590,7 @@ type Mutation {
   updateAlternativeText(data: AlternativeTextUpdateInput!, where: AlternativeTextWhereUniqueInput!): AlternativeText
   updateList(data: ListUpdateInput!, where: ListWhereUniqueInput!): List
   updateQuestion(data: QuestionUpdateInput!, where: QuestionWhereUniqueInput!): Question
+  updateClinician(data: ClinicianUpdateInput!, where: ClinicianWhereUniqueInput!): Clinician
   updateAnswer(data: AnswerUpdateInput!, where: AnswerWhereUniqueInput!): Answer
   updateQuestionType(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereUniqueInput!): QuestionType
   updateLanguage(data: LanguageUpdateInput!, where: LanguageWhereUniqueInput!): Language
@@ -1297,6 +1602,7 @@ type Mutation {
   deleteAlternativeText(where: AlternativeTextWhereUniqueInput!): AlternativeText
   deleteList(where: ListWhereUniqueInput!): List
   deleteQuestion(where: QuestionWhereUniqueInput!): Question
+  deleteClinician(where: ClinicianWhereUniqueInput!): Clinician
   deleteAnswer(where: AnswerWhereUniqueInput!): Answer
   deleteQuestionType(where: QuestionTypeWhereUniqueInput!): QuestionType
   deleteLanguage(where: LanguageWhereUniqueInput!): Language
@@ -1308,6 +1614,7 @@ type Mutation {
   upsertAlternativeText(where: AlternativeTextWhereUniqueInput!, create: AlternativeTextCreateInput!, update: AlternativeTextUpdateInput!): AlternativeText!
   upsertList(where: ListWhereUniqueInput!, create: ListCreateInput!, update: ListUpdateInput!): List!
   upsertQuestion(where: QuestionWhereUniqueInput!, create: QuestionCreateInput!, update: QuestionUpdateInput!): Question!
+  upsertClinician(where: ClinicianWhereUniqueInput!, create: ClinicianCreateInput!, update: ClinicianUpdateInput!): Clinician!
   upsertAnswer(where: AnswerWhereUniqueInput!, create: AnswerCreateInput!, update: AnswerUpdateInput!): Answer!
   upsertQuestionType(where: QuestionTypeWhereUniqueInput!, create: QuestionTypeCreateInput!, update: QuestionTypeUpdateInput!): QuestionType!
   upsertLanguage(where: LanguageWhereUniqueInput!, create: LanguageCreateInput!, update: LanguageUpdateInput!): Language!
@@ -1319,6 +1626,7 @@ type Mutation {
   updateManyAlternativeTexts(data: AlternativeTextUpdateInput!, where: AlternativeTextWhereInput): BatchPayload!
   updateManyLists(data: ListUpdateInput!, where: ListWhereInput): BatchPayload!
   updateManyQuestions(data: QuestionUpdateInput!, where: QuestionWhereInput): BatchPayload!
+  updateManyClinicians(data: ClinicianUpdateInput!, where: ClinicianWhereInput): BatchPayload!
   updateManyAnswers(data: AnswerUpdateInput!, where: AnswerWhereInput): BatchPayload!
   updateManyQuestionTypes(data: QuestionTypeUpdateInput!, where: QuestionTypeWhereInput): BatchPayload!
   updateManyLanguages(data: LanguageUpdateInput!, where: LanguageWhereInput): BatchPayload!
@@ -1330,6 +1638,7 @@ type Mutation {
   deleteManyAlternativeTexts(where: AlternativeTextWhereInput): BatchPayload!
   deleteManyLists(where: ListWhereInput): BatchPayload!
   deleteManyQuestions(where: QuestionWhereInput): BatchPayload!
+  deleteManyClinicians(where: ClinicianWhereInput): BatchPayload!
   deleteManyAnswers(where: AnswerWhereInput): BatchPayload!
   deleteManyQuestionTypes(where: QuestionTypeWhereInput): BatchPayload!
   deleteManyLanguages(where: LanguageWhereInput): BatchPayload!
@@ -1371,6 +1680,7 @@ type Query {
   alternativeTexts(where: AlternativeTextWhereInput, orderBy: AlternativeTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [AlternativeText]!
   lists(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [List]!
   questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question]!
+  clinicians(where: ClinicianWhereInput, orderBy: ClinicianOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Clinician]!
   answers(where: AnswerWhereInput, orderBy: AnswerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Answer]!
   questionTypes(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuestionType]!
   languages(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Language]!
@@ -1382,6 +1692,7 @@ type Query {
   alternativeText(where: AlternativeTextWhereUniqueInput!): AlternativeText
   list(where: ListWhereUniqueInput!): List
   question(where: QuestionWhereUniqueInput!): Question
+  clinician(where: ClinicianWhereUniqueInput!): Clinician
   answer(where: AnswerWhereUniqueInput!): Answer
   questionType(where: QuestionTypeWhereUniqueInput!): QuestionType
   language(where: LanguageWhereUniqueInput!): Language
@@ -1393,6 +1704,7 @@ type Query {
   alternativeTextsConnection(where: AlternativeTextWhereInput, orderBy: AlternativeTextOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AlternativeTextConnection!
   listsConnection(where: ListWhereInput, orderBy: ListOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ListConnection!
   questionsConnection(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionConnection!
+  cliniciansConnection(where: ClinicianWhereInput, orderBy: ClinicianOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClinicianConnection!
   answersConnection(where: AnswerWhereInput, orderBy: AnswerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AnswerConnection!
   questionTypesConnection(where: QuestionTypeWhereInput, orderBy: QuestionTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionTypeConnection!
   languagesConnection(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LanguageConnection!
@@ -2625,6 +2937,7 @@ type Subscription {
   alternativeText(where: AlternativeTextSubscriptionWhereInput): AlternativeTextSubscriptionPayload
   list(where: ListSubscriptionWhereInput): ListSubscriptionPayload
   question(where: QuestionSubscriptionWhereInput): QuestionSubscriptionPayload
+  clinician(where: ClinicianSubscriptionWhereInput): ClinicianSubscriptionPayload
   answer(where: AnswerSubscriptionWhereInput): AnswerSubscriptionPayload
   questionType(where: QuestionTypeSubscriptionWhereInput): QuestionTypeSubscriptionPayload
   language(where: LanguageSubscriptionWhereInput): LanguageSubscriptionPayload
@@ -2637,6 +2950,9 @@ type User implements Node {
   email: String!
   password: String!
   answers(where: AnswerWhereInput, orderBy: AnswerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Answer!]
+  birthday: String
+  idtype: String
+  clinician(where: ClinicianWhereInput): Clinician
 }
 
 """A connection to a list of items."""
@@ -2653,7 +2969,10 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
+  birthday: String
+  idtype: String
   answers: AnswerCreateManyInput
+  clinician: ClinicianCreateOneInput
 }
 
 """An edge in a connection."""
@@ -2674,6 +2993,10 @@ enum UserOrderByInput {
   email_DESC
   password_ASC
   password_DESC
+  birthday_ASC
+  birthday_DESC
+  idtype_ASC
+  idtype_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -2685,6 +3008,8 @@ type UserPreviousValues {
   name: String!
   email: String!
   password: String!
+  birthday: String
+  idtype: String
 }
 
 type UserSubscriptionPayload {
@@ -2730,7 +3055,10 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  birthday: String
+  idtype: String
   answers: AnswerUpdateManyInput
+  clinician: ClinicianUpdateOneInput
 }
 
 input UserWhereInput {
@@ -2902,9 +3230,90 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  birthday: String
+
+  """All values that are not equal to given value."""
+  birthday_not: String
+
+  """All values that are contained in given list."""
+  birthday_in: [String!]
+
+  """All values that are not contained in given list."""
+  birthday_not_in: [String!]
+
+  """All values less than the given value."""
+  birthday_lt: String
+
+  """All values less than or equal the given value."""
+  birthday_lte: String
+
+  """All values greater than the given value."""
+  birthday_gt: String
+
+  """All values greater than or equal the given value."""
+  birthday_gte: String
+
+  """All values containing the given string."""
+  birthday_contains: String
+
+  """All values not containing the given string."""
+  birthday_not_contains: String
+
+  """All values starting with the given string."""
+  birthday_starts_with: String
+
+  """All values not starting with the given string."""
+  birthday_not_starts_with: String
+
+  """All values ending with the given string."""
+  birthday_ends_with: String
+
+  """All values not ending with the given string."""
+  birthday_not_ends_with: String
+  idtype: String
+
+  """All values that are not equal to given value."""
+  idtype_not: String
+
+  """All values that are contained in given list."""
+  idtype_in: [String!]
+
+  """All values that are not contained in given list."""
+  idtype_not_in: [String!]
+
+  """All values less than the given value."""
+  idtype_lt: String
+
+  """All values less than or equal the given value."""
+  idtype_lte: String
+
+  """All values greater than the given value."""
+  idtype_gt: String
+
+  """All values greater than or equal the given value."""
+  idtype_gte: String
+
+  """All values containing the given string."""
+  idtype_contains: String
+
+  """All values not containing the given string."""
+  idtype_not_contains: String
+
+  """All values starting with the given string."""
+  idtype_starts_with: String
+
+  """All values not starting with the given string."""
+  idtype_not_starts_with: String
+
+  """All values ending with the given string."""
+  idtype_ends_with: String
+
+  """All values not ending with the given string."""
+  idtype_not_ends_with: String
   answers_every: AnswerWhereInput
   answers_some: AnswerWhereInput
   answers_none: AnswerWhereInput
+  clinician: ClinicianWhereInput
 }
 
 input UserWhereUniqueInput {

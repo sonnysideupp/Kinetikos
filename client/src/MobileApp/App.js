@@ -26,6 +26,9 @@ import HomePage from "./trial2/src/screens/HomePage"
 import Activity from "./trial2/src/screens/ActivityMonitor"
 import Settings from "./components/settings/settings"
 import Language from "./components/language/language"
+import QuestionnaireEntry from "./questions/screens/Questionnaire2"
+import Q3 from "./trial3/screens/QTextcopy"
+
 import Fonts from "./components/fonts/fonts"
 import Profile from "./components/profile/profile"
 import Loading from "./components/loading/loading"
@@ -45,7 +48,8 @@ const Navigation = createStackNavigator(
     Tenth: {screen: Fonts},
     Eleventh: {screen: Profile},
     Twelveth: {screen: Loading},
-    Thirdteen: {screen: Clinician}
+    Thirdteen: {screen: Clinician},
+    Fourteenth: {screen: QuestionnaireEntry},
   },
   {
     initialRouteName: 'Twelveth',

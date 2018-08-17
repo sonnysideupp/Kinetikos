@@ -1,13 +1,13 @@
-        //use query for question type
-        import React, { Component } from 'react'
-        import RadioForm, { RadioButton, RadioButtonInput } from 'react-native-simple-radio-button'
-        import { Text, View, StyleSheet,TouchableOpacity,Button, Image } from 'react-native'
-        import { Query, ApolloProvider } from 'react-apollo'
-        import { FormLabel, FormInput } from "react-native-elements"
-        import gql from 'graphql-tag'
-        import { AsyncStorage } from "react-native"
-        import { CheckBox } from 'react-native-elements'
-        import SelectMultiple from 'react-native-select-multiple'
+ //use query for question type
+import React, { Component } from 'react'
+import RadioForm, { RadioButton, RadioButtonInput } from 'react-native-simple-radio-button'
+import { Text, View, StyleSheet,TouchableOpacity,Button, Image } from 'react-native'
+import { Query, ApolloProvider } from 'react-apollo'
+import { FormLabel, FormInput } from "react-native-elements"
+import gql from 'graphql-tag'
+import { AsyncStorage } from "react-native"
+import { CheckBox } from 'react-native-elements'
+import SelectMultiple from 'react-native-select-multiple'
 
         const GET_ALT_TEXT = gql`
         query alternativeTexts($where:AlternativeTextWhereInput) {

@@ -76,7 +76,7 @@ export default class HomePage extends Component {
 
         <View style={styles.questionnaire}>
         <TouchableOpacity onPress= {async() => {
-          navigate("Second")}}>
+          navigate("Fourteenth")}}>
           <Image
             style={styles.questionContainer}
             source={require("../assets/GradientQuestion.png")} /*gradient: {"elipseLength":0,"from":{"x":"0.50","y":"0.10"},"gradientType":"LinearGradient","id":"11D407E8-F25B-4216-B420-F3A69B34CFE0","shouldSmoothenOpacity":false,"stops":[{"offset":0,"stopColor":"rgba(124,204,227,1)","style":{}},{"offset":1,"stopColor":"rgba(84,175,200,1)","style":{}}],"style":{},"to":{"x":"0.50","y":"0.98"}}*/
