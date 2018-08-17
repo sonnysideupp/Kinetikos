@@ -119,7 +119,7 @@ componentWillMount() {
         var {navigate} = this.props.navigation;
        
 
-     
+     // a page that has the questionnaire question text, then passed props to subcomponents(input type,multiple choice,select multiple)
 
 
     return (

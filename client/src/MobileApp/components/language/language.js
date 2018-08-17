@@ -33,6 +33,8 @@ export default class Language extends Component {
    
     render () {
         
+
+    //changing the language of the questionnaire 
         var {navigate} = this.props.navigation;
             var options = []
             var buttons = []

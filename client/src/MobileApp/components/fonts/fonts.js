@@ -63,7 +63,7 @@ state = {number:null,
     return (
     
 
-
+// changing the fontsize of the questionnaire 
 
 
       <View style={styles.root}>

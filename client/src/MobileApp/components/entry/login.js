@@ -74,7 +74,7 @@ export default class SignInScreen extends React.Component {
   }
   render() {
 
-
+//login page for users
 
 
     return (
@@ -141,7 +141,7 @@ export default class SignInScreen extends React.Component {
      
     );
   }
-
+//mutation that is needed to call in order for users to log in
   _signInAsync = async login => {
     this.setState({ error: "" });
     console.log("i am trying to log in")
