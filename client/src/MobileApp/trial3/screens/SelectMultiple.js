@@ -28,10 +28,12 @@ const GET_ALT_TEXT = gql`
         `
 
 export default class QText extends Component {
-  state = {
-    number:  null,
-    answer: null
- }
+    state = { selectedAnswers: [] ,
+        answer:"",
+        value:0,
+        number: null,
+        options: null
+    }
 
  onSelectionsChange = (selectedAnswers) => {
     // selectedFruits is array of { label, value }
@@ -68,6 +70,16 @@ export default class QText extends Component {
                                 if (error) {
                                     return(<Text>`Error! ${error.message}`</Text>);
                                 }
+
+                                if (this.state.options == null) {
+                                    this.setState(
+                                        {
+                                            options: data.alternativeTexts
+                                        }
+                                    )
+                                }
+
+
                                 for(var i = 0; i < data.alternativeTexts.length; i ++)
                                 {
                                     answers.push({label:data.alternativeTexts[i].text,value:i})
@@ -118,7 +130,20 @@ export default class QText extends Component {
         <View style={styles.next}>
         <TouchableOpacity
         onPress={() => {
-          this.props.updateAnswer(this.state.value,this.props.number,this.state.id)
+            for(var j = 0; j < this.state.selectedAnswers.length; j++) {
+                if (this.state.options != null) {
+                    this.props.updateAnswer(
+                        this.state.options[this.state.selectedAnswers[j].value].alternativeID.value,
+                        this.props.number,
+                        this.state.options[this.state.selectedAnswers[j].value].alternativeID.id)
+                }
+                // this.props.updateAnswer(
+                //     this.state.options[this.state.selectedAnswers[j].value].alternativeID.value,
+                //     this.props.number,
+                //     this.state.options[this.state.selectedAnswers[j].value].alternativeID.id)
+                }
+
+        //   this.props.updateAnswer(this.state.value,this.props.number,this.state.id)
           this.props.updateQuestion(this.props.state.number+1)
           this.props.navigate.navigate("Second") }}
           >

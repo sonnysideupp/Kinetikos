@@ -103,6 +103,7 @@ import SelectMultiple from 'react-native-select-multiple'
                                 if (error) {
                                     return(<Text>`Error! ${error.message}`</Text>);
                                 }
+
                                 for(var i = 0; i < data.alternativeTexts.length; i ++)
                                 {
                                     answers.push({label:data.alternativeTexts[i].text,value:i})

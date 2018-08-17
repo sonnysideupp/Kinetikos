@@ -28,7 +28,6 @@ import Activity from "./trial2/src/screens/ActivityMonitor"
 import Settings from "./components/settings/settings"
 import Language from "./components/language/language"
 import QuestionnaireEntry from "./questions/screens/Questionnaire2"
-import Q3 from "./trial3/screens/QTextcopy"
 
 import Fonts from "./components/fonts/fonts"
 import Profile from "./components/profile/profile"
