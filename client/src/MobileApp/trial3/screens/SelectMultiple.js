@@ -1,40 +1,47 @@
 import React, { Component } from "react";
 import { Svg, Path } from "react-native-svg";
 import KinetikosIconTransparent85Balck1 from "../symbols/KinetikosIconTransparent85Balck1";
-import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, ScrollView } from "react-native";
-import { Query, ApolloProvider } from 'react-apollo'
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image, TextInput } from "react-native";
+import { FormInput } from "react-native-elements"
 import gql from 'graphql-tag'
+import { Query, ApolloProvider } from 'react-apollo'
+import SelectMultiple from 'react-native-select-multiple'
 
 const GET_ALT_TEXT = gql`
-query alternativeTexts($where:AlternativeTextWhereInput) {
-    alternativeTexts(where:$where) {
-        id
-        alternativeID{
-            id
-            question{
-              number
+        query alternativeTexts($where:AlternativeTextWhereInput) {
+            alternativeTexts(where:$where) {
+                id
+                alternativeID{
+                    id
+                    question{
+                    number
+                    }
+                    value
+                }
+                text
+                language {
+                    id
+                    name
+                }
             }
-            value
-          }
-        text
-        language {
-            id
-            name
         }
-    }
-}
-`
+        `
 
-export default class Q1 extends Component {
+export default class QText extends Component {
+  state = {
+    number:  null,
+    answer: null
+ }
 
-state = {
-   number:  null
+ onSelectionsChange = (selectedAnswers) => {
+    // selectedFruits is array of { label, value }
+    this.setState({ selectedAnswers })
 }
+
 
   render() {
 
-    var options = []
-    var buttons = []
+    const answers = []
 
     return (
       <View style = {styles.radioGroup}>
@@ -47,67 +54,63 @@ state = {
         <Text style = {styles.question}>{this.props.questionText}</Text>
 
 
-         <View>  
-               
-               <Query query={GET_ALT_TEXT} key="altTextQuery"
-               variables={{
-                   where:{language:{name:this.props.language},
-                   alternativeID:{question:{number:this.props.number}}}
-               }}>
-               {({ loading, error, data, refetch }) => {
-                   if (loading) {
-                       return(<Text>Loading</Text>);
-                   }
-                   if (error) {
-                       return(<Text>`Error! ${error.message}`</Text>);
-                   }
-                   for(let i = 0; i < data.alternativeTexts.length; i ++)
-                   {
-                       options.push({label:data.alternativeTexts[i].text,value:i});
-                       var number = i;
-                       var opacity = null;
-                       var image = "Gradient_QvTTfdx.png";
-                       var text = data.alternativeTexts[i].text;
-                       var integer= options[i].value
-                       if (this.state.number === i) {
-                           opacity = 0;
-                           image = "Gradient_eUSP669.png";
-                       }
-                      
-                       buttons.push(
-                        <View style={styles.rectangle4Copy8} key={i}>
-                        <TouchableOpacity onPress={() => {
-                                this.setState(
-                                  {number:i,
-                                  value: data.alternativeTexts[i].alternativeID.value,
-                                  id: data.alternativeTexts[i].alternativeID.id}
-                                  )}}>
-                        <Image
-                          style={styles.container4}
-                          source={require("../assets/Gradient_JITHUo5.png")}
-                          opacity={opacity}
-                        />
-                        <Text style={styles.times3}>{data.alternativeTexts[i].text}</Text>
-                        </TouchableOpacity>
-                        </View>                           
-                       )
-                   }
-                   
-                   console.log(buttons)
-                       return (
-                         <View style={styles.style3}>
-                         <ScrollView>
-                           {buttons}
-                        </ScrollView>
-                        </View>
-                       )
-                   }
-               }
-               </Query>
-               
-           
+       
+       <View>  
+                    <Query query={GET_ALT_TEXT} key="altTextQuery1"
+                            variables={{
+                                where:{language:{name:this.props.language},
+                                alternativeID:{question:{number:this.props.number}}}
+                            }}>
+                            {({ loading, error, data, refetch }) => {
+                                if (loading) {
+                                    return(<Text>Loading</Text>);
+                                }
+                                if (error) {
+                                    return(<Text>`Error! ${error.message}`</Text>);
+                                }
+                                for(var i = 0; i < data.alternativeTexts.length; i ++)
+                                {
+                                    answers.push({label:data.alternativeTexts[i].text,value:i})
+                                }
 
-       </View>
+
+                            
+                                
+                                    return (
+                                        <View>
+                                        
+                                        <SelectMultiple
+                                        items={answers}
+                                        selectedItems={this.state.selectedAnswers}
+                                        onSelectionsChange={this.onSelectionsChange}
+                                        style={styles.multiple}
+                                        rowStyle={styles.row}
+                                        checkboxStyle={{justifyContent: "space-between", height: 30}}
+                                        labelStyle={{fontSize: this.props.font}} />
+                                        <TouchableOpacity
+                                        style={styles.signinButton}
+                                        onPress={() => { 
+                                        console.log(this.state.selectedAnswers)
+                                        for(var j = 0; j < this.state.selectedAnswers.length; j++) {
+                                        this.props.updateAnswer(
+                                            data.alternativeTexts[this.state.selectedAnswers[j].value].alternativeID.value,
+                                            this.props.number,
+                                            data.alternativeTexts[this.state.selectedAnswers[j].value].alternativeID.id)
+                                        }
+                                    
+                                        this.props.updateQuestion(this.props.state.number+1)
+                                    
+                                        this.props.navigate.navigate("Second") }}
+                                        
+                                        
+                                    >
+                                    </TouchableOpacity>
+                                    </View>
+                                    )
+                                }
+                            }
+                            </Query>
+                        </View>
 
 
         </View>
@@ -127,7 +130,7 @@ state = {
           <Svg
             viewBox="0 0 12.34 20.84"
             preserveAspectRatio="none"
-            style={styles.combinedShapeCopy}
+            style={styles.arrow}
           >
             <Path
               strokeWidth={0}
@@ -143,8 +146,13 @@ state = {
         <View style={styles.back}>
         <TouchableOpacity
         onPress={() => {
-          this.props.updateQuestion(this.props.state.number-1)
-          this.props.navigate.navigate("Second") }}
+            if (this.props.state.number == 0) {
+                this.props.navigate.navigate("Fifth")
+            } else {
+                this.props.updateQuestion(this.props.state.number-1)
+                this.props.navigate.navigate("Second")
+            }
+        }}
         >
           <Image
             style={styles.rectangle81}
@@ -259,7 +267,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.1
   },
   next: {
-    position: "absolute",
+    // position: "absolute",
     top: "86.56%",
     left: "65.65%",
     height: "7.81%",
@@ -291,7 +299,7 @@ const styles = StyleSheet.create({
     fontFamily: "Aller-Bold",
     alignSelf: "center"
   },
-  combinedShapeCopy: {
+  arrow: {
     position: "absolute",
     top: 15,
     left: 76,
@@ -307,16 +315,16 @@ const styles = StyleSheet.create({
     ]
   },
   back: {
-    // position: "absolute",
+    position: "absolute",
     top: "89.38%",
     left: "5.28%",
-    height: "17.97%",
+    height: "7.97%",
     width: "28.89%",
     display: "none"
   },
   rectangle81: {
     // position: "absolute",
-    // top: "0.00%",
+    top: "0.00%",
     left: "0.00%",
     height: "100.00%",
     width: "100.00%",
@@ -328,7 +336,7 @@ const styles = StyleSheet.create({
   },
   back1: {
     position: "absolute",
-    top: "9.80%",
+    top: "18%",
     left: "13.46%",
     height: "72.55%",
     width: "86.54%",
@@ -344,6 +352,7 @@ const styles = StyleSheet.create({
     left: 14,
     right: 77.66,
     bottom: 15.16,
+    width: "15%",
     backgroundColor: "transparent",
     borderColor: "transparent"
   },
@@ -667,5 +676,129 @@ const styles = StyleSheet.create({
     color: "rgba(86,110,190,1)",
     fontSize: 20,
     fontFamily: "Aller"
+  },
+  rectangleCopy: {
+    position: "absolute",
+    top: "15.63%",
+    left: "0.00%",
+    height: "1.88%",
+    width: "100.00%",
+    backgroundColor: "rgba(86,110,190,1)"
+  },
+  doYouFeelYourCon: {
+    position: "absolute",
+    top: "18.75%",
+    left: "6.09%",
+    height: "8.78%",
+    width: "88.37%",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    color: "rgba(0,0,0,1)",
+    fontSize: 20,
+    fontFamily: "Aller",
+    lineHeight: 140,
+    letterSpacing: 0.1
+  },
+  next: {
+    position: "absolute",
+    top: "86.72%",
+    left: "65.28%",
+    height: "7.97%",
+    width: "29.44%"
+  },
+  finish: {
+    position: "absolute",
+    top: "32%",
+    left: "8.57%",
+    height: "74%",
+    width: "83.81%",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    color: "rgba(255,255,255,1)",
+    fontSize: 20,
+    fontFamily: "Aller-Bold"
+  },
+  back: {
+    position: "absolute",
+    top: "86.72%",
+    left: "5.56%",
+    height: "7.97%",
+    width: "28.89%"
+  },
+  combinedShapeCopy: {
+    position: "absolute",
+    top: 15,
+    left: 14,
+    right: 77.66,
+    bottom: 15.16,
+    backgroundColor: "transparent",
+    borderColor: "transparent"
+  },
+  helpless: {
+    // position: "absolute",
+    // top: "29.69%",
+    left: "2.77%",
+    height: "58.13%",
+    width: "93.91%"
+  },
+  rectangle4Copy: {
+    position: "absolute",
+    top: "9.41%",
+    left: "0%",
+    height: "81.45%",
+    width: "100%",
+    borderWidth: 0.5,
+    borderColor: "rgba(179,179,179,1)",
+    borderTopLeftRadius: 11,
+    borderTopRightRadius: 11,
+    borderBottomRightRadius: 11,
+    borderBottomLeftRadius: 11,
+    shadowColor: "rgba(0,0,0,0.5)",
+    shadowRadius: 1,
+    shadowOpacity: 1,
+    backgroundColor: "rgba(255,255,255,1)",
+    shadowOffset: {
+      height: 0,
+      width: 0
+    }
+  },
+  helpless1: {
+    position: "absolute",
+    top: "0%",
+    left: "2.63%",
+    height: "7.4%",
+    width: "93.27%",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    color: "rgba(0,0,0,1)",
+    fontSize: 21,
+    fontFamily: "Aller"
+  },
+  combinedShape: {
+    position: "absolute",
+    top: 1.57,
+    left: 0.54,
+    right: 132,
+    bottom: 2,
+    backgroundColor: "transparent",
+    borderColor: "transparent"
+  },
+  helplessCopy: {
+    top: "12.1%",
+    left: "3.56%",
+    width: "93.28%",
+    height: "12.37%",
+    position: "absolute",
+    backgroundColor: "transparent",
+    fontSize: 18,
+    fontFamily: "Aller",
+    color: "rgba(179,179,179,1)"
+  },
+  input: {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    top: 10,
+    fontSize: 20,
   }
 });

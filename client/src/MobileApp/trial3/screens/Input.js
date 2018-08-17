@@ -73,8 +73,13 @@ export default class QText extends Component {
         <View style={styles.back}>
         <TouchableOpacity
         onPress={() => {
-          this.props.updateQuestion(this.props.state.number-1)
-          this.props.navigate.navigate("Second") }}
+          if (this.props.state.number == 0) {
+              this.props.navigate.navigate("Fifth")
+          } else {
+              this.props.updateQuestion(this.props.state.number-1)
+              this.props.navigate.navigate("Second")
+          }
+        }}
         >
           <Image
             style={styles.rectangle81}
@@ -531,9 +536,9 @@ const styles = StyleSheet.create({
   },
   header: {
     position: "absolute",
-    top: "0.00%",
+    top: "-2.50%",
     left: "0.00%",
-    height: "15.16%",
+    height: "18%",
     width: "100.00%"
   },
   rectangle7: {
@@ -695,21 +700,6 @@ const styles = StyleSheet.create({
     color: "rgba(0,0,0,1)",
     fontSize: 21,
     fontFamily: "Aller"
-  },
-  header: {
-    position: "absolute",
-    top: "0.00%",
-    left: "0.00%",
-    height: "15.16%",
-    width: "100.00%"
-  },
-  rectangle7: {
-    position: "absolute",
-    top: "0.00%",
-    left: "0.00%",
-    height: "97.94%",
-    width: "100.00%",
-    backgroundColor: "rgba(248,248,248,1)"
   },
   combinedShape: {
     position: "absolute",

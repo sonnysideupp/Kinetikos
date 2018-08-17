@@ -30,6 +30,8 @@ import Language from "./components/language/language"
 import QuestionnaireEntry from "./questions/screens/Questionnaire2"
 import Q3 from "./trial3/screens/QTextcopy"
 
+import Fonts from "./components/fonts/fonts"
+import Profile from "./components/profile/profile"
 
 const Navigation = createStackNavigator(
   {
@@ -42,8 +44,9 @@ const Navigation = createStackNavigator(
     Seventh: {screen: Activity},
     Eighth: {screen: Settings},
     Ninth: {screen: Language},
-    Tenth: {screen: QuestionnaireEntry},
-    Eleventh: {screen: Q3}
+    Tenth: {screen: Fonts},
+    Eleventh: {screen: Profile},
+    Fourteenth: {screen: QuestionnaireEntry}
   },
   {
     initialRouteName: 'First',

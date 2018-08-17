@@ -8,8 +8,9 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import gql from 'graphql-tag'
 import Question from '../question/question2'
-import MultipleChoice from "../../trial3/screens/Q1"
-import Input from "../../trial3/screens/QTextcopy"
+import MultipleChoice from "../../trial3/screens/MultipleChoice"
+import Input from "../../trial3/screens/Input"
+import SelectMultiple from "../../trial3/screens/SelectMultiple"
 
 const GET_TEXTS = gql`
 query questionTexts($where:QuestionTextWhereInput) {
@@ -63,7 +64,8 @@ export default class Questionaire extends Component {
  
 state = {number:0,
     answers:[],
-    language:"English"
+    language:"English",
+    font: 25
 }
 
     constructor(props) {
@@ -84,19 +86,22 @@ UpdateAnswer(value,questionNumber,alternativeId){
 }
 componentWillMount() {
     var reallanguage
-  
-
+    var font
+    var font1
     (async ()=> {
       try{
      
      reallanguage =  await  AsyncStorage.getItem("Language");
-     console.log("reallanguage" + reallanguage)
+     font =  await  AsyncStorage.getItem("Font");
+     font1 = JSON.parse(font)
+     console.log("font" + font)
     if(reallanguage == undefined)
       {
     reallanguage = "English"
       };
       this.setState({language:reallanguage});
-      console.log("language2"+ this.state.language)
+      this.setState({font:font1});
+   
            }
            catch (err) {
              console.warn(err)
@@ -131,7 +136,7 @@ componentWillMount() {
                         return(<Text>`Error! ${error.message}`</Text>);
                     }
                     const number = data.questionnaires[0].questions.length;
-                    console.log("language3"+this.state.language)
+                   
                   
                       
                     if(this.state.number == number) {
@@ -217,6 +222,20 @@ componentWillMount() {
                             />
                             </View>
                         )
+                    } else if (data.questionTexts[0].question.questionType.type == "Select Multiple") {
+                        return (
+                            <View>
+                            <SelectMultiple
+                            questionText = {data.questionTexts[0].text}
+                            number={data.questionTexts[0].question.number}
+                            language={this.state.language} 
+                            state={this.state} 
+                            updateAnswer = {this.UpdateAnswer} 
+                            updateQuestion={this.Update} 
+                            navigate = {this.props.navigation}
+                            />
+                            </View>
+                        )
                     }
                     else {
                         return (
@@ -229,6 +248,7 @@ componentWillMount() {
                  language={this.state.language} 
                  numberofquestions={number} number={data.questionTexts[0].question.number}
                  questionText = {data.questionTexts[0].text}
+                 font={this.state.font}
                  />
                         )
                     }
