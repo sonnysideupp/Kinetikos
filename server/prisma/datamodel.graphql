@@ -4,6 +4,9 @@ type User {
   email: String! @unique
   password: String!
   answers:[Answer!]!
+  birthday: String
+  idtype: String
+  clinician: Clinician
 }
 
 type Questionnaire{
@@ -12,6 +15,16 @@ type Questionnaire{
   questions:[Question!]!
   questionairename: [Questionnairename!]!
 }
+
+
+type Clinician{
+id: ID! @unique
+name: String! 
+officeaddress: String
+phonenumber: String
+}
+
+
 
 type Questionnairename
 {

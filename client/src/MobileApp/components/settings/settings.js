@@ -13,10 +13,11 @@ import {
 } from "react-native";
 
 export default class Settings extends Component {
-  static navigationOptions = {
-    title: "Settings",
+  static navigationOptions = ({navigation}) => {
+    return {
 
-}
+  }
+};
 
   
   
@@ -68,7 +69,8 @@ export default class Settings extends Component {
 
         
         <View style={styles.header} /*locked*/>
-          <View style={styles.rectangle7} />
+          <View style={styles.HeaderContainer} />
+          
           <Image
             source={require("../../trial2/src/assets/KIconBlack.png")}
             style={styles.kIconBlack}
@@ -87,6 +89,7 @@ export default class Settings extends Component {
             />
           </Svg>
           <Text style={styles.homePage}>Settings</Text>
+          
         </View>
       </View>
     );
@@ -100,6 +103,25 @@ export default class Settings extends Component {
       justifyContent: "flex-end",
       padding: 0
     },
+    root1: {
+      backgroundColor: "white",
+      flex: 1
+    },
+    kIconBlack: {
+      top: "36.08%",
+      left: "85.00%",
+      height: "50.39%",
+      width: "10.00%",
+      backgroundColor: "transparent"
+    },
+  HeaderContainer: {
+    position: "absolute",
+    top: "0.00%",
+    left: "0.00%",
+    height: "97.94%",
+    width: "100.00%",
+    backgroundColor: "rgba(248,248,248,1)"
+  },
     settings: {
       height: 97,
       width: 320,
@@ -303,6 +325,17 @@ export default class Settings extends Component {
       fontSize: 32,
       fontFamily: "Aller"
     },
+    activityMonitor1: {
+      position: "absolute",
+      top: "46.39%",
+      left: "4.44%",
+      height: "48.45%",
+      width: "80.56%",
+      backgroundColor: "transparent",
+      color: "rgba(0,0,0,1)",
+      fontSize: 36,
+      fontFamily: "Aller-Bold"
+    },
     footprint: {
       position: "absolute",
       top: "0.00%",
@@ -314,8 +347,16 @@ export default class Settings extends Component {
   
     header: {
       height: 97,
-      width: 360
+      width: "100%"
     },
+
+  header1: {
+    position: "absolute",
+    top: "0%",
+    left: "0%",
+    height: "15.16%",
+    width: "100%"
+  },
     rectangle7: {
       position: "absolute",
       top: "0.00%",

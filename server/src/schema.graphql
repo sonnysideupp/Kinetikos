@@ -31,7 +31,11 @@ type AuthPayload {
 }
 
 type User {
-  id: ID!
-  email: String!
   name: String!
+  email: String! 
+  answers:[Answer!]!
+  birthday: String
+  idtype: String
+  clinician: Clinician
 }
+

@@ -17,7 +17,6 @@ const SIGNUP = gql`
     signup(email: $email, password: $password, name: $name) {
       token
       user {
-        id
         email
         name
       }
@@ -44,7 +43,8 @@ export default class SignUpScreen extends React.Component {
     email: "",
     password: "",
     name: "",
-    error: ""
+    error: "",
+    birthday:""
   };
 
 
@@ -84,7 +84,7 @@ export default class SignUpScreen extends React.Component {
                     this.setState({ email: text });
                   }}
                 />
-              
+
                 <FormLabel labelStyle={styles.label}>Password</FormLabel>
                 <FormInput
                 underlineColorAndroid="black"
@@ -95,6 +95,7 @@ export default class SignUpScreen extends React.Component {
                     this.setState({ password: text });
                   }}
                 />
+
                 </View>
               
 
@@ -126,13 +127,14 @@ export default class SignUpScreen extends React.Component {
           email: this.state.email,
           password: this.state.password,
           name: this.state.name,
+
         }
       });
       this.setState({ email: "", password: "" });
       await AsyncStorage.setItem("token", data.signup.token);
       await AsyncStorage.setItem("email", data.signup.user.email);
       await AsyncStorage.setItem("name", data.signup.user.name);
-      this.props.navigation.navigate("First");
+      this.props.navigation.navigate("Fifth");
     } catch (e) {
       console.log(e);
       this.setState({
