@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Svg, Path } from "react-native-svg";
 import KinetikosIconTransparent85Balck1 from "../symbols/KinetikosIconTransparent85Balck1";
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image, TextInput } from "react-native";
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, Image, TextInput, ScrollView } from "react-native";
 import { FormInput } from "react-native-elements"
 import gql from 'graphql-tag'
 import { Query, ApolloProvider } from 'react-apollo'
@@ -53,7 +53,15 @@ export default class QText extends Component {
 
         <View style={styles.body}>
 
-        <Text style = {styles.question}>{this.props.questionText}</Text>
+       <Text style = {{  width: "89.42%",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    alignSelf: "center",
+    color: "rgba(0,0,0,1)",
+    fontSize: this.props.font,
+    fontFamily: "Aller",
+    // lineHeight: 120,
+    letterSpacing: 0.1}}>{this.props.questionText}</Text>
 
 
        
@@ -90,7 +98,7 @@ export default class QText extends Component {
                                 
                                     return (
                                         <View>
-                                        
+                                        <ScrollView>
                                         <SelectMultiple
                                         items={answers}
                                         selectedItems={this.state.selectedAnswers}
@@ -99,24 +107,7 @@ export default class QText extends Component {
                                         rowStyle={styles.row}
                                         checkboxStyle={{justifyContent: "space-between", height: 30}}
                                         labelStyle={{fontSize: this.props.font}} />
-                                        <TouchableOpacity
-                                        style={styles.signinButton}
-                                        onPress={() => { 
-                                        console.log(this.state.selectedAnswers)
-                                        for(var j = 0; j < this.state.selectedAnswers.length; j++) {
-                                        this.props.updateAnswer(
-                                            data.alternativeTexts[this.state.selectedAnswers[j].value].alternativeID.value,
-                                            this.props.number,
-                                            data.alternativeTexts[this.state.selectedAnswers[j].value].alternativeID.id)
-                                        }
-                                    
-                                        this.props.updateQuestion(this.props.state.number+1)
-                                    
-                                        this.props.navigate.navigate("Second") }}
-                                        
-                                        
-                                    >
-                                    </TouchableOpacity>
+                                        </ScrollView>
                                     </View>
                                     )
                                 }

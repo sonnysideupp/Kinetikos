@@ -17,8 +17,15 @@ export default class QText extends Component {
         <View style={styles.rectangleCopy} />
 
         <View style={styles.body}>
-
-        <Text style = {styles.question}>{this.props.questionText}</Text>
+        <Text style = {{  width: "89.42%",
+    backgroundColor: "transparent",
+    textAlign: "center",
+    alignSelf: "center",
+    color: "rgba(0,0,0,1)",
+    fontSize: this.props.font,
+    fontFamily: "Aller",
+    // lineHeight: 120,
+    letterSpacing: 0.1}}>{this.props.questionText}</Text>
 
 
         <View style={styles.helpless}>
