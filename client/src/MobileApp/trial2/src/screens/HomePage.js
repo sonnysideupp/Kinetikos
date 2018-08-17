@@ -19,25 +19,13 @@ export default class HomePage extends Component {
     header: null
 }
 
-  
-  
+
+
   render() {
-  
 
-
-
-
- 
- 
- 
-    
  var {navigate} = this.props.navigation;
 
     return (
-    
-
-
-
 
       <View style={styles.root}>
 

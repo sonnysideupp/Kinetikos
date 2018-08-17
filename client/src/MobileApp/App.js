@@ -32,6 +32,8 @@ import Q3 from "./trial3/screens/QTextcopy"
 
 import Fonts from "./components/fonts/fonts"
 import Profile from "./components/profile/profile"
+import Loading from "./components/loading/loading"
+import Clinician from "./components/clinician/clinician"
 
 const Navigation = createStackNavigator(
   {
@@ -46,10 +48,12 @@ const Navigation = createStackNavigator(
     Ninth: {screen: Language},
     Tenth: {screen: Fonts},
     Eleventh: {screen: Profile},
-    Fourteenth: {screen: QuestionnaireEntry}
+    Twelveth: {screen: Loading},
+    Thirdteen: {screen: Clinician},
+    Fourteenth: {screen: QuestionnaireEntry},
   },
   {
-    initialRouteName: 'First',
+    initialRouteName: 'Twelveth',
     navigationOptions:{
       headerStyle: {
         backgroundColor: 'transparent'
@@ -71,7 +75,7 @@ const authLink = setContext(async (_, { headers }) => {
     },
   };
 });
-const httpLink = new HttpLink({uri: `http://10.0.2.2:4000`})
+const httpLink = new HttpLink({uri: `http://192.168.1.175:4000`})
 
 const client = new ApolloClient({
   link: ApolloLink.from([authLink, httpLink]),

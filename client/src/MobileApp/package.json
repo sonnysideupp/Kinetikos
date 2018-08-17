@@ -25,6 +25,7 @@
     "react-native-create-bridge": "^2.0.1",
     "react-native-elements": "^0.19.1",
     "react-native-flexi-radio-button": "^0.2.2",
+    "react-native-geolocation-service": "^1.1.0",
     "react-native-radio-buttons": "^1.0.0",
     "react-native-radio-form": "^1.1.0",
     "react-native-select-multiple": "^1.2.0",

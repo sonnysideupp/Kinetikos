@@ -1,7 +1,7 @@
 //use query for question type
 import React, { Component } from 'react'
 import RadioForm, { RadioButton, RadioButtonInput } from 'react-native-simple-radio-button'
-import { Text, View, StyleSheet,TouchableOpacity,Button } from 'react-native'
+import { Text, View, StyleSheet,TouchableOpacity,Button ,Image} from 'react-native'
 import { Query, ApolloProvider } from 'react-apollo'
 import { FormLabel, FormInput } from "react-native-elements"
 import gql from 'graphql-tag'
@@ -23,7 +23,7 @@ export default class Language extends Component {
    
     state = { 
             value:0,
-            number:0
+            number:null
         }
     onSelectionsChange = (selectedAnswers) => {
         // selectedFruits is array of { label, value }
@@ -34,6 +34,7 @@ export default class Language extends Component {
         
         var {navigate} = this.props.navigation;
             var options = []
+            var buttons = []
             return (
                 
                 <View>  
@@ -49,20 +50,45 @@ export default class Language extends Component {
                         if (error) {
                             return(<Text>`Error! ${error.message}`</Text>);
                         }
-                        for(var i = 0; i < data.languages.length; i ++)
+                        for(let i = 0; i < data.languages.length; i ++)
                         {
-                            options.push({label:data.languages[i].name,value:i})
-                        }
-                        
+                            options.push({label:data.languages[i].name,value:i});
+                            var number = i;
+                            var opacity = null;
+                            var image = "Gradient_QvTTfdx.png";
+                            if (this.state.number === i) {
+                                opacity = 0.1;
+                                image = "Gradient_eUSP669.png";
+                        }       
+                        buttons.push(
+                            <TouchableOpacity
+                            style={styles.radioButton}
+                            onPress={() => {
+                            this.setState({number:i})}}>
+                                    <Image
+                                    style={styles.radioImage}
+                                    source={require(`../../trial1/assets/Gradient_QvTTfdx.png`)}
+                                    opacity={opacity}
+                                />
+                                    <Text style={{position: "absolute",
+                                    backgroundColor: "transparent",
+                                    marginBottom: 0,
+                                    padding: 0,
+                                    fontSize: 25,
+                                    fontFamily: "Aller-Bold",
+                                    textAlign: "center",
+                                    color: "rgba(255,255,255,1)"}}>{data.languages[i].name}</Text>
+                            </TouchableOpacity>
+                            
+                        )
+                    }
                             return (
                                 <View>
-                                <RadioForm
-                                sytle={styles.radio} 
-                                radio_props = {options}
-                                onPress={(label, value) => {
+
+                                <View style={styles.radioGroup}>
+                                {buttons}
+                                </View>
                         
-                                    this.setState({ answer: label, number:value})}}
-                                />
                                 <TouchableOpacity
                                 style={styles.signinButton}
                                 onPress={async () => {
@@ -89,7 +115,6 @@ export default class Language extends Component {
  
 }
 
-
 const styles = StyleSheet.create({
     question: {
         fontSize: 25,
@@ -108,7 +133,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         paddingTop: 7.5,
         paddingBottom: 7.5
-      },
+    },
 
     container: {
         alignSelf: "flex-start", 
@@ -119,12 +144,60 @@ const styles = StyleSheet.create({
     label: {
         color: "purple",
         fontSize: 18
-      },
-      buttonContainer: {
+    },
+    buttonContainer: {
         alignSelf: "center",
         justifyContent: "center",
         width: "100%",
         paddingTop: 50,
         flexDirection: "row"
-      }
+    },
+    multiple: {
+        width: "85%",
+        alignSelf: "center",
+        padding: 25,
+    },
+    row: {
+        padding: 15,
+        
+    },
+    radioImage: {
+        top: 0,
+        left: 0,
+        bottom: 0,
+        width: 132,
+        height: 38,
+        backgroundColor: "transparent",
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        borderTopRightRadius: 8,
+        borderTopLeftRadius: 8
+    },
+    radioGroup: {
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        justifyContent: "space-around",
+        paddingBottom: 10,
+        paddingTop: 10,
+        height: "80%"
+    },
+    radioButton: {
+        alignContent: "center",
+        alignItems: "center",
+    },
+    text: {
+        // top: 5,
+        // bottom: 5,
+        // left: "22.73%",
+        // width: 72,
+        // height: 40,
+        position: "absolute",
+        backgroundColor: "transparent",
+        marginBottom: 0,
+        padding: 0,
+        fontSize: 20,
+        fontFamily: "Aller-Bold",
+        textAlign: "center",
+        color: "rgba(255,255,255,1)"
+    }
 });

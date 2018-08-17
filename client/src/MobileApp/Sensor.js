@@ -85,9 +85,15 @@ class Sensor extends Component{
     this.state = {csvData:[{time:0,x: 0, y: 0, z: 0, latitude:0, longitude:0}],
     csvData1:[{time:0 ,a: 0, b: 0, c: 0, latitude:0, longitude:0}],
   showStart:true,showStop:false};
+  }
+  
+
+componenetWillMount(){
 
 
-  async function requestLocationPermission() {
+
+
+  (async function requestLocationPermission() {
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -105,8 +111,8 @@ class Sensor extends Component{
     } catch (err) {
       console.warn(err)
     }
-  }
-  async function requestLocationPermission1() {
+  })()
+  (async function requestLocationPermission1() {
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
@@ -124,7 +130,7 @@ class Sensor extends Component{
     } catch (err) {
       console.warn(err)
     }
-  }
+  })()
 
     new Accelerometer({
       updateInterval: 10// defaults to 100ms
@@ -174,12 +180,10 @@ class Sensor extends Component{
   }
   
   exportCSV(){
-    async function requestWriteExternalStorage() {
+    (async function requestWriteExternalStorage() {
       try {
         const granted = await PermissionsAndroid.request(
-          
             PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        
            {
             title: 'Permission',
             message: 'We need your permission.',
@@ -193,11 +197,10 @@ class Sensor extends Component{
       } catch (err) {
         console.warn(err)
       }
-    }
-    async function requestWriteExternalStorage1() {
+    })()
+   ( async function requestWriteExternalStorage1() {
       try {
-        const granted = await PermissionsAndroid.request(
-          
+        const granted = await PermissionsAndroid.request( 
             PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
             
          {
@@ -213,38 +216,17 @@ class Sensor extends Component{
       } catch (err) {
         console.warn(err)
       }
-    }
-    async function requestWriteExternalStorage2() {
-      try {
-        const granted = await PermissionsAndroid.request(
-          
-            PermissionsAndroid.PERMISSIONS.DOWNLOAD_WITHOUT_NOTIFICATION,
-            
-         {
-            title: 'Permission',
-            message: 'We need your permission.',
-          },
-        )
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log("You can download the external storage")
-        } else {
-          console.log("Write External storage permission denied")
-        }
-      } catch (err) {
-        console.warn(err)
-      }
-    }
+    })()
+   
     (async function() {
       await  requestWriteExternalStorage();
     })();
-
+  
     (async function() {
       await  requestWriteExternalStorage1();
     })();
-    (async function() {
-      await  requestWriteExternalStorage2();
-    })();
-
+  
+  
     const headerString = 'time,x,y,z,longitdue,latitude\n';
     const rowString = this.state.csvData.map(d => `${d.time},${d.x},${d.y},${d.z},${d.longitude},${d.latitude}\n`).join('');
     const csvString = `${headerString}${rowString}`;

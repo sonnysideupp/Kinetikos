@@ -217,22 +217,13 @@ import SelectMultiple from 'react-native-select-multiple'
                                     )
                                 }
                                 
-                                console.log(buttons)
                                     return (
                                         <View>
 
                                             <View style={styles.radioGroup}>
                                             {buttons}
                                             </View>
-                                        
-                                        
-                                        {/* <RadioForm
-                                        style={styles.radio} 
-                                        radio_props = {options}
-                                        onPress={(label, value) => {
-                                            console.log(value)
-                                            this.setState({ answer: label, number:value})}}
-                                        /> */}
+                                    
 
                                         <TouchableOpacity
                                         style={styles.signinButton}

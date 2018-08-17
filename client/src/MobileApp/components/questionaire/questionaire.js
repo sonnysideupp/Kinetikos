@@ -99,6 +99,10 @@ componentWillMount() {
       {
     reallanguage = "English"
       };
+      if(font1 == undefined)
+      {
+    font1 = 25
+      };
       this.setState({language:reallanguage});
       this.setState({font:font1});
    

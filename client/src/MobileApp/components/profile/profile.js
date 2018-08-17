@@ -70,7 +70,7 @@ export default class Profile extends Component {
                     <TouchableOpacity
                                 style={styles.signinButton}
                                 onPress={async () => {
-                                    await navigate("Fifth") }}
+                                    await navigate("Thirdteen") }}
                               >
                                 <Text style={styles.signinButtonText}>Clinician Info!</Text>
                               </TouchableOpacity>
