@@ -98,7 +98,7 @@ class Sensor extends Component {
     })
       .then(observable => {
         observable.subscribe(({ x, y, z }) => {
-          navigator.geolocation.getCurrentPosition(
+          Geolocation.getCurrentPosition(
             position =>
               this.state.csvData.push({
                 x: x,
@@ -111,7 +111,7 @@ class Sensor extends Component {
               // See error code charts below.
               console.log(error.code, error.message)
             },
-            { enableHighAccuracy: true, timeout: 15000 }
+            { enableHighAccuracy: true, timeout: 15000}
           )
         })
         console.log(this.state.csvData)

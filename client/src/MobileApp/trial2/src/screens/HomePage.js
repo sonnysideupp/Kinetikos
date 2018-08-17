@@ -411,9 +411,9 @@ const styles = StyleSheet.create({
   logout: {
     position: "absolute",
     top: "90%",
-    left: "35%",
-    height: "5%",
-    width: "40%"
+    // left: "35%",
+    // height: "5%",
+    // width: "40%"
 
     
     // width: 132,
@@ -428,7 +428,7 @@ const styles = StyleSheet.create({
     width: 132,
     height: 38,
     // position: "absolute",
-    backgroundColor: "transparent",
+    // backgroundColor: "transparent",
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
     borderTopRightRadius: 8,
@@ -437,12 +437,12 @@ const styles = StyleSheet.create({
   text: {
     top: 5,
     bottom: 5,
-    left: "19%",
-    width: 72,
+    // left: "19%",
+    width: 130,
     height: 40,
     position: "absolute",
     alignSelf: "center",
-    backgroundColor: "transparent",
+    // backgroundColor: "transparent",
     marginBottom: 0,
     padding: 0,
     fontSize: 20,
